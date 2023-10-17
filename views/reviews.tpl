@@ -83,7 +83,7 @@
 <!-- Review Creation Form -->
 <div class="question-form">
     <h2>Create a Review</h2>
-    <form action="#" method="post">
+    <form action="reviews" method="post">
         <label for="question">Question:</label>
         <input class="question-input" type="text" name="question" id="question" required>
 

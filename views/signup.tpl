@@ -83,7 +83,7 @@
 <!-- Sign Up Form -->
 <div class="signup-container">
     <h2>Sign Up for AchieveIT</h2>
-    <form class="signup-form" action="signup.php" method="post">
+    <form class="signup-form" action="/signup" method="post">
         <input class="signup-input" type="text" name="username" placeholder="Username" required>
         <input class="signup-input" type="email" name="email" placeholder="Email" required>
         <input class="signup-input" type="password" name="password" placeholder="Password" required>

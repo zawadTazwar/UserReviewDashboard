@@ -84,7 +84,7 @@
 <!-- Login Form -->
 <div class="login-container">
     <h2>Login to Your Account</h2>
-    <form class="login-form" action="login.php" method="post">
+    <form class="login-form" action="login" method="post">
         <input class="login-input" type="text" name="username" placeholder="Username" required>
         <input class="login-input" type="password" name="password" placeholder="Password" required>
         <button class="login-button" type="submit">Log In</button>
