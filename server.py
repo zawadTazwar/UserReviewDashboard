@@ -1,4 +1,17 @@
-from bottle import Bottle, run, request, template, static_file
+from bottle import Bottle, request, redirect, template, run, response
+from pymongo import MongoClient
+
+"""
+Author: Muhammad Mahad Mirza
+
+This code establishes a connection to a MongoDB cluster using the MongoClient class from the PyMongo library. It 
+connects to a MongoDB database named 'userreview' and a collection named 'login'. The connection string includes the 
+username, password, and cluster information required for authentication and connection.
+
+"""
+cluster = MongoClient("mongodb+srv://mahadmirza545:Mahad1234@cluster0.yqjy6mb.mongodb.net/?retryWrites=true&w=majority")
+db = cluster["userreview"]
+collection = db["login"]
 
 # Create a Bottle web application
 app = Bottle()
@@ -16,21 +29,21 @@ def login():
 
 
 # Route for handling login form submissions
+
+
+
 @app.route('/login', method='POST')
 def do_login():
     username = request.forms.get('username')
     password = request.forms.get('password')
 
-    # Check if the username and password are correct (in this example, we use a dictionary for user data)
-    users = {
-        'user1': 'password1',
-        'user2': 'password2'
-    }
+    user = collection.find_one({"_id": username})
 
-    if username in users and users[username] == password:
-        return f"Welcome, {username}! You are now logged in."
+    if user and user["password"] == password:
+        response.set_cookie('username', username)
+        return redirect('/login')
     else:
-        return "Invalid username or password. Please try again."
+        return "Invalid username or password"
 
 
 @app.route('/profile')
@@ -45,21 +58,23 @@ def signup():
 
 
 # Define a route to handle form submissions
+
+
+
 @app.route('/signup', method='POST')
 def do_signup():
-    username = request.forms.get('username')
-    email = request.forms.get('email')
-    password = request.forms.get('password')
-    confirm_password = request.forms.get('confirm_password')
+    if request.method == 'POST':
+        username = request.forms.get('username')
+        password = request.forms.get('password')
 
-    # Perform sign-up logic here (e.g., validate input, add to database)
-    if not (username and email and password and confirm_password):
-        return "All fields are required. Please fill out the form completely."
+        user = collection.find_one({"_id": username})
+        if user:
+            return "Username already exists"
+        else:
+            collection.insert_one({"_id": username, "password": password})
+            return "You were successfully registered"
 
-    if password != confirm_password:
-        return "Password and Confirm Password do not match. Please try again."
-    # For this example, we'll just return a simple response
-    return f"Sign-up successful for {username} with email {email}"
+    return template('signup.tpl')
 
 
 @app.route('/reviews')
