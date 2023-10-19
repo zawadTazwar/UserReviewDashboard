@@ -1,4 +1,6 @@
-from bottle import Bottle, run, request, template, static_file
+from bottle import Bottle, run, request, template, static_file, response
+from user_info import register_user, authenticate_user
+from session_management import create_session, get_session
 
 # Create a Bottle web application
 app = Bottle()
@@ -21,13 +23,8 @@ def do_login():
     username = request.forms.get('username')
     password = request.forms.get('password')
 
-    # Check if the username and password are correct (in this example, we use a dictionary for user data)
-    users = {
-        'user1': 'password1',
-        'user2': 'password2'
-    }
-
-    if username in users and users[username] == password:
+    if authenticate_user(username, password):
+        create_session(request, response)
         return f"Welcome, {username}! You are now logged in."
     else:
         return "Invalid username or password. Please try again."
@@ -52,14 +49,17 @@ def do_signup():
     password = request.forms.get('password')
     confirm_password = request.forms.get('confirm_password')
 
-    # Perform sign-up logic here (e.g., validate input, add to database)
     if not (username and email and password and confirm_password):
         return "All fields are required. Please fill out the form completely."
 
     if password != confirm_password:
         return "Password and Confirm Password do not match. Please try again."
-    # For this example, we'll just return a simple response
-    return f"Sign-up successful for {username} with email {email}"
+
+    if register_user(username, password, email):
+        create_session(request, response)
+        return f"Sign-up successful for {username} with email {email}"
+    else:
+        return "Username already exists. Please choose a different username."
 
 
 @app.route('/reviews')
