@@ -11,8 +11,8 @@ username, password, and cluster information required for authentication and conn
 """
 cluster = MongoClient("mongodb+srv://mahadmirza545:Mahad1234@cluster0.yqjy6mb.mongodb.net/?retryWrites=true&w=majority")
 db = cluster["userreview"]
-collection = db["login"]
-
+users_collection = db["login"]
+reviews_collection = db["reviews"]
 # Create a Bottle web application
 app = Bottle()
 
@@ -37,11 +37,11 @@ def do_login():
     username = request.forms.get('username')
     password = request.forms.get('password')
 
-    user = collection.find_one({"_id": username})
+    user = users_collection.find_one({"_id": username})
 
     if user and user["password"] == password:
         response.set_cookie('username', username)
-        return redirect('/login')
+        return template('dashboard.tpl')
     else:
         return "Invalid username or password"
 
@@ -67,11 +67,11 @@ def do_signup():
         username = request.forms.get('username')
         password = request.forms.get('password')
 
-        user = collection.find_one({"_id": username})
+        user = users_collection.find_one({"_id": username})
         if user:
             return "Username already exists"
         else:
-            collection.insert_one({"_id": username, "password": password})
+            users_collection.insert_one({"_id": username, "password": password})
             return "You were successfully registered"
 
     return template('signup.tpl')
