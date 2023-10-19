@@ -63,18 +63,36 @@ def signup():
 
 @app.route('/signup', method='POST')
 def do_signup():
-    if request.method == 'POST':
-        username = request.forms.get('username')
-        password = request.forms.get('password')
+    first_name = request.forms.get('first_name')
+    last_name = request.forms.get('last_name')
+    username = request.forms.get('username')
+    email = request.forms.get('email')
+    password = request.forms.get('password')
 
-        user = users_collection.find_one({"_id": username})
-        if user:
-            return "Username already exists"
-        else:
-            users_collection.insert_one({"_id": username, "password": password})
-            return "You were successfully registered"
+    # Check if the username already exists
+    existing_user = users_collection.find_one({"username": username})
+    if existing_user:
+        return "Username already exists. Please choose a different username."
 
-    return template('signup.tpl')
+    # Count the number of existing users to generate a unique ID
+    user_count = users_collection.count_documents({})
+    user_id = user_count + 1
+
+    # Create a new user document
+    user = {
+        "id": user_id,
+        "first_name": first_name,
+        "last_name": last_name,
+        "username": username,
+        "email": email,
+        "password": password  # Note: In a real application, hash the password for security
+    }
+
+    # Insert the new user into the 'users_collection'
+    users_collection.insert_one(user)
+
+    # For this example, you can return a success message
+    return f"Sign-up successful for {first_name} {last_name} with username {username}"
 
 
 @app.route('/reviews')
