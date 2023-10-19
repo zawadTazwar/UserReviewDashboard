@@ -4,7 +4,7 @@
 **Recorded by:** Jason Wheeler
 **Notes submitted on:** Oct 3, 2023 
 **Venue:** EN 2040 
-**Source:** If there is a recording or other source material, link it here  
+**Source:** None
 **Time:** 1PM  
 **Attendance:** Everyone
 
@@ -13,8 +13,8 @@ Project architecture was discussed. We are considering using Python, Bottle, SQL
 General Areas for Group Members:
 - Frontend: Jason
 - Server: Muhammed
-- Database:
-- User Info/App Logic:
+- Database: Zawad
+- User Info/App Logic: Golam Mahmud
 
 
 ## Oct 4, 2023
@@ -22,7 +22,7 @@ General Areas for Group Members:
 **Notes submitted on:** Oct 4, 2023
 **SCRUM master:** Muhammed 
 **Venue:** EN 2040 
-**Source:** If there is a recording or other source material, link it here  
+**Source:** None  
 **Time:** 1PM  
 **Attendance:** Everyone
 
@@ -35,8 +35,37 @@ Source Control strategy was introduced. We decided to go with truck-based. The d
 **Notes submitted on:** Oct 5, 2023
 **SCRUM master:** Muhammed  
 **Venue:** EN 2040 
-**Source:** If there is a recording or other source material, link it here  
+**Source:** None  
 **Time:** 1PM  
 **Attendance:** Everyone
 
 KanBan Board was introduced to the team. We spent time setting up the KanBan board for use in tracking progress.
+
+## Oct 12, 2023
+**Recorded by:** Md Golam Mahmud Chowdhury
+**Notes submitted on:** Oct 12, 2023
+**SCRUM master:** Muhammed  
+**Venue:** EN 2040 
+**Source:** None  
+**Time:** 1PM  
+**Attendance:** Everyone
+
+User stories defined.
+Reviewed code implementation progress. 
+Decided on the public methods and the method signatures that are required as per part of each module interface. 
+
+## Oct 17, 2023
+**Recorded by:** Md Golam Mahmud Chowdhury
+**Notes submitted on:** Oct 12, 2023
+**SCRUM master:** Muhammed  
+**Venue:** EN 2040 
+**Source:** None  
+**Time:** 1PM  
+**Attendance:** Everyone
+
+Code implementation reviewed
+Tasks that are left to be completed discussed in details.
+Source-control strategy file documentation finished.
+Next meeting agendas proposed.
+
+
