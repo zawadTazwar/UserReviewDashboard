@@ -16,3 +16,20 @@ Md Gulam Mahmud:
 Md Gulam Mahmud is a quiet but knowledgeable team member. He regularly organizes meetings outside of class to discuss his work and is a valuable resource for code discussions. He's actively engaged online and maintains regular communication through our group chat on Discord.
 
 In summary, it's been a pleasure working with this diligent team. Challenges were met with resilience and collaboration. I look forward to achieving more together.
+
+**Jason's Review:**
+
+The team has got along very well and it has been really easy to communicate with everyone. We all show up for our meetings and have put in equal effort for the project.
+
+Brief reviews of each team member:
+
+Mahad:
+Mahad has been very great to work with. He is always open to any task that needs to be done and has performed really well on all of his coding tasks for sprint 1.
+
+Zawad:
+Zawad always has a smile on his face and ready to do any task. He is open to learning and has worked really hard on his tasks for this sprint.
+
+Md Gulam Mahmud:
+Almost always the first team member to arrive at the meetings. He is always ready to go and has a plan on what we need to complete. He has done a great job on his tasks for this sprint.
+
+Great team, and I am ready to keep working and seeing what we can end up with as our final product.
