@@ -5,7 +5,7 @@ from pymongo import MongoClient
 Author: Muhammad Mahad Mirza
 
 This code establishes a connection to a MongoDB cluster using the MongoClient class from the PyMongo library. It 
-connects to a MongoDB database named 'userreview' and a collection named 'login'. The connection string includes the 
+connects to a MongoDB database named 'userreview' and collection named 'login'. The connection string includes the 
 username, password, and cluster information required for authentication and connection.
 
 """
@@ -80,10 +80,57 @@ def signup():
     return template('signup.tpl')
 
 
-# Define a route to handle form submissions
 
+python
+Copy code
+"""
+Author: Muhammad Mahad Mirza
 
+Route for user registration (sign-up).
 
+This route handles HTTP POST requests to the '/signup' endpoint, allowing users to create new accounts. 
+It expects the following parameters in the form data:
+    - 'first_name' (str): The user's first name.
+    - 'last_name' (str): The user's last name.
+    - 'username' (str): The desired username for the new account.
+    - 'email' (str): The user's email address.
+    - 'password' (str): The password for the new account.
+
+Before creating a new account, it checks if the provided 'username' already exists in the 'users_collection'. 
+If the 'username' is found, it returns an error message indicating that the username is already taken. If the 
+'username' is unique, it generates a new 'user_id' by counting the existing user documents and incrementing 
+the count by one.
+
+A new user document is created with the provided information, including a unique 'user_id'. 
+The password is stored as-is in this example, but it is recommended to hash the password for security 
+in a real application.
+
+The new user document is then inserted into the 'users_collection'. For this example, it returns a success message 
+to indicate that the sign-up was successful, including the user's name and username.
+
+HTTP Method: POST
+
+Route URL: /signup
+
+Parameters:
+    - 'first_name' (str): The user's first name.
+    - 'last_name' (str): The user's last name.
+    - 'username' (str): The desired username for the new account.
+    - 'email' (str): The user's email address.
+    - 'password' (str): The password for the new account.
+
+Returns:
+    - If the 'username' is unique, it creates a new user, inserts it into the 'users_collection', 
+    and returns a success message.
+    - If the 'username' is already taken, it returns an error message indicating that the username is not available.
+
+Example Usage:
+    POST /signup
+    Request Data: {'first_name': 'John', 'last_name': 'Doe', 'username': 'john_doe', 'email': 'john.doe@example.com',
+     'password': 'secretpassword'}
+    - If 'john_doe' is not already in use, it creates a new user and returns a success message.
+    - If 'john_doe' is already taken, it returns 'Username already exists. Please choose a different username.'
+"""
 @app.route('/signup', method='POST')
 def do_signup():
     first_name = request.forms.get('first_name')
