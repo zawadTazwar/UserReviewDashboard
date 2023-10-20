@@ -6,17 +6,36 @@
     <title>Create Review - AchieveIT</title>
     <style>
         /* Simple CSS for styling */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f5f5f5;
-        }
         header {
             background-color: #333;
             color: #fff;
-            text-align: center;
             padding: 10px;
+            text-align: center;
+        }
+
+        /* Style the buttons */
+        .header-button {
+            background-color: #2368dc;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+
+        /* Style the buttons on hover */
+        .header-button:hover {
+            background-color: #45a049;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
         }
         main {
             max-width: 600px;
@@ -53,6 +72,9 @@
 
 <header>
     <h1>AchieveIT - Create Review</h1>
+    <a class="header-button" href="/">Home</a>
+    <a class="header-button" href="reviews">Reviews</a>
+    <a class="header-button" href="profile">Profile</a>
 </header>
 
 <main>
