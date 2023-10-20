@@ -19,14 +19,27 @@ reviews_collection = db["reviews"]
 app = Bottle()
 
 
-# Serve static files (CSS)
 @app.route('/')
 def home():
+    """
+    Author: Jason Wheeler
+    Main page when opening the website.
+
+    Returns:
+        the homepage.tpl file.
+    """
     return template('homepage')
 
 
 @app.route('/login')
 def login():
+    """
+    Author: Jason Wheeler
+    Login page /login
+
+    Returns:
+        the login.tpl file.
+    """
     return template('login.tpl')
 
 
@@ -73,13 +86,28 @@ def do_login():
 
 @app.route('/profile')
 def profile():
+    """
+    Author: Jason Wheeler
+    Profile page for user /profile
+
+    Returns:
+        the profile.tpl file.
+    """
     return template('profile')
 
 
 # Define a route for the sign-up page
 @app.route('/signup')
 def signup():
+    """
+    Author: Jason Wheeler
+    Signup page /signup
+
+    Returns:
+        the signup.tpl file.
+    """
     return template('signup.tpl')
+
 
 """
 Author: Muhammad Mahad Mirza
@@ -235,7 +263,6 @@ def delete_review(review_id):
     reviews_collection.delete_one({"_id": ObjectId(review_id)})
 
     redirect('/dashboard')
-
 
 
 # Route for creating a new review
