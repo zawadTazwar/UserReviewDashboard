@@ -48,6 +48,7 @@
             display: block;
             margin-bottom: 8px;
         }
+        input, /* Modified to add title field */
         textarea {
             width: 100%;
             padding: 10px;
@@ -81,8 +82,14 @@
     <h2>Write a New Review</h2>
 
     <form action="/store_review" method="post">
+        <!-- Title Field -->
+        <label for="title">Review Title:</label>
+        <input type="text" name="title" id="title" required>
+
+        <!-- Content Field -->
         <label for="content">Review Content:</label>
         <textarea name="content" id="content" rows="10" required></textarea>
+
         <button type="submit">Submit Review</button>
     </form>
 </main>
