@@ -28,16 +28,39 @@ def login():
     return template('login.tpl')
 
 
-# Route for handling login form submissions
+"""
+Author: Muhammad Mahad Mirza
+Route for handling user login.
+This route handles HTTP POST requests to the '/login' endpoint. It extracts the 'username' and 'password' parameters 
+from the form data submitted by the user. It then queries a 'users_collection' to find a user with the provided 
+'username'. If a user is found and their 'password' matches the provided password, it sets a cookie with the user's 
+'username' and redirects the user to the 'dashboard.tpl' template. If the user is not found or the password does not 
+match, it returns an error message indicating 'Invalid username or password'.
 
+HTTP Method: POST
 
+Route URL: /login
 
+Parameters:
+    - 'username' (str): The username provided by the user.
+    - 'password' (str): The password provided by the user.
+
+Returns:
+    - If a valid user is found and the password matches, it sets a cookie and redirects to the dashboard.
+    - If the user is not found or the password is incorrect, it returns an error message as a string.
+
+Example Usage:
+    POST /login
+    Request Data: {'username': 'john_doe', 'password': 'secretpassword'}
+    - If 'john_doe' with the correct password exists, it sets a cookie and redirects to the dashboard.
+    - If the username doesn't exist or the password is incorrect, it returns 'Invalid username or password'.
+"""
 @app.route('/login', method='POST')
 def do_login():
     username = request.forms.get('username')
     password = request.forms.get('password')
 
-    user = users_collection.find_one({"_id": username})
+    user = users_collection.find_one({"username": username})
 
     if user and user["password"] == password:
         response.set_cookie('username', username)
