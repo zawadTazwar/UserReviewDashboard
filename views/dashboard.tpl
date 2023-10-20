@@ -8,7 +8,31 @@
     <title>AchieveIT - Dashboard</title>
     <style>
         /* Existing styles here */
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
 
+        /* Style the buttons */
+        .header-button {
+            background-color: #2368dc;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+
+        /* Style the buttons on hover */
+        .header-button:hover {
+            background-color: #45a049;
+        }
         /* Style the "Edit Review" button */
         .edit-button {
             background-color: #2368dc;
@@ -53,7 +77,6 @@
     <h1>AchieveIT - Dashboard</h1>
     <a class="header-button" href="/">Home</a>
     <a class="header-button" href="/reviews">Reviews</a>
-    <a class="header-button" href="/login">Login</a>
     <a class="header-button" href="/profile">Profile</a>
 </header>
 
