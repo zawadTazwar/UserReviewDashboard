@@ -84,10 +84,11 @@
 <div class="signup-container">
     <h2>Sign Up for AchieveIT</h2>
     <form class="signup-form" action="/signup" method="post">
+        <input class="signup-input" type="text" name="first_name" placeholder="First Name" required>
+        <input class="signup-input" type="text" name="last_name" placeholder="Last Name" required>
         <input class="signup-input" type="text" name="username" placeholder="Username" required>
         <input class="signup-input" type="email" name="email" placeholder="Email" required>
         <input class="signup-input" type="password" name="password" placeholder="Password" required>
-        <input class="signup-input" type="password" name="confirm_password" placeholder="Confirm Password" required>
         <button class="signup-button" type="submit">Sign Up</button>
     </form>
 </div>
