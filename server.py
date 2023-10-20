@@ -1,5 +1,7 @@
 from bottle import Bottle, request, redirect, template, run, response
 from pymongo import MongoClient
+from bson import ObjectId
+
 
 """
 Author: Muhammad Mahad Mirza
@@ -155,6 +157,108 @@ def do_signup():
 @app.route('/reviews')
 def reviews():
     return template('reviews')
+
+"""
+Author: Md Jawad Ul Tazwar
+
+Routes:
+-------
+/dashboard:
+    Displays the user's dashboard containing all their reviews. If the user is not logged in, they are redirected 
+    to the login page.
+
+/edit_review/<review_id>:
+    Displays the edit page for a particular review specified by its unique ID. If the review with the provided ID 
+    is not found, a message is displayed to the user.
+
+/update_review:
+    Updates a review in the database with the edited content from the user. After updating, the user is redirected 
+    back to the dashboard.
+
+/delete_review/<review_id>:
+    Deletes a review specified by its unique ID from the database. After deletion, the user is redirected back 
+    to the dashboard.
+
+/create_review:
+    Displays the page for creating a new review.
+
+/store_review:
+    Stores the newly created review in the database. The review is associated with the logged-in user. After storage,
+    the user is redirected back to the dashboard.
+
+Dependencies:
+-------------
+* reviews_collection: This represents the MongoDB collection that contains all the reviews. Operations such as 
+  finding, updating, and deleting reviews are performed on this collection.
+
+* ObjectId: It's a utility from the MongoDB library to handle the unique object IDs associated with each document.
+
+
+"""
+
+
+@app.route('/dashboard')
+def dashboard():
+    username = request.get_cookie('username')
+    if not username:
+        # If the user is not logged in, redirect to login
+        redirect("/login")
+
+    # Fetch user reviews from the database
+    user_reviews = list(reviews_collection.find({"username": username}))
+
+    return template('dashboard.tpl', reviews=user_reviews)
+
+# Route for editing a review
+@app.route('/edit_review/<review_id>')
+def edit_review(review_id):
+    review = reviews_collection.find_one({"_id": ObjectId(review_id)})
+
+    if not review:
+        return "Review not found"
+
+    return template('edit_review.tpl', review=review)
+
+# Route for updating a review after editing
+@app.route('/update_review', method='POST')
+def update_review():
+    review_id = request.forms.get('review_id')
+    content = request.forms.get('content')
+
+    reviews_collection.update_one({"_id": ObjectId(review_id)}, {"$set": {"content": content}})
+
+    redirect('/dashboard')
+
+# Route for deleting a review
+@app.route('/delete_review/<review_id>')
+def delete_review(review_id):
+    reviews_collection.delete_one({"_id": ObjectId(review_id)})
+
+    redirect('/dashboard')
+
+
+
+# Route for creating a new review
+@app.route('/create_review')
+def create_review():
+    return template('create_review.tpl')
+
+
+# Route for storing a new review after creation
+@app.route('/store_review', method='POST')
+def store_review():
+    content = request.forms.get('content')
+    username = request.get_cookie('username')
+
+    # Creating the review document
+    review = {
+        "username": username,
+        "content": content
+    }
+
+    reviews_collection.insert_one(review)
+
+    redirect('/dashboard')
 
 
 if __name__ == '__main__':
