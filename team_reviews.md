@@ -33,3 +33,16 @@ Md Gulam Mahmud:
 Almost always the first team member to arrive at the meetings. He is always ready to go and has a plan on what we need to complete. He has done a great job on his tasks for this sprint.
 
 Great team, and I am ready to keep working and seeing what we can end up with as our final product.
+
+**Golam Mahmud's Review:**
+
+Our team has been nothing short of exceptional in collaborative efforts. Each team member has displayed a strong teamwork and diligence to the success of our project. 
+
+Jason:
+Jason has consistently shown dedication and an eagerness to tackle any task at hand, consistently delivering impressive results. His proactive approach, strong problem-solving abilities, and valuable contributions to server design have been pivotal to our progress. 
+
+Zawad:
+Zawad's cheerful personality and unwavering work ethic have been a source of motivation for the entire team, and his commitment to overcoming challenges is commendable. 
+
+Mahad:
+Mahad's problem-solving skills and openness to tasks have greatly benefited our project, and his exceptional coding performance during sprint 1 deserves recognition. He  has shown resilience in the face of challenges and created a positive working environment.
