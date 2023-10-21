@@ -7,8 +7,32 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>AchieveIT - Dashboard</title>
     <style>
-        /* Add your existing CSS styles here */
+        /* Existing styles here */
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
 
+        /* Style the buttons */
+        .header-button {
+            background-color: #2368dc;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+
+        /* Style the buttons on hover */
+        .header-button:hover {
+            background-color: #45a049;
+        }
         /* Style the "Edit Review" button */
         .edit-button {
             background-color: #2368dc;
@@ -51,10 +75,9 @@
 <!-- Header Section -->
 <header>
     <h1>AchieveIT - Dashboard</h1>
-    <a class="header-button" href="">Home</a>
-    <a class="header-button" href="reviews">Reviews</a>
-    <a class="header-button" href="login">Login</a>
-    <a class="header-button" href="profile">Profile</a>
+    <a class="header-button" href="/">Home</a>
+    <a class="header-button" href="/reviews">Reviews</a>
+    <a class="header-button" href="/profile">Profile</a>
 </header>
 
 <!-- Main Content Section -->
@@ -67,7 +90,8 @@
         <p>
             Your review content goes here.
         </p>
-        <a class="edit-button" href="edit_review?id=1">Edit Review</a>
+        <!-- Updated href for "Edit Review" button to point to the edit_review template -->
+        <a class="edit-button" href="/edit_review?id=1">Edit Review</a>
     </div>
 
     <!-- Review 2 -->
@@ -76,13 +100,12 @@
         <p>
             Your review content goes here.
         </p>
-        <a class="edit-button" href="edit_review?id=2">Edit Review</a>
+        <!-- Updated href for "Edit Review" button to point to the edit_review template -->
+        <a class="edit-button" href="/edit_review?id=2">Edit Review</a>
     </div>
 
-    <!-- Add more reviews here -->
-
-    <!-- Create New Review Button -->
-    <a class="create-button" href="create_review">Create New Review</a>
+    <!-- Updated href for "Create New Review" button to point to the create_review template -->
+    <a class="create-button" href="/create_review">Create New Review</a>
 </main>
 
 <footer style="background-color: #333; color: #fff; text-align: center; padding: 10px;">

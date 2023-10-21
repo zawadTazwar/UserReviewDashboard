@@ -12,7 +12,7 @@ Project architecture was discussed. We are considering using Python, Bottle, SQL
 
 General Areas for Group Members:
 - Frontend: Jason
-- Server: Muhammed
+- Server: Muhammad
 - Database: Zawad
 - User Info/App Logic: Golam Mahmud
 
@@ -20,20 +20,20 @@ General Areas for Group Members:
 ## Oct 4, 2023
 **Recorded by:** Jason Wheeler
 **Notes submitted on:** Oct 4, 2023
-**SCRUM master:** Muhammed 
+**SCRUM master:** Muhammad 
 **Venue:** EN 2040 
 **Source:** None  
 **Time:** 1PM  
 **Attendance:** Everyone
 
-Introduced SCRUM master. We all decided that Mohammed would be a good fit for this role.
+Introduced SCRUM master. We all decided that Muhammad would be a good fit for this role.
 
-Source Control strategy was introduced. We decided to go with truck-based. The deadline is Oct. 19th for Pull Requests.
+Source Control strategy was introduced. We decided to go with trunk-based. The deadline is Oct. 19th for Pull Requests.
 
 ## Oct 5, 2023
 **Recorded by:** Jason Wheeler
 **Notes submitted on:** Oct 5, 2023
-**SCRUM master:** Muhammed  
+**SCRUM master:** Muhammad  
 **Venue:** EN 2040 
 **Source:** None  
 **Time:** 1PM  
@@ -44,7 +44,7 @@ KanBan Board was introduced to the team. We spent time setting up the KanBan boa
 ## Oct 12, 2023
 **Recorded by:** Md Golam Mahmud Chowdhury
 **Notes submitted on:** Oct 12, 2023
-**SCRUM master:** Muhammed  
+**SCRUM master:** Muhammad  
 **Venue:** EN 2040 
 **Source:** None  
 **Time:** 1PM  
@@ -57,7 +57,7 @@ Decided on the public methods and the method signatures that are required as per
 ## Oct 17, 2023
 **Recorded by:** Md Golam Mahmud Chowdhury
 **Notes submitted on:** Oct 12, 2023
-**SCRUM master:** Muhammed  
+**SCRUM master:** Muhammad 
 **Venue:** EN 2040 
 **Source:** None  
 **Time:** 1PM  
@@ -68,4 +68,16 @@ Tasks that are left to be completed discussed in details.
 Source-control strategy file documentation finished.
 Next meeting agendas proposed.
 
+## Oct 19, 2023
+**Recorded by:** Muhammad Mahad Mirza
+**Notes submitted on:** Oct 12, 2023
+**SCRUM master:** Jason   
+**Venue:** EN 2040 
+**Source:** None  
+**Time:** 1PM  
+**Attendance:** Everyone
 
+Discussed performance reviews and final review of code.
+Deadline for pull requests extended to Oct 20th.
+Everyone instructed to finalize code and start working on team reviews and documentation.
+Finalized elements for the Code Review document for the end of the first sprint.
