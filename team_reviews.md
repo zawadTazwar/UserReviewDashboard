@@ -33,3 +33,18 @@ Md Gulam Mahmud:
 Almost always the first team member to arrive at the meetings. He is always ready to go and has a plan on what we need to complete. He has done a great job on his tasks for this sprint.
 
 Great team, and I am ready to keep working and seeing what we can end up with as our final product.
+
+**Zawad's Review:**
+
+It has been a great experience to work on a project with a group as this was my first group project at MUN. Got the chance to learn a lot from my team members and still learning. 
+Some words for my team members:
+Mahad:
+Really a helpful guy. Helped me a lot to figure out problems and got to learn a lot of things from him.
+
+Jason:
+The Chief! Always gets everything done and leads the way.
+
+Md Gulam:
+A great meeting organizer and helped the group a lot in keeping track of the tasks that needs to be completed.
+
+Really looking forward to the next projects.
