@@ -68,6 +68,20 @@ Tasks that are left to be completed discussed in details.
 Source-control strategy file documentation finished.
 Next meeting agendas proposed.
 
+## Oct 19, 2023
+**Recorded by:** Muhammad Mahad Mirza
+**Notes submitted on:** Oct 12, 2023
+**SCRUM master:** Jason   
+**Venue:** EN 2040 
+**Source:** None  
+**Time:** 1PM  
+**Attendance:** Everyone
+
+Discussed performance reviews and final review of code.
+Deadline for pull requests extended to Oct 20th.
+Everyone instructed to finalize code and start working on team reviews and documentation.
+Finalized elements for the Code Review document for the end of the first sprint.
+
 
 ## Oct 23, 2023
 **Recorded by:** Jason Wheeler
