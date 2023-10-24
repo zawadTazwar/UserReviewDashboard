@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reviews - AchieveIT</title>
+    <title>View Review - AchieveIT</title>
     <style>
         /* Add some basic styling for the header */
         header {
@@ -32,8 +32,8 @@
             background-color: #45a049;
         }
 
-        /* Style the form for adding questions */
-        .question-form {
+        /* Style the content container */
+        .content-container {
             text-align: center;
             margin: 20px;
             background-color: #f5f5f5;
@@ -41,43 +41,13 @@
             border-radius: 5px;
         }
 
-        .question-input {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .question-type {
-            margin: 10px 0;
-        }
-
-        .question-button {
-            background-color: #2368dc;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            margin: 10px 0;
-            text-align: center;
-            text-decoration: none;
-            display: block;
-            width: 100%;
-            border-radius: 5px;
-        }
-
-        .question-button:hover {
-            background-color: #45a049;
-        }
-
-        /* Style for the review titles */
-        .review-titles {
-            text-align: center;
-            margin: 20px;
-        }
-
-        .review-title {
+        .content-title {
             font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .content {
             margin: 10px 0;
         }
     </style>
@@ -86,19 +56,16 @@
 <header>
     <h1>AchieveIT</h1>
     <a class="header-button" href="/">Home</a>
-    <a class="header-button" href="reviews">Reviews</a>
-    <a class="header-button" href="profile">Profile</a>
+    <a class="header-button" href="/reviews">Reviews</a>
+    <a class="header-button" href="/profile">Profile</a>
 </header>
 <body>
 
-<!-- Review Titles Section -->
-<div class="review-titles">
-    <h1>Review Titles</h1>
-    <ul>
-        % for review in reviews:
-            <a href="/view_review/{{review['_id']}}">{{review['title']}}</a><br>
-        % end
-    </ul>
+<!-- Content Section -->
+<div class="content-container">
+    <h1>Review</h1>
+    <div class="content-title">{{review['title']}}</div>
+    <div class="content">{{review['content']}}</div>
 </div>
 
 </body>

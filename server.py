@@ -2,7 +2,6 @@ from bottle import Bottle, request, redirect, template, run, response
 from pymongo import MongoClient
 from bson import ObjectId
 
-
 """
 Author: Muhammad Mahad Mirza
 
@@ -70,6 +69,8 @@ Example Usage:
     - If 'john_doe' with the correct password exists, it sets a cookie and redirects to the dashboard.
     - If the username doesn't exist or the password is incorrect, it returns 'Invalid username or password'.
 """
+
+
 @app.route('/login', method='POST')
 def do_login():
     username = request.forms.get('username')
@@ -155,6 +156,8 @@ Example Usage:
     - If 'john_doe' is not already in use, it creates a new user and returns a success message.
     - If 'john_doe' is already taken, it returns 'Username already exists. Please choose a different username.'
 """
+
+
 @app.route('/signup', method='POST')
 def do_signup():
     first_name = request.forms.get('first_name')
@@ -191,7 +194,25 @@ def do_signup():
 
 @app.route('/reviews')
 def reviews():
-    return template('reviews')
+    # Fetch review titles and their corresponding _id from the database
+    reviews = list(reviews_collection.find({}, {"_id": 1, "title": 1}))
+
+    # Modify the _id field to a string
+    for review in reviews:
+        review['_id'] = str(review['_id'])
+
+    return template('reviews.tpl', reviews=reviews)
+
+
+@app.route('/view_review/<review_id>')
+def view_review(review_id):
+    review = reviews_collection.find_one({"_id": ObjectId(review_id)})
+
+    if not review:
+        return "Review not found"
+
+    return template('view_review.tpl', review=review)
+
 
 """
 Author: Md Jawad Ul Tazwar
@@ -244,6 +265,7 @@ def dashboard():
 
     return template('dashboard.tpl', reviews=user_reviews)
 
+
 # Route for editing a review
 @app.route('/edit_review/<review_id>')
 def edit_review(review_id):
@@ -254,6 +276,7 @@ def edit_review(review_id):
 
     return template('edit_review.tpl', review=review)
 
+
 # Route for updating a review after editing
 @app.route('/update_review', method='POST')
 def update_review():
@@ -263,6 +286,7 @@ def update_review():
     reviews_collection.update_one({"_id": ObjectId(review_id)}, {"$set": {"content": content}})
 
     redirect('/dashboard')
+
 
 # Route for deleting a review
 @app.route('/delete_review/<review_id>')
@@ -284,7 +308,6 @@ def store_review():
     content = request.forms.get('content')
     username = request.get_cookie('username')
 
-
     review = {
         "username": username,
         "title": title,
@@ -294,6 +317,8 @@ def store_review():
     reviews_collection.insert_one(review)
 
     redirect('/dashboard')
+
+
 
 if __name__ == '__main__':
     run(app, host='localhost', port=8080)
