@@ -133,5 +133,11 @@ November 6th
 - Comments
 - Like/Dislike Button
 
+## Oct 24, 2023
+**Notes submitted on:** Oct 24, 2023
+
+_No team meeting for today. Some members had midterms and we also did the agenda for today in yesterdays meeting._
+
+
 
 
