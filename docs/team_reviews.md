@@ -34,6 +34,21 @@ Almost always the first team member to arrive at the meetings. He is always read
 
 Great team, and I am ready to keep working and seeing what we can end up with as our final product.
 
+**Zawad's Review:**
+
+It has been a great experience to work on a project with a group as this was my first group project at MUN. Got the chance to learn a lot from my team members and still learning. 
+Some words for my team members:
+Mahad:
+Really a helpful guy. Helped me a lot to figure out problems and got to learn a lot of things from him.
+
+Jason:
+The Chief! Always gets everything done and leads the way.
+
+Md Gulam:
+A great meeting organizer and helped the group a lot in keeping track of the tasks that needs to be completed.
+
+Really looking forward to the next projects.
+
 **Golam Mahmud's Review:**
 
 Our team has been nothing short of exceptional in collaborative efforts. Each team member has displayed a strong teamwork and diligence to the success of our project. 
@@ -46,3 +61,4 @@ Zawad's cheerful personality and unwavering work ethic have been a source of mot
 
 Mahad:
 Mahad's problem-solving skills and openness to tasks have greatly benefited our project, and his exceptional coding performance during sprint 1 deserves recognition. He  has shown resilience in the face of challenges and created a positive working environment.
+

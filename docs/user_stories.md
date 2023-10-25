@@ -10,3 +10,6 @@ I want to be able to login and have my own session. Once I login my profile and 
 
 **Written by:** Md Golam Mahmud Chowdhury - 
 As a computer science student, I wish to have a platform where I can easily review and discuss potential project prospects with my fellow students. I desire a feature-rich platform that allows us to list and categorize project ideas, provide detailed descriptions, and receive feedback and comments from peers. This will enable us to brainstorm, evaluate, and refine project concepts collaboratively, fostering innovation and meaningful discussions within our academic community.
+
+**Written by:** Md Jawad Ul Tazwar
+I think the current platform should have an option where I could view the reviews from other people besides my personal reviews. Apart from this, I want to have a feature where we can give anonymous reviews.
