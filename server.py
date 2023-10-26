@@ -1,6 +1,8 @@
+import console
 from bottle import Bottle, request, redirect, template, run, response
 from pymongo import MongoClient
 from bson import ObjectId
+from session_management import create_session, manage_sessions, delete_session
 
 """
 Author: Muhammad Mahad Mirza
@@ -13,6 +15,8 @@ username, password, and cluster information required for authentication and conn
 cluster = MongoClient("mongodb+srv://mahadmirza545:Mahad1234@cluster0.yqjy6mb.mongodb.net/?retryWrites=true&w=majority")
 db = cluster["userreview"]
 users_collection = db["login"]
+sessions_collection = db["sessions"]
+print(sessions_collection)
 reviews_collection = db["reviews"]
 # Create a Bottle web application
 app = Bottle()
@@ -69,7 +73,9 @@ Example Usage:
     - If 'john_doe' with the correct password exists, it sets a cookie and redirects to the dashboard.
     - If the username doesn't exist or the password is incorrect, it returns 'Invalid username or password'.
 """
-
+@app.hook('before_request')
+def session_manager():
+    manage_sessions(sessions_collection)
 
 @app.route('/login', method='POST')
 def do_login():
@@ -79,8 +85,9 @@ def do_login():
     user = users_collection.find_one({"username": username})
 
     if user and user["password"] == password:
-        response.set_cookie('username', username)
-        return template('dashboard.tpl')
+        session_id = create_session(username, sessions_collection)
+        response.set_cookie('session_id', session_id)
+        redirect('/dashboard')
     else:
         return "Invalid username or password"
 
@@ -255,7 +262,7 @@ Dependencies:
 
 @app.route('/dashboard')
 def dashboard():
-    username = request.get_cookie('username')
+    username = request.session.get('username', None)
     if not username:
         # If the user is not logged in, redirect to login
         redirect("/login")
@@ -318,6 +325,14 @@ def store_review():
 
     redirect('/dashboard')
 
+@app.route('/logout')
+def logout():
+    # Clear the session
+    session_id = request.get_cookie('session_id')
+    if session_id:
+        delete_session(session_id, sessions_collection)
+        response.delete_cookie('session_id')
+    redirect('/login')
 
 
 if __name__ == '__main__':
