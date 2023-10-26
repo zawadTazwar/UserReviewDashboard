@@ -1,3 +1,4 @@
+import console
 from bottle import Bottle, request, redirect, template, run, response
 from pymongo import MongoClient
 from bson import ObjectId
@@ -15,6 +16,7 @@ cluster = MongoClient("mongodb+srv://mahadmirza545:Mahad1234@cluster0.yqjy6mb.mo
 db = cluster["userreview"]
 users_collection = db["login"]
 sessions_collection = db["sessions"]
+print(sessions_collection)
 reviews_collection = db["reviews"]
 # Create a Bottle web application
 app = Bottle()
@@ -82,7 +84,7 @@ def do_login():
 
     user = users_collection.find_one({"username": username})
 
-    if user:
+    if user and user["password"] == password:
         session_id = create_session(username, sessions_collection)
         response.set_cookie('session_id', session_id)
         redirect('/dashboard')
