@@ -1,7 +1,8 @@
+import console
 from bottle import Bottle, request, redirect, template, run, response
 from pymongo import MongoClient
 from bson import ObjectId
-
+from session_management import create_session, manage_sessions, delete_session
 
 """
 Author: Muhammad Mahad Mirza
@@ -14,6 +15,8 @@ username, password, and cluster information required for authentication and conn
 cluster = MongoClient("mongodb+srv://mahadmirza545:Mahad1234@cluster0.yqjy6mb.mongodb.net/?retryWrites=true&w=majority")
 db = cluster["userreview"]
 users_collection = db["login"]
+sessions_collection = db["sessions"]
+print(sessions_collection)
 reviews_collection = db["reviews"]
 # Create a Bottle web application
 app = Bottle()
@@ -70,6 +73,10 @@ Example Usage:
     - If 'john_doe' with the correct password exists, it sets a cookie and redirects to the dashboard.
     - If the username doesn't exist or the password is incorrect, it returns 'Invalid username or password'.
 """
+@app.hook('before_request')
+def session_manager():
+    manage_sessions(sessions_collection)
+
 @app.route('/login', method='POST')
 def do_login():
     username = request.forms.get('username')
@@ -78,8 +85,9 @@ def do_login():
     user = users_collection.find_one({"username": username})
 
     if user and user["password"] == password:
-        response.set_cookie('username', username)
-        return template('dashboard.tpl')
+        session_id = create_session(username, sessions_collection)
+        response.set_cookie('session_id', session_id)
+        redirect('/dashboard')
     else:
         return "Invalid username or password"
 
@@ -155,6 +163,8 @@ Example Usage:
     - If 'john_doe' is not already in use, it creates a new user and returns a success message.
     - If 'john_doe' is already taken, it returns 'Username already exists. Please choose a different username.'
 """
+
+
 @app.route('/signup', method='POST')
 def do_signup():
     first_name = request.forms.get('first_name')
@@ -191,7 +201,25 @@ def do_signup():
 
 @app.route('/reviews')
 def reviews():
-    return template('reviews')
+    # Fetch review titles and their corresponding _id from the database
+    reviews = list(reviews_collection.find({}, {"_id": 1, "title": 1}))
+
+    # Modify the _id field to a string
+    for review in reviews:
+        review['_id'] = str(review['_id'])
+
+    return template('reviews.tpl', reviews=reviews)
+
+
+@app.route('/view_review/<review_id>')
+def view_review(review_id):
+    review = reviews_collection.find_one({"_id": ObjectId(review_id)})
+
+    if not review:
+        return "Review not found"
+
+    return template('view_review.tpl', review=review)
+
 
 """
 Author: Md Jawad Ul Tazwar
@@ -234,7 +262,7 @@ Dependencies:
 
 @app.route('/dashboard')
 def dashboard():
-    username = request.get_cookie('username')
+    username = request.session.get('username', None)
     if not username:
         # If the user is not logged in, redirect to login
         redirect("/login")
@@ -243,6 +271,7 @@ def dashboard():
     user_reviews = list(reviews_collection.find({"username": username}))
 
     return template('dashboard.tpl', reviews=user_reviews)
+
 
 # Route for editing a review
 @app.route('/edit_review/<review_id>')
@@ -254,6 +283,7 @@ def edit_review(review_id):
 
     return template('edit_review.tpl', review=review)
 
+
 # Route for updating a review after editing
 @app.route('/update_review', method='POST')
 def update_review():
@@ -263,6 +293,7 @@ def update_review():
     reviews_collection.update_one({"_id": ObjectId(review_id)}, {"$set": {"content": content}})
 
     redirect('/dashboard')
+
 
 # Route for deleting a review
 @app.route('/delete_review/<review_id>')
@@ -284,7 +315,6 @@ def store_review():
     content = request.forms.get('content')
     username = request.get_cookie('username')
 
-
     review = {
         "username": username,
         "title": title,
@@ -294,6 +324,16 @@ def store_review():
     reviews_collection.insert_one(review)
 
     redirect('/dashboard')
+
+@app.route('/logout')
+def logout():
+    # Clear the session
+    session_id = request.get_cookie('session_id')
+    if session_id:
+        delete_session(session_id, sessions_collection)
+        response.delete_cookie('session_id')
+    redirect('/login')
+
 
 if __name__ == '__main__':
     run(app, host='localhost', port=8080)
