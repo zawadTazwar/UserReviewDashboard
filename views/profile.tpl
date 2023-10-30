@@ -61,9 +61,9 @@
 <div class="profile-container">
     <h2>My Profile</h2>
     <div class="user-info">
-        <p><strong>Name:</strong> {{first_name}}</p>
+        <p><strong>Name:</strong> {{first_name}} {{last_name}}</p>
         <p><strong>Username:</strong> {{username}}</p>
-
+        <p><strong>Email:</strong> {{email}}</p>
     </div>
 </div>
 

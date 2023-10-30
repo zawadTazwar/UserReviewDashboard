@@ -92,14 +92,20 @@ def do_login():
 
 @app.route('/profile')
 def profile():
-    """
-    Author: Jason Wheeler
-    Profile page for user /profile
+    # Retrieve user information from the session
+    username = request.session.get('username', None)
+    first_name = request.session.get('first_name', None)
+    last_name = request.session.get('last_name', None)
+    email = request.session.get('email', None)
+    # Add more user-specific information as needed
 
-    Returns:
-        the profile.tpl file.
-    """
-    return template('profile')
+    if not username:
+        # If the user is not logged in, redirect to login
+        redirect("/login")
+
+    # Pass the user data to the profile template
+    return template('profile', username=username, first_name=first_name, last_name=last_name, email=email)
+
 
 
 # Define a route for the sign-up page
