@@ -6,22 +6,38 @@ from bson import ObjectId
 sessions = {}
 
 
-def create_session(username, sessions_collection):
+def create_session(user_id, username, password, first_name, last_name, email, sessions_collection):
+
     """
-    Creates a new user session and set a session cookie in the response.
+    Create a new user session and set a session cookie in the response.
+
+    This function generates a unique session ID, creates a session document, and stores it in the MongoDB collection
+    designated for sessions. It also stores the session data in a dictionary for quick access.
 
     Args:
+        user_id (int): The unique identifier of the authenticated user.
         username (str): The username of the authenticated user.
+        password (str): The password of the authenticated user.
+        first_name (str): The first name of the authenticated user.
+        last_name (str): The last name of the authenticated user.
+        email (str): The email address of the authenticated user.
         sessions_collection (pymongo.collection.Collection): The MongoDB collection for storing sessions.
 
     Returns:
-        str: The newly created session ID.
+        str: The newly created session ID, which can be used as a session identifier.
     """
     session_id = ObjectId()  # Generate a unique session ID
 
     session_data = {
         "_id": session_id,
+        "id": user_id,
         "username": username,
+
+        "first_name": first_name,
+        "last_name": last_name,
+        "username": username,
+        "email": email,
+        "password": password
         # Add other session data as needed
     }
     sessions_collection.insert_one(session_data)
@@ -84,3 +100,7 @@ def get_session(request):
     """
     session_id = request.get_cookie('session_id')
     return sessions.get(session_id, {})
+
+
+
+

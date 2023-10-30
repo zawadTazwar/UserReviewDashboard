@@ -79,13 +79,17 @@ def session_manager():
 
 @app.route('/login', method='POST')
 def do_login():
+    user_id = request.forms.get('id')
     username = request.forms.get('username')
     password = request.forms.get('password')
+    first_name = request.forms.get('first_name')
+    last_name = request.forms.get('last_name')
+    email = request.forms.get('email')
 
     user = users_collection.find_one({"username": username})
 
     if user and user["password"] == password:
-        session_id = create_session(username, sessions_collection)
+        session_id = create_session(user_id, username, password, first_name, last_name, email , sessions_collection)
         response.set_cookie('session_id', session_id)
         redirect('/dashboard')
     else:
