@@ -82,24 +82,32 @@ def do_login():
 
     user = users_collection.find_one({"username": username})
 
-    if user:
+    if user and user["password"] == password:
+        # Create a session and store user information in it
         session_id = create_session(username, sessions_collection)
+        request.session = {'username': username, 'user_id': user["id"], 'first_name': user['first_name']}  # Add more user data as needed
+
         response.set_cookie('session_id', session_id)
         redirect('/dashboard')
     else:
         return "Invalid username or password"
 
 
+
 @app.route('/profile')
 def profile():
-    """
-    Author: Jason Wheeler
-    Profile page for user /profile
+    # Retrieve user information from the session
+    username = request.session.get('username', None)
+    first_name = request.session.get('first_name', None)
+    # Add more user-specific information as needed
 
-    Returns:
-        the profile.tpl file.
-    """
-    return template('profile')
+    if not username:
+        # If the user is not logged in, redirect to login
+        redirect("/login")
+
+    # Pass the user data to the profile template
+    return template('profile', username=username, first_name=first_name)
+
 
 
 # Define a route for the sign-up page
