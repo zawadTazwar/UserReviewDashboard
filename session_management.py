@@ -21,8 +21,7 @@ def create_session(username, sessions_collection):
 
     session_data = {
         "_id": session_id,
-        "username": username
-
+        "username": username,
         # Add other session data as needed
     }
     sessions_collection.insert_one(session_data)
