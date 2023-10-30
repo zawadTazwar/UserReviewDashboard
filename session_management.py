@@ -31,8 +31,6 @@ def create_session(user_id, username, password, first_name, last_name, email, se
     session_data = {
         "_id": session_id,
         "id": user_id,
-        "username": username,
-
         "first_name": first_name,
         "last_name": last_name,
         "username": username,
