@@ -52,22 +52,24 @@
 <header>
     <h1>AchieveIT</h1>
     <a class="header-button" href="/">Home</a>
-    <a class="header-button" href="reviews">Reviews</a>
+    <a class="header-button" href="/reviews">Reviews</a>
+    <a class="header-button" href="/dashboard">Dashboard</a>
+    <a class="header-button" href="/logout">Logout</a>
 </header>
 
 <!-- Profile Container -->
 <div class="profile-container">
     <h2>My Profile</h2>
     <div class="user-info">
-        <p><strong>Name:</strong> John Doe</p>
-        <p><strong>Email:</strong> john.doe@example.com</p>
-        <p><strong>Username:</strong> johndoe123</p>
-        <p><strong>Role:</strong> User</p>
+        <p><strong>Name:</strong> {{first_name}} {{last_name}}</p>
+        <p><strong>Username:</strong> {{username}}</p>
+        <p><strong>Email:</strong> {{email}}</p>
     </div>
 </div>
 
 </body>
-    <footer style="background-color: #333; color: #fff; text-align: center; padding: 10px;">
-        &copy; 2023 AchieveIT. All rights reserved.
-    </footer>
+<footer style="background-color: #333; color: #fff; text-align: center; padding: 10px;">
+    &copy; 2023 AchieveIT. All rights reserved.
+</footer>
 </html>
+
