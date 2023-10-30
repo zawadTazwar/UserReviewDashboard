@@ -1,3 +1,4 @@
+import console
 from bottle import Bottle, request, redirect, template, run, response
 from pymongo import MongoClient
 from bson import ObjectId
@@ -15,6 +16,7 @@ cluster = MongoClient("mongodb+srv://mahadmirza545:Mahad1234@cluster0.yqjy6mb.mo
 db = cluster["userreview"]
 users_collection = db["login"]
 sessions_collection = db["sessions"]
+print(sessions_collection)
 reviews_collection = db["reviews"]
 # Create a Bottle web application
 app = Bottle()
@@ -71,9 +73,12 @@ Example Usage:
     - If 'john_doe' with the correct password exists, it sets a cookie and redirects to the dashboard.
     - If the username doesn't exist or the password is incorrect, it returns 'Invalid username or password'.
 """
+
+
 @app.hook('before_request')
 def session_manager():
     manage_sessions(sessions_collection)
+
 
 @app.route('/login', method='POST')
 def do_login():
@@ -82,8 +87,13 @@ def do_login():
 
     user = users_collection.find_one({"username": username})
 
-    if user:
-        session_id = create_session(username, sessions_collection)
+    user_id = user["id"]
+    first_name = user["first_name"]
+    last_name = user["last_name"]
+    email = user["email"]
+
+    if user and user["password"] == password:
+        session_id = create_session(user_id, username, password, first_name, last_name, email, sessions_collection)
         response.set_cookie('session_id', session_id)
         redirect('/dashboard')
     else:
@@ -92,20 +102,14 @@ def do_login():
 
 @app.route('/profile')
 def profile():
-    # Retrieve user information from the session
-    username = request.session.get('username', None)
-    first_name = request.session.get('first_name', None)
-    last_name = request.session.get('last_name', None)
-    email = request.session.get('email', None)
-    # Add more user-specific information as needed
+    """
+    Author: Jason Wheeler
+    Profile page for user /profile
 
-    if not username:
-        # If the user is not logged in, redirect to login
-        redirect("/login")
-
-    # Pass the user data to the profile template
-    return template('profile', username=username, first_name=first_name, last_name=last_name, email=email)
-
+    Returns:
+        the profile.tpl file.
+    """
+    return template('profile')
 
 
 # Define a route for the sign-up page
@@ -328,6 +332,7 @@ def store_review():
     reviews_collection.insert_one(review)
 
     redirect('/dashboard')
+
 
 @app.route('/logout')
 def logout():
