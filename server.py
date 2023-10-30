@@ -73,9 +73,12 @@ Example Usage:
     - If 'john_doe' with the correct password exists, it sets a cookie and redirects to the dashboard.
     - If the username doesn't exist or the password is incorrect, it returns 'Invalid username or password'.
 """
+
+
 @app.hook('before_request')
 def session_manager():
     manage_sessions(sessions_collection)
+
 
 @app.route('/login', method='POST')
 def do_login():
@@ -84,8 +87,13 @@ def do_login():
 
     user = users_collection.find_one({"username": username})
 
+    user_id = user["id"]
+    first_name = user["first_name"]
+    last_name = user["last_name"]
+    email = user["email"]
+
     if user and user["password"] == password:
-        session_id = create_session(username, sessions_collection)
+        session_id = create_session(user_id, username, password, first_name, last_name, email, sessions_collection)
         response.set_cookie('session_id', session_id)
         redirect('/dashboard')
     else:
@@ -324,6 +332,7 @@ def store_review():
     reviews_collection.insert_one(review)
 
     redirect('/dashboard')
+
 
 @app.route('/logout')
 def logout():
