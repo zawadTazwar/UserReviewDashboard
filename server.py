@@ -1,4 +1,3 @@
-import console
 from bottle import Bottle, request, redirect, template, run, response
 from pymongo import MongoClient
 from bson import ObjectId
