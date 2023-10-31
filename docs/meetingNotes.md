@@ -182,4 +182,22 @@ Discussed software architecture to be reviewed and enhanced.
 Zawad reviews and keeps on implementing the dashboard after the sessions are managed.
 Jason update the tpl file in accordance with dashboard implementation.
 
+## Oct 31, 2023
+**Recorded by:** Jason Wheeler
+**Notes submitted on:** Oct 31, 2023
+**SCRUM master:** Tazwar
+**Venue:** EN 2040 
+**Source:** None  
+**Time:** 1PM  
+**Attendance:** Everyone
+
+Dashboard, reviews, and profile is working with session management now.
+
+Next tasks are search bar and comments. These tasks due date are Thursday Nov 2nd.
+
+- Jason will build the html forms for the search bar and comments
+- Md Golam Mahmud Chowdhury will implement the python code for the search bar to search by titles
+- Mahad will create the python code for comments.
+- Tazwar is adding the delete button for deleting reviews.
+
 
