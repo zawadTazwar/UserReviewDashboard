@@ -169,7 +169,7 @@ tasks followed through to sprint 2 from sprint 1.
 
 ## Oct 30, 2023
 **Recorded by:** Md Golam Mahmud Chowdhury
-**Notes submitted on:** Oct 30, 2023
+**Notes submitted on:** Oct 31, 2023
 **SCRUM master:** Muhammad Mahad Mirza
 **Venue:** EN 2040 
 **Source:** None  
