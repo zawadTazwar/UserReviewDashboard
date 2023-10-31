@@ -166,3 +166,20 @@ Everyone advised to review the professors video concerning said issue and to hav
 that it can be implemented in the next meeting. Further, we discussed issues everyone had been encountering with their assignments and
 helped each other understand how to fix these. Kanban board also to be updated with new issues. Goal until next meeting is to complete whatever 
 tasks followed through to sprint 2 from sprint 1.
+
+## Oct 30, 2023
+**Recorded by:** Md Golam Mahmud Chowdhury
+**Notes submitted on:** Oct 30, 2023
+**SCRUM master:** Muhammad Mahad Mirza
+**Venue:** EN 2040 
+**Source:** None  
+**Time:** 1PM  
+**Attendance:** Everyone
+
+Implemented perfectly working sessions.
+Implemented small feature i.e. Logout button.
+Discussed software architecture to be reviewed and enhanced.
+Zawad reviews and keeps on implementing the dashboard after the sessions are managed.
+Jason update the tpl file in accordance with dashboard implementation.
+
+
