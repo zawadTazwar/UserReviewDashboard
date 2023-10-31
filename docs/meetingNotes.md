@@ -166,3 +166,22 @@ Everyone advised to review the professors video concerning said issue and to hav
 that it can be implemented in the next meeting. Further, we discussed issues everyone had been encountering with their assignments and
 helped each other understand how to fix these. Kanban board also to be updated with new issues. Goal until next meeting is to complete whatever 
 tasks followed through to sprint 2 from sprint 1.
+
+## Oct 31, 2023
+**Recorded by:** Jason Wheeler
+**Notes submitted on:** Oct 31, 2023
+**SCRUM master:** Tazwar
+**Venue:** EN 2040 
+**Source:** None  
+**Time:** 1PM  
+**Attendance:** Everyone
+
+Dashboard, reviews, and profile is working with session management now.
+
+Next tasks are search bar and comments. These tasks due date are Thursday Nov 2nd.
+
+- Jason will build the html forms for the search bar and comments
+- Md Golam Mahmud Chowdhury will implement the python code for the search bar to search by titles
+- Mahad will create the python code for comments.
+- Tazwar is adding the delete button for deleting reviews.
+
