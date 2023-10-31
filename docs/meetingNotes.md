@@ -167,6 +167,21 @@ that it can be implemented in the next meeting. Further, we discussed issues eve
 helped each other understand how to fix these. Kanban board also to be updated with new issues. Goal until next meeting is to complete whatever 
 tasks followed through to sprint 2 from sprint 1.
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Oct 31, 2023
 **Recorded by:** Jason Wheeler
 **Notes submitted on:** Oct 31, 2023
