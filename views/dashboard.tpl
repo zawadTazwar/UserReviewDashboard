@@ -103,6 +103,10 @@
                 {{ review['content'] }}
             </p>
             <a class="edit-button" href="/edit_review/{{ review['_id'] }}">Edit Review</a>
+                <!-- Delete Review Form -->
+            <form action="/delete_review/{{ review['_id'] }}" method="post" style="display: inline;">
+                <button type="submit" class="edit-button" style="background-color: #dc3545;">Delete Review</button>
+            </form>
         </div>
         % end
 
