@@ -1,4 +1,3 @@
-import console
 from bottle import Bottle, request, redirect, template, run, response
 from pymongo import MongoClient
 from bson import ObjectId
@@ -102,14 +101,19 @@ def do_login():
 
 @app.route('/profile')
 def profile():
-    """
-    Author: Jason Wheeler
-    Profile page for user /profile
+    # Retrieve user information from the session
+    username = request.session.get('username', None)
+    first_name = request.session.get('first_name', None)
+    last_name = request.session.get('last_name', None)
+    email = request.session.get('email', None)
+    # Add more user-specific information as needed
 
-    Returns:
-        the profile.tpl file.
-    """
-    return template('profile')
+    if not username:
+        # If the user is not logged in, redirect to login
+        redirect("/login")
+
+    # Pass the user data to the profile template
+    return template('profile', username=username, first_name=first_name, last_name=last_name, email=email)
 
 
 # Define a route for the sign-up page
@@ -271,12 +275,13 @@ Dependencies:
 @app.route('/dashboard')
 def dashboard():
     username = request.session.get('username', None)
-    if not username:
-        # If the user is not logged in, redirect to login
-        redirect("/login")
 
     # Fetch user reviews from the database
-    user_reviews = list(reviews_collection.find({"username": username}))
+    user_reviews = list(reviews_collection.find({'username': username}, {"_id": 1, "title": 1, "content": 1}))
+
+    # Modify the _id field to a string
+    for review in user_reviews:
+        review['_id'] = str(review['_id'])
 
     return template('dashboard.tpl', reviews=user_reviews)
 
@@ -303,12 +308,12 @@ def update_review():
     redirect('/dashboard')
 
 
-# Route for deleting a review
-@app.route('/delete_review/<review_id>')
+
+@app.route('/delete_review/<review_id>', method='POST')
 def delete_review(review_id):
     reviews_collection.delete_one({"_id": ObjectId(review_id)})
+    return redirect('/dashboard')
 
-    redirect('/dashboard')
 
 
 # Route for creating a new review
@@ -321,7 +326,7 @@ def create_review():
 def store_review():
     title = request.forms.get('title')
     content = request.forms.get('content')
-    username = request.get_cookie('username')
+    username = request.session.get('username')
 
     review = {
         "username": username,
