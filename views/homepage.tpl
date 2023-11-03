@@ -80,9 +80,9 @@
 <header>
     <h1>AchieveIT</h1>
     <a class="header-button" href="/">Home</a>
-    <a class="header-button" href="reviews">Reviews</a>
-    <a class="header-button" href="login">Login</a>
-    <a class="header-button" href="profile">Profile</a>
+    <a class="header-button" href="/reviews">Reviews</a>
+    <a class="header-button" href="/login">Login</a>
+    <a class="header-button" href="/logout">Logout</a>
 </header>
 
 <!-- Main Content Section -->

@@ -1,4 +1,3 @@
-import console
 from bottle import Bottle, request, redirect, template, run, response
 from pymongo import MongoClient
 from bson import ObjectId
@@ -73,9 +72,12 @@ Example Usage:
     - If 'john_doe' with the correct password exists, it sets a cookie and redirects to the dashboard.
     - If the username doesn't exist or the password is incorrect, it returns 'Invalid username or password'.
 """
+
+
 @app.hook('before_request')
 def session_manager():
     manage_sessions(sessions_collection)
+
 
 @app.route('/login', method='POST')
 def do_login():
@@ -84,8 +86,13 @@ def do_login():
 
     user = users_collection.find_one({"username": username})
 
+    user_id = user["id"]
+    first_name = user["first_name"]
+    last_name = user["last_name"]
+    email = user["email"]
+
     if user and user["password"] == password:
-        session_id = create_session(username, sessions_collection)
+        session_id = create_session(user_id, username, password, first_name, last_name, email, sessions_collection)
         response.set_cookie('session_id', session_id)
         redirect('/dashboard')
     else:
@@ -94,14 +101,19 @@ def do_login():
 
 @app.route('/profile')
 def profile():
-    """
-    Author: Jason Wheeler
-    Profile page for user /profile
+    # Retrieve user information from the session
+    username = request.session.get('username', None)
+    first_name = request.session.get('first_name', None)
+    last_name = request.session.get('last_name', None)
+    email = request.session.get('email', None)
+    # Add more user-specific information as needed
 
-    Returns:
-        the profile.tpl file.
-    """
-    return template('profile')
+    if not username:
+        # If the user is not logged in, redirect to login
+        redirect("/login")
+
+    # Pass the user data to the profile template
+    return template('profile', username=username, first_name=first_name, last_name=last_name, email=email)
 
 
 # Define a route for the sign-up page
@@ -263,12 +275,13 @@ Dependencies:
 @app.route('/dashboard')
 def dashboard():
     username = request.session.get('username', None)
-    if not username:
-        # If the user is not logged in, redirect to login
-        redirect("/login")
 
     # Fetch user reviews from the database
-    user_reviews = list(reviews_collection.find({"username": username}))
+    user_reviews = list(reviews_collection.find({'username': username}, {"_id": 1, "title": 1, "content": 1}))
+
+    # Modify the _id field to a string
+    for review in user_reviews:
+        review['_id'] = str(review['_id'])
 
     return template('dashboard.tpl', reviews=user_reviews)
 
@@ -295,12 +308,12 @@ def update_review():
     redirect('/dashboard')
 
 
-# Route for deleting a review
-@app.route('/delete_review/<review_id>')
+
+@app.route('/delete_review/<review_id>', method='POST')
 def delete_review(review_id):
     reviews_collection.delete_one({"_id": ObjectId(review_id)})
+    return redirect('/dashboard')
 
-    redirect('/dashboard')
 
 
 # Route for creating a new review
@@ -313,7 +326,7 @@ def create_review():
 def store_review():
     title = request.forms.get('title')
     content = request.forms.get('content')
-    username = request.get_cookie('username')
+    username = request.session.get('username')
 
     review = {
         "username": username,
@@ -324,6 +337,7 @@ def store_review():
     reviews_collection.insert_one(review)
 
     redirect('/dashboard')
+
 
 @app.route('/logout')
 def logout():
