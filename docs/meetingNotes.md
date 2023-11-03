@@ -166,3 +166,28 @@ Everyone advised to review the professors video concerning said issue and to hav
 that it can be implemented in the next meeting. Further, we discussed issues everyone had been encountering with their assignments and
 helped each other understand how to fix these. Kanban board also to be updated with new issues. Goal until next meeting is to complete whatever 
 tasks followed through to sprint 2 from sprint 1.
+
+## Nov 02, 2023
+**Recorded by:** Muhammad Mahad Mirza
+**Notes submitted on:** Nov 02, 2023
+**SCRUM master:** Jason
+**Venue:** EN 2040 
+**Source:** None  
+**Time:** 1PM  
+**Attendance:** Everyone
+
+Agenda items from professor: Reviewing feedback for sprint 1 and incorporating it into our process model moving forward.
+Kanban board is used for coding and design tasks only. We only want to see the progress of each individuals assigned 
+tasks in there. We will document decisions and problems in the meeting notes and we will update how those problems are 
+going in the meeting notes.
+
+Code reviews have been happening in discord and we were not documenting them properly for how the professor wants us to
+complete them. We will now have a codereview.md file that we will update when doing pull requests.
+
+Due date for comment code and search bar code pushed to Nov. 3. Team was struggling with finding out how to implement 
+these features and needed more time to do so. This was okay because we are ahead of schedule for deadline of sprint 2.
+
+We also talked about how our server.py file is very disorganized. To solve said issue we are going to organize it better 
+with proper docstrings for each piece of code. This issue has also been highlighted in the kanban board.
+Furthermore, the modules being worked upon by each member were difficult to identify according to the professor, so we 
+are going to properly indicate in the readme file which part of code belongs to which individual.
