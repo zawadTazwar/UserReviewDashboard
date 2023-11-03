@@ -1,23 +1,15 @@
-import console
 from bottle import Bottle, request, redirect, template, run, response
 from pymongo import MongoClient
 from bson import ObjectId
 from session_management import create_session, manage_sessions, delete_session
 
-"""
-Author: Muhammad Mahad Mirza
-
-This code establishes a connection to a MongoDB cluster using the MongoClient class from the PyMongo library. It 
-connects to a MongoDB database named 'userreview' and collection named 'login'. The connection string includes the 
-username, password, and cluster information required for authentication and connection.
-
-"""
 cluster = MongoClient("mongodb+srv://mahadmirza545:Mahad1234@cluster0.yqjy6mb.mongodb.net/?retryWrites=true&w=majority")
 db = cluster["userreview"]
 users_collection = db["login"]
 sessions_collection = db["sessions"]
 print(sessions_collection)
 reviews_collection = db["reviews"]
+comments_collection = db["comments"]
 # Create a Bottle web application
 app = Bottle()
 
@@ -45,37 +37,10 @@ def login():
     """
     return template('login.tpl')
 
-
-"""
-Author: Muhammad Mahad Mirza
-Route for handling user login.
-This route handles HTTP POST requests to the '/login' endpoint. It extracts the 'username' and 'password' parameters 
-from the form data submitted by the user. It then queries a 'users_collection' to find a user with the provided 
-'username'. If a user is found and their 'password' matches the provided password, it sets a cookie with the user's 
-'username' and redirects the user to the 'dashboard.tpl' template. If the user is not found or the password does not 
-match, it returns an error message indicating 'Invalid username or password'.
-
-HTTP Method: POST
-
-Route URL: /login
-
-Parameters:
-    - 'username' (str): The username provided by the user.
-    - 'password' (str): The password provided by the user.
-
-Returns:
-    - If a valid user is found and the password matches, it sets a cookie and redirects to the dashboard.
-    - If the user is not found or the password is incorrect, it returns an error message as a string.
-
-Example Usage:
-    POST /login
-    Request Data: {'username': 'john_doe', 'password': 'secretpassword'}
-    - If 'john_doe' with the correct password exists, it sets a cookie and redirects to the dashboard.
-    - If the username doesn't exist or the password is incorrect, it returns 'Invalid username or password'.
-"""
 @app.hook('before_request')
 def session_manager():
     manage_sessions(sessions_collection)
+
 
 @app.route('/login', method='POST')
 def do_login():
@@ -84,8 +49,13 @@ def do_login():
 
     user = users_collection.find_one({"username": username})
 
+    user_id = user["id"]
+    first_name = user["first_name"]
+    last_name = user["last_name"]
+    email = user["email"]
+
     if user and user["password"] == password:
-        session_id = create_session(username, sessions_collection)
+        session_id = create_session(user_id, username, password, first_name, last_name, email, sessions_collection)
         response.set_cookie('session_id', session_id)
         redirect('/dashboard')
     else:
@@ -94,14 +64,19 @@ def do_login():
 
 @app.route('/profile')
 def profile():
-    """
-    Author: Jason Wheeler
-    Profile page for user /profile
+    # Retrieve user information from the session
+    username = request.session.get('username', None)
+    first_name = request.session.get('first_name', None)
+    last_name = request.session.get('last_name', None)
+    email = request.session.get('email', None)
+    # Add more user-specific information as needed
 
-    Returns:
-        the profile.tpl file.
-    """
-    return template('profile')
+    if not username:
+        # If the user is not logged in, redirect to login
+        redirect("/login")
+
+    # Pass the user data to the profile template
+    return template('profile', username=username, first_name=first_name, last_name=last_name, email=email)
 
 
 # Define a route for the sign-up page
@@ -115,54 +90,6 @@ def signup():
         the signup.tpl file.
     """
     return template('signup.tpl')
-
-
-"""
-Author: Muhammad Mahad Mirza
-
-Route for user registration (sign-up).
-
-This route handles HTTP POST requests to the '/signup' endpoint, allowing users to create new accounts. It expects the 
-following parameters in the form data:
-    - 'first_name' (str): The user's first name.
-    - 'last_name' (str): The user's last name.
-    - 'username' (str): The desired username for the new account.
-    - 'email' (str): The user's email address.
-    - 'password' (str): The password for the new account.
-
-Before creating a new account, it checks if the provided 'username' already exists in the 'users_collection'. 
-If the 'username' is found, it returns an error message indicating that the username is already taken. If the 'username'
- is unique, it generates a new 'user_id' by counting the existing user documents and incrementing the count by one.
-
-A new user document is created with the provided information, including a unique 'user_id'. The password is stored as-
-is in this example, but it is recommended to hash the password for security in a real application.
-
-The new user document is then inserted into the 'users_collection'. For this example, it returns a success message to 
-indicate that the sign-up was successful, including the user's name and username.
-
-HTTP Method: POST
-
-Route URL: /signup
-
-Parameters:
-    - 'first_name' (str): The user's first name.
-    - 'last_name' (str): The user's last name.
-    - 'username' (str): The desired username for the new account.
-    - 'email' (str): The user's email address.
-    - 'password' (str): The password for the new account.
-
-Returns:
-    - If the 'username' is unique, it creates a new user, inserts it into the 'users_collection', and returns a success 
-    message.
-    - If the 'username' is already taken, it returns an error message indicating that the username is not available.
-
-Example Usage:
-    POST /signup
-    Request Data: {'first_name': 'John', 'last_name': 'Doe', 'username': 'john_doe', 'email': 'john.doe@example.com', 
-    'password': 'secretpassword'}
-    - If 'john_doe' is not already in use, it creates a new user and returns a success message.
-    - If 'john_doe' is already taken, it returns 'Username already exists. Please choose a different username.'
-"""
 
 
 @app.route('/signup', method='POST')
@@ -214,11 +141,11 @@ def reviews():
 @app.route('/view_review/<review_id>')
 def view_review(review_id):
     review = reviews_collection.find_one({"_id": ObjectId(review_id)})
-
+    comments = comments_collection.find({"review_id": review_id})
     if not review:
         return "Review not found"
 
-    return template('view_review.tpl', review=review)
+    return template('view_review.tpl', review=review, comments=comments)
 
 
 """
@@ -263,12 +190,13 @@ Dependencies:
 @app.route('/dashboard')
 def dashboard():
     username = request.session.get('username', None)
-    if not username:
-        # If the user is not logged in, redirect to login
-        redirect("/login")
 
     # Fetch user reviews from the database
-    user_reviews = list(reviews_collection.find({"username": username}))
+    user_reviews = list(reviews_collection.find({'username': username}, {"_id": 1, "title": 1, "content": 1}))
+
+    # Modify the _id field to a string
+    for review in user_reviews:
+        review['_id'] = str(review['_id'])
 
     return template('dashboard.tpl', reviews=user_reviews)
 
@@ -295,12 +223,12 @@ def update_review():
     redirect('/dashboard')
 
 
-# Route for deleting a review
-@app.route('/delete_review/<review_id>')
+
+@app.route('/delete_review/<review_id>', method='POST')
 def delete_review(review_id):
     reviews_collection.delete_one({"_id": ObjectId(review_id)})
+    return redirect('/dashboard')
 
-    redirect('/dashboard')
 
 
 # Route for creating a new review
@@ -313,7 +241,7 @@ def create_review():
 def store_review():
     title = request.forms.get('title')
     content = request.forms.get('content')
-    username = request.get_cookie('username')
+    username = request.session.get('username')
 
     review = {
         "username": username,
@@ -325,6 +253,7 @@ def store_review():
 
     redirect('/dashboard')
 
+
 @app.route('/logout')
 def logout():
     # Clear the session
@@ -334,6 +263,27 @@ def logout():
         response.delete_cookie('session_id')
     redirect('/login')
 
+
+@app.route('/add_comment/<review_id>', method=['GET','POST'])
+def comment(review_id):
+    if request.method == 'POST':
+        content = request.forms.get('comment')
+
+        if content:
+            username = request.session.get('username')
+            comment = {
+                "review_id": review_id,
+                "username": username,
+                "comment": content,
+            }
+
+            comments_collection.insert_one(comment)
+            redirect('/view_review/' + review_id)
+    else:
+        # Handle GET request to display comments
+        review = reviews_collection.find_one({"_id": ObjectId(review_id)})
+        comments = comments_collection.find({"review_id": review_id})
+        return template('view_review.tpl', review=review, comments=comments)
 
 if __name__ == '__main__':
     run(app, host='localhost', port=8080)
