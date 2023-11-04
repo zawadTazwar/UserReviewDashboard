@@ -121,6 +121,20 @@
         </form>
     </div>
 
+        <!-- Display Comments -->
+    <div class="comments">
+        <h2>Comments</h2>
+        % if comments:
+            <ul>
+                % for comment in comments:
+                    <li class="comment">{{comment['username']}} said: {{comment['comment']}}</li>
+                % end
+            </ul>
+        % else:
+            <p>No comments yet.</p>
+        % end
+    </div>
+
 
 </body>
 <footer style="background-color: #333; color: #fff; text-align: center; padding: 10px;">
