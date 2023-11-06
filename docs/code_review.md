@@ -102,6 +102,9 @@ Tazwar added the like_review function in server.py. This function takes the argu
 * __Code Guidelines:__ Code guidelines were checked and code is approved. Although improvement could be made since the like action is similar to dislike. It is possible to make it one line instead of almost duplicating the code with the if statement. Added to backlog because we are on tight schedule.
 * __Improvement:__ Only allow logged in users to like/dislike and the user can only like/dislike once. Added to backlog.
 
+__Pull Request #89-90 (Date: Nov. 6)__
+* Added meetingNotes for today, and added our code_reviews.md file. No review needed.
+
 
 
 
