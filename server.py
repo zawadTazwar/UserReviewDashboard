@@ -246,7 +246,9 @@ def store_review():
     review = {
         "username": username,
         "title": title,
-        "content": content
+        "content": content,
+        "like": 0,
+        "dislike": 0
     }
 
     reviews_collection.insert_one(review)
