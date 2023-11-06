@@ -246,12 +246,27 @@ def store_review():
     review = {
         "username": username,
         "title": title,
-        "content": content
+        "content": content,
+        "like": 0,
+        "dislike": 0
     }
 
     reviews_collection.insert_one(review)
 
     redirect('/dashboard')
+
+
+@app.route('/like_review/<review_id>', method='POST')
+def like_review(review_id):
+    action = request.forms.get('action')
+
+    if action == 'like':
+        reviews_collection.update_one({"_id": ObjectId(review_id)}, {"$inc": {"like": 1}})
+    elif action == 'dislike':
+        reviews_collection.update_one({"_id": ObjectId(review_id)}, {"$inc": {"dislike": 1}})
+
+    # Redirect back to the view_review page
+    redirect(f'/view_review/{review_id}')
 
 
 @app.route('/logout')
