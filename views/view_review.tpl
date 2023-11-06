@@ -94,6 +94,38 @@
         .comment-container button:hover {
             background-color: #45a049;
         }
+        /* Style for the like and dislike buttons */
+        .like-button, .dislike-button {
+            background-color: #2368dc;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+
+        .like-button:hover {
+            background-color: #45a049;
+        }
+
+        .dislike-button:hover {
+            background-color: #ff5733;
+        }
+
+        /* Style for the like and dislike counts */
+        .like-dislike-count {
+            margin-top: 20px;
+        }
+
+        .like-count, .dislike-count {
+            font-size: 18px;
+            margin: 5px;
+        }
+
 
     </style>
 </head>
@@ -111,6 +143,14 @@
         <h1>Review</h1>
         <div class="content-title">{{review['title']}}</div>
         <div class="content">{{review['content']}}</div>
+        <form action="/like_review/{{review['_id']}}" method="POST">
+            <button type="submit" name="action" value="like" class="like-button">Like</button>
+            <button type="submit" name="action" value="dislike" class="dislike-button">Dislike</button>
+        </form>
+        <div class="like-dislike-count">
+            <p class="like-count">Likes: {{review['like']}}</p>
+            <p class="dislike-count">Dislikes: {{review['dislike']}}</p>
+        </div>
     </div>
 
     <div class="comment-container">
