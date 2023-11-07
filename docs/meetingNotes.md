@@ -225,3 +225,43 @@ We also talked about how our server.py file is very disorganized. To solve said 
 with proper docstrings for each piece of code. This issue has also been highlighted in the kanban board.
 Furthermore, the modules being worked upon by each member were difficult to identify according to the professor, so we 
 are going to properly indicate in the readme file which part of code belongs to which individual.
+
+
+## Nov 06, 2023
+**Recorded by:** Tazwar
+**Notes submitted on:** Nov 06, 2023
+**SCRUM master:** Muhammad Mahad Mirza
+**Venue:** EN 2040 
+**Source:** None  
+**Time:** 1PM  
+**Attendance:** Everyone
+
+#### New Features
+We add some new things to our backlog. After reviewing code and brainstorming we decided we wanted to only show the log out button when you are logged in. We also only want to show the reviews page when logged in. 
+Another feature added to the backlog was to update view_review to display the username of the user who created the review.
+
+#### Code Reviews
+We have been doing code reviews in our discord group chat. We find this is the most efficient way for us to do them. It allows our group members to look at the code when they can. 
+We will create a code reviews markdown file showing discord discussions. Jason is working on taking the info from discord and updating the file for marking. We will take our code review process and put it in a format similar to the example given on the course webpage for better understanding. 
+This format seems to be better for how we should go about code reviews and will be the format going forward.
+
+#### What we are working on now
+We are now putting our finishing touches on likes/dislikes and the rating review. The due date is tonight for those tasks. 
+The rest of the week, we will be finalizing the documents for marking, the kanban board for the backlog, performance reviews, readme file, and more.
+
+#### Old Tasks
+For the search bar, the coding task for md has not been submitted yet. He never communicated any issues or anything about why it was behind over the weekend. 
+So we communicated in the meeting that we needed things done on time and to ask for help if he needed it. We will check back into this issue for next due date to make sure this problem has been solved. 
+Everything else was completed for Nov. 3 deadline.
+
+#### Process Model and Architecture Document
+This was our rough idea of a process model while in the meeting today. We are going to discuss more outside of class and update what we came up with in the next meeting notes.
+_Figure out process model description in meeting today:_
+* **Process now:** Understand sprint instructions -> team meeting -> work on assigned tasks -> review finished work -> find ways to improve -> add to backlog -> back to team meeting -> once we finished primary tasks, do backlog tasks. Create this as a diagram and then explain how we do each item of the diagram.
+
+Ask about the component architecture document. Is it just the UML diagram but more detailed? 
+* Info we got was to look into the UML video. Create a diagram based on our architecture and explain each component.
+
+#### Unit Tests
+Unit tests are still an issue, we don't understand how to create them and have been testing our code manually. We talked to the process and got some insight from one of his videos
+We are going to try it out and hopefully have something working soon. If not we will go back to the professor for more help.
