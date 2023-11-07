@@ -279,6 +279,41 @@ def logout():
     redirect('/login')
 
 
+@app.route('/search_reviews', method='GET')
+def search_reviews():
+    """
+    Author: Md Golam Mahmud Chowdhury
+    Search reviews / search_reviews
+
+    Returns:
+        the search_results.tpl file.
+
+    Search for reviews that match a user's query.
+
+    This route retrieves a search query from the URL's 'query' parameter and searches for reviews in the 'reviews_collection' with titles or usernames that match the query. It returns the search results using a template.
+
+    Returns:
+        str: Rendered template with search results.
+    """
+    # Get the search query from the URL
+    query = request.query.query.strip()  # The 'query' parameter from the URL
+
+    # Search for reviews in the 'reviews_collection' with titles or usernames that match the query
+    results = list(reviews_collection.find({
+        "$or": [
+            {"title": {"$regex": query, "$options": "i"}},
+            {"username": {"$regex": query, "$options": "i"}}
+        ]
+    }))
+
+    # Convert ObjectId to string for easier use in the template
+    for review in results:
+        review["_id"] = str(review["_id"])
+
+    # Render the search results using a template
+    return template('search_results', reviews=results)
+
+
 @app.route('/add_comment/<review_id>', method=['GET','POST'])
 def comment(review_id):
     if request.method == 'POST':
