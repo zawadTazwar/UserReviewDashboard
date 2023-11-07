@@ -98,7 +98,3 @@ def get_session(request):
     """
     session_id = request.get_cookie('session_id')
     return sessions.get(session_id, {})
-
-
-
-

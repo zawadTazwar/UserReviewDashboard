@@ -68,6 +68,16 @@
         .create-button:hover {
             background-color: #45a049;
         }
+
+        .profile-container {
+            background-color: #f5f5f5;
+            padding: 20px;
+            text-align: center;
+            margin: 20px auto; /* Add margin for better spacing */
+            max-width: 800px; /* Adjust the maximum width as needed */
+            border: 1px solid #ddd; /* Add a border for better separation */
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
@@ -78,34 +88,31 @@
     <a class="header-button" href="/">Home</a>
     <a class="header-button" href="/reviews">Reviews</a>
     <a class="header-button" href="/profile">Profile</a>
+    <a class="header-button" href="/logout">Logout</a>
 </header>
 
 <!-- Main Content Section -->
 <main style="background-color: #f5f5f5; padding: 20px; text-align: center;">
-    <h2>Your Reviews</h2>
+    <div class="profile-container">
+        <h2>Your Reviews</h2>
 
-    <!-- Review 1 -->
-    <div>
-        <h3>Review 1</h3>
-        <p>
-            Your review content goes here.
-        </p>
-        <!-- Updated href for "Edit Review" button to point to the edit_review template -->
-        <a class="edit-button" href="/edit_review?id=1">Edit Review</a>
+        % for review in reviews:
+        <div>
+            <h3>{{ review['title'] }}</h3>
+            <p>
+                {{ review['content'] }}
+            </p>
+            <a class="edit-button" href="/edit_review/{{ review['_id'] }}">Edit Review</a>
+                <!-- Delete Review Form -->
+            <form action="/delete_review/{{ review['_id'] }}" method="post" style="display: inline;">
+                <button type="submit" class="edit-button" style="background-color: #dc3545;">Delete Review</button>
+            </form>
+        </div>
+        % end
+
+        <!-- Add a button to create a new review -->
+        <a class="create-button" href="/create_review">Create New Review</a>
     </div>
-
-    <!-- Review 2 -->
-    <div>
-        <h3>Review 2</h3>
-        <p>
-            Your review content goes here.
-        </p>
-        <!-- Updated href for "Edit Review" button to point to the edit_review template -->
-        <a class="edit-button" href="/edit_review?id=2">Edit Review</a>
-    </div>
-
-    <!-- Updated href for "Create New Review" button to point to the create_review template -->
-    <a class="create-button" href="/create_review">Create New Review</a>
 </main>
 
 <footer style="background-color: #333; color: #fff; text-align: center; padding: 10px;">
