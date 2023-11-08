@@ -114,6 +114,11 @@ It returns the search results using a template. He also created the search_resul
 * __Code Guidelines:__ Code guidelines were checked and code is approved.
 * __Improvement:__ No improvement came from code review.
 
+__Pull Request #93 (Date: Nov. 7)__
+* Only meetingNotes, no review needed.
+
+
+
 
 
 
