@@ -117,7 +117,15 @@ It returns the search results using a template. He also created the search_resul
 __Pull Request #93 (Date: Nov. 7)__
 * Only meetingNotes, no review needed.
 
-
+__Pull Request #94 (Date: Nov. 8)__
+* Added Process Model Diagram and Unit Tests
+* __Participants of review:__ Everyone
+* Jason was assigned this task. Unit tests are in place now to test key calls to the server.py file. These will be used when doing code reviews going forward.
+Process Model Document is used to explain our process of how we are working on the sprint as of today.
+* __Does it cause rest of code to not work?__ Code still works properly and new code does as well.
+* __Coding style conventions:__ Code does follow our conventions.
+* __Code Guidelines:__ Code guidelines were checked and code is approved.
+* __Improvement:__ No improvement came from code review.
 
 
 
