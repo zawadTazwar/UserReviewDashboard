@@ -90,7 +90,6 @@ __Pull Request #84 (Date: Nov. 4)__
 * __Code Guidelines:__ Code guidelines were checked and code is approved.
 * __Improvement:__ Add a delete comment button was added to backlog.
 
-
 __Pull Request #85-87 (Date: Nov. 6)__
 * added like/dislike feature.
 * Jason worked on the HTML of view_review.tpl. He updated the file by created a like/dislike button form and displayed the count. 
@@ -101,6 +100,25 @@ Tazwar added the like_review function in server.py. This function takes the argu
 * __Coding style conventions:__ Docstings need to be added. Otherwise fine, we can update before sprint deadline/final code review.
 * __Code Guidelines:__ Code guidelines were checked and code is approved. Although improvement could be made since the like action is similar to dislike. It is possible to make it one line instead of almost duplicating the code with the if statement. Added to backlog because we are on tight schedule.
 * __Improvement:__ Only allow logged in users to like/dislike and the user can only like/dislike once. Added to backlog.
+
+__Pull Request #89-90 (Date: Nov. 6)__
+* Added meetingNotes for today, and added our code_reviews.md file. No review needed.
+
+__Pull Request #92 (Date: Nov. 7)__
+* added Search bar
+* __Participants of review:__ Everyone
+* Md Golam Mahmud Chowdhury was assigned this task. He created the function search_reviews in server.py file. This function retrieves a search query from the URL's 'query' parameter and searches for reviews in the 'reviews_collection' with titles or usernames that match the query. 
+It returns the search results using a template. He also created the search_results.tpl file. This file displays the search results performed by the call search_reviews. It also allows you to search again.
+* __Does it cause rest of code to not work?__ Code still works properly and new code does as well.
+* __Coding style conventions:__ Code does follow our conventions. Docstrings look great.
+* __Code Guidelines:__ Code guidelines were checked and code is approved.
+* __Improvement:__ No improvement came from code review.
+
+__Pull Request #93 (Date: Nov. 7)__
+* Only meetingNotes, no review needed.
+
+
+
 
 
 
