@@ -4,63 +4,141 @@
 
 This GitHub repository contains the code for a User Review System, implemented in Python using the Bottle web framework and PyMongo for MongoDB integration. The system allows users to create accounts, log in, submit reviews, and view their reviews on a dashboard. This README provides an overview of the code and its functionality.
 
-## Code Overview
+# Documentation
 
-### Server.py
+Our `docs` directory in the repository contains various documents that provide more insight into our project. Here's a guide to help you navigate through them:
 
-`server.py` is the main script for the User Review System. It establishes a connection to a MongoDB cluster using the PyMongo library and creates a Bottle web application. The key components of the code are explained below:
+- **assignment1.md**: Contains the details about the first assignment related to our project, including specifications and evaluation criteria.
+- **attribution_template.md**: A template for attributing work and contributions to the project by team members or third parties.
+- **code_review.md**: Outlines our code review process, standards, and checklists to ensure quality and consistency in our codebase.
+- **meetingNotes.md**: Notes from our team meetings, capturing the key points discussed, decisions made, and action items.
+- **project_description.md**: An in-depth description of the project, including its scope, objectives, and intended outcomes.
+- **source-control_str.md**: Describes our strategy for source control, including branch naming conventions, merge strategies, and commit policies.
+- **team_reviews.md**: Documentation of peer reviews within the team, reflecting on the work done and providing feedback for improvement.
+- **user_stories.md**: A collection of user stories that guide the development of the project, ensuring we're building features that users actually need.
 
-- **User Authentication**: Users can register for an account or log in using a username and password. Passwords are stored as-is in this example, but it is recommended to hash them in a real application for security which will hopefully be done in the next sprint.
+Please refer to each document for detailed information on its respective topic.
 
-- **User Dashboard**: Once logged in, users can access their dashboard to view their submitted reviews.
+# Views Directory
 
-- **Review Submission**: Users can submit reviews that include a title and content.
+The `views` directory contains template files that define the structure and layout of the web pages in our application. Below is a description of each file and its purpose:
 
-### Code Authors
+- **create_review.tpl**: Template for the page where users can create new reviews.
+- **dashboard.tpl**: The main dashboard view that users see after logging in, which provides an overview of their activity and options.
+- **edit_review.tpl**: A form view that allows users to edit their existing reviews.
+- **homepage.tpl**: The landing page of our website, showcasing the main features and entry points into the application.
+- **login.tpl**: The login page template where users can enter their credentials to access their accounts.
+- **profile.tpl**: Displays the user profile where personal information and user-specific data are shown.
+- **reviews.tpl**: This template is used to display a list of reviews, allowing users to browse through different submissions.
+- **search_results.tpl**: Shows the results of a user's search query, formatted for easy reading and navigation.
+- **signup.tpl**: The sign-up page template where new users can register for an account.
+- **view_review.tpl**: A detailed view of a single review, including options to like, dislike, and comment.
 
-- Authors: 
-- Jason Wheeler
-- Muhammad Mahad Mirza
-- Md Jawad Ul Tazwar
-- Md Golam Mamud Chowdhury
+Each template is designed to be responsive and user-friendly, ensuring a seamless experience across various devices and screen sizes.
 
-## Features
+# Server
 
-1. **User Registration (Sign-Up)**
-   - Route URL: `/signup`
-   - Parameters:
-     - `first_name` (str): The user's first name.
-     - `last_name` (str): The user's last name.
-     - `username` (str): The desired username for the new account.
-     - `email` (str): The user's email address.
-     - `password` (str): The password for the new account.
-   - Returns:
-     - If the `username` is unique, it creates a new user, inserts it into the 'users_collection', and returns a success message.
-     - If the `username` is already taken, it returns an error message indicating that the username is not available.
-
-2. **User Login**
-   - Route URL: `/login`
-   - Parameters:
-     - `username` (str): The username provided by the user.
-     - `password` (str): The password provided by the user.
-   - Returns:
-     - If a valid user is found and the password matches, it sets a cookie and redirects to the dashboard.
-     - If the user is not found or the password is incorrect, it returns "Invalid username or password."
-
-3. **User Dashboard**
-   - Route URL: `/dashboard`
-   - Users can view their submitted reviews on the dashboard. If not logged in, they are redirected to the login page. However, for this sprint viewing reviews has not been implemented as it requires session management which we have in mind for the next sprint.
-
-4. **Review Submission**
-   - Route URL: `/create_review`
-   - Users can create and submit reviews with a title and content. Reviews are stored in the database.
-
-### Usage
-
-To run the application, execute `server.py`. Make sure you have installed the required dependencies, including Bottle and PyMongo.
-
+The server.py contains all the backend code for the website. 
+## Running the Server
+To start the server, run the following command from the root of the project directory:
 python server.py
+The server will start, and the application will be accessible at http://localhost:8080/ by default.
+Once the server is running, you should be able to access the dashboard and other pages via your web browser at `http://localhost:8080/dashboard` or whichever port you have configured.
 
-### Future Development
-- Session management is mentioned as a requirement for viewing reviews on the dashboard and will be added in the next sprint. This will enhance user authentication and provide a more secure user experience.
+## (Zawad)
+## Available Routes for the dashboard
+The server handles the following routes:
+### functions
+- `/dashboard`: Displays the dashboard with user reviews.
+- `/edit_review/<review_id>`: Opens a review for editing.
+- `/update_review`: Endpoint for submitting the updated review.
+- `/delete_review/<review_id>`: Endpoint for deleting a review.
+- `/create_review`: Displays a form to create a new review.
+- `/store_review`: Endpoint for storing the new review.
+- `/like_review/<review_id>`: Endpoint for liking or disliking a review.
+### Unit tests 
+Unit tests for the functions
+
+## (Dayeem)
+
+## (Jason)
+
+## (Mahad)
+
+
+
+# Session Management
+
+The `server.py` script includes a session management system that provides secure user authentication and session handling using cookies and MongoDB for storage.The session ID is stored securely as a cookie in the user's browser.
+
+## Overview
+
+The session management is facilitated through several key functions:
+
+- `create_session`: Generates a unique session ID and stores user session data in MongoDB and a local dictionary.
+- `delete_session`: Deletes a user session from MongoDB and the local storage based on the session ID.
+- `manage_sessions`: Acts as a hook to manage user sessions before processing requests.
+- `get_session`: Retrieves the current user session data from a request.
+
+## Setup
+
+Ensure MongoDB is running and a `sessions_collection` is created to store session data.
+
+## Usage
+
+### Creating Sessions
+When a user logs in, call `create_session` with the user's details to initiate a session.
+Example:
+session_id = create_session(user_id, username, password, first_name, last_name, email, sessions_collection)
+response.set_cookie('session_id', session_id)
+
+### Deleting Sessions
+To log out a user, invoke delete_session with the user's session ID.
+Example:
+delete_session(session_id, sessions_collection)
+response.delete_cookie('session_id')
+
+### Managing Sessions
+Incorporate manage_sessions as a hook or middleware in your application to validate sessions on each request.
+Example:
+@app.hook('before_request')
+def before_request():
+    manage_sessions(sessions_collection)
+
+### Retrieving Sessions
+Use get_session to access the session data in the context of a request.
+Example:
+session_data = get_session(request)
+
+
+# User Registration and Authentication
+
+The `user_info.py` script contains functions to register new users and authenticate existing ones against credentials stored in a MongoDB database.
+
+## Overview
+
+This script provides two primary functions:
+
+- `register_user`: Registers a new user in the database.
+- `authenticate_user`: Authenticates a user's login attempt.
+
+## Usage
+
+### Registering Users
+To register a new user, call register_user with the required personal information.
+Example:
+message = register_user('John', 'Doe', 'johndoe', 'john@example.com', 'password123')
+print(message)
+
+### Authenticating Users
+To authenticate a user, call authenticate_user with the username and password.
+Example:
+is_authenticated = authenticate_user('johndoe', 'password123')
+if is_authenticated:
+    print("Login successful.")
+else:
+    print("Login failed.")
+
+# Future Development
+
     
