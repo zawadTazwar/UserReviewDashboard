@@ -5,6 +5,7 @@ cluster = MongoClient("mongodb+srv://mahadmirza545:Mahad1234@cluster0.yqjy6mb.mo
 db = cluster["userreview"]
 users_collection = db["login"]
 
+
 def register_user(first_name, last_name, username, email, password):
     """
     Registers a new user in the MongoDB database.
@@ -37,6 +38,7 @@ def register_user(first_name, last_name, username, email, password):
 
     users_collection.insert_one(user)
     return f"Sign-up successful for {first_name} {last_name} with username {username}"
+
 
 def authenticate_user(username, password):
     """
