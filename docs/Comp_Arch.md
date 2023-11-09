@@ -5,7 +5,7 @@
 This document provides an architecture overview of a web application built using the Bottle framework in Python. The application's primary focus is on user authentication, session management, and various user interactions, including login, signup, review creation, editing, deletion, and comment addition.
 
 ### UML Diagram:
-![UML diagram](images/UML diagram.png)
+![UML diagram](images/UML_diagram.png)
 
 ## Components
 
