@@ -311,47 +311,34 @@ This will put us in a great position to finalize and clean up everything for sub
 - Jason is working on Process Model Diagram.
 - Tazwar is putting together a template for our ReadMe file.
 
-## Nov 07, 2023
-**Recorded by:** Md Golam Mahmud Chowdhury
-**Notes submitted on:** Nov 07, 2023
-**SCRUM master:** Jason Wheeler
+## Nov 09, 2023
+**Recorded by:** Tazwar
+**Notes submitted on:** Nov 09, 2023
+**SCRUM master:** Md Golam Mahmud Chowdhury
 **Venue:** EN 2040 
 **Source:** None  
 **Time:** 1PM  
 **Attendance:** Everyone
 
-We now have unit tests. This will be a part of our code review process from now on. 
-This will be added to our master after the meeting today.
+**What did we complete since our last meeting?**
+- Process model document has been completed by Jason yesterday. It has been merged with the master.
+- ReadMe file has been updated by Tazwar, individual portions need to be added since and the document is not currently merged with master.
+- Component Architecture Document is almost completed by Mahad and Dayeem. They will complete that today.
+- Rating Reviews form has been created by Jason.
+- Code Reviews took place for everything merged to master.
 
-Last night, we code-reviewed the like/dislike feature. 
-The updated info is now merged to the master in code_review.md.
+**Our finalizing tasks:**
+- Performance reviews: Everyone needs to complete this task in team_reviews.md.
+- Attributions: Everyone needs to update their attributions for this sprint.
+- Docstrings: Docstrings need to be checked and updated for all code.
+- Final Code Review: Double check the code to make sure everything is ready to go.
+- Finalize KanBan Board: Update tasks that are done and move everything else to backlog for next sprint.
+- ReadMe: Finish the ReadMe final for marking.
 
-**Where are we at with rating reviews?**
-The rating review is not production-ready. Jason has designed the HTML form, but the logic of the backend has been tricky to figure out. 
-We want users to be able to select the option of having a rating review when creating their review. We are still ahead of schedule, so we can still work on this until the final code deadline.
+_All of these tasks are individual and everyone has to do them._
 
-**Where are we at with the search bar?**
-We have manually tested the search bar and are now doing a code review. 
-However, we wish that when Md was behind schedule, he did update us on this. The task is a hard one to complete. 
-It didn’t hold us back from completing other tasks, and he did a great job on the task. We noticed how hard he worked on completing this task to finish it as quickly as possible after we discussed our problem.
+All code is now finalized and now more new code will be added for this sprint so we can do our final code review and add in our documentation.
 
-Final Code PR deadline: Nov. 8, this is so we can do our final code review on Nov. 9 to make sure our code is ready to go for submission.
-
-**What do we do now?**
-- Process Model Diagram
-- Component Architecture Document
-- Performance Reviews
-- ReadMe
-- Attributions
-- Finalize KanBan Board
-- Organize Code
-- Docstrings
-- Final Code review
-
-**Our next tasks:**
-The goal is to communicate through our discord chat outside of our meeting today and tomorrow. 
-We want to complete our parts of the Process Model Diagram, Component Architecture Document, and ReadMe by our next team meeting on Nov. 9. 
-This will put us in a great position to finalize and clean up everything for submission. 
-- Md Golam Mahmud Chowdhury and Mahad are wokring on Component Architecture Document.
-- Jason is working on Process Model Diagram.
-- Tazwar is putting together a template for our ReadMe file.
+**Team Problem:**
+We talked about Md Golam Mahmud Chowdhury a couple meetings ago we wanted to talk about how the problem is going. Md Golam Mahmud Chowdhury has been communicating better in our discord chat for problems he may be encountering.
+It seems like after our talk the problem has been resolved, and he understands the importance of deadlines and communicating any issues to the team.
