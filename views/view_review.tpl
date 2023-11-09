@@ -147,13 +147,14 @@
             <button type="submit" name="action" value="like" class="like-button">Like</button>
             <button type="submit" name="action" value="dislike" class="dislike-button">Dislike</button>
         </form>
-        <div style="padding: 50px; margin: 10px 80px; border: solid;">
+        <form style="padding: 50px; margin: 10px 80px; border: solid;">
         Rate the following on a scale from 1 to 10:  <br><br>
             <input type="number" min="1" max="10"> Effort expended on this topic.   <br>
             <input type="number" min="1" max="10"> Did the content provide something valuable?  <br>
             <input type="number" min="1" max="10"> Would you read another review from this user? <br>
+
             <button type="submit" name="action">Submit</button>
-        </div>
+        </form>
         <div class="like-dislike-count">
             <p class="like-count">Likes: {{review['like']}}</p>
             <p class="dislike-count">Dislikes: {{review['dislike']}}</p>
