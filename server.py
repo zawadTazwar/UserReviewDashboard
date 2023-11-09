@@ -1,7 +1,7 @@
 from bottle import Bottle, request, redirect, template, run, response
 from pymongo import MongoClient
 from bson import ObjectId
-from session_management import create_session, manage_sessions, delete_session
+from session_management import create_session, manage_sessions, delete_session, get_session
 
 cluster = MongoClient("mongodb+srv://mahadmirza545:Mahad1234@cluster0.yqjy6mb.mongodb.net/?retryWrites=true&w=majority")
 db = cluster["userreview"]
@@ -37,6 +37,7 @@ def login():
     """
     return template('login.tpl')
 
+
 @app.hook('before_request')
 def session_manager():
     manage_sessions(sessions_collection)
@@ -65,15 +66,14 @@ def do_login():
 @app.route('/profile')
 def profile():
     # Retrieve user information from the session
+    session = get_session(request)
+    if not session:
+        return redirect('/login')
     username = request.session.get('username', None)
     first_name = request.session.get('first_name', None)
     last_name = request.session.get('last_name', None)
     email = request.session.get('email', None)
     # Add more user-specific information as needed
-
-    if not username:
-        # If the user is not logged in, redirect to login
-        redirect("/login")
 
     # Pass the user data to the profile template
     return template('profile', username=username, first_name=first_name, last_name=last_name, email=email)
@@ -223,12 +223,10 @@ def update_review():
     redirect('/dashboard')
 
 
-
 @app.route('/delete_review/<review_id>', method='POST')
 def delete_review(review_id):
     reviews_collection.delete_one({"_id": ObjectId(review_id)})
     return redirect('/dashboard')
-
 
 
 # Route for creating a new review
@@ -279,7 +277,7 @@ def logout():
     redirect('/login')
 
 
-@app.route('/add_comment/<review_id>', method=['GET','POST'])
+@app.route('/add_comment/<review_id>', method=['GET', 'POST'])
 def comment(review_id):
     if request.method == 'POST':
         content = request.forms.get('comment')
@@ -299,6 +297,7 @@ def comment(review_id):
         review = reviews_collection.find_one({"_id": ObjectId(review_id)})
         comments = comments_collection.find({"review_id": review_id})
         return template('view_review.tpl', review=review, comments=comments)
+
 
 if __name__ == '__main__':
     run(app, host='localhost', port=8080)

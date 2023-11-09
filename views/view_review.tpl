@@ -152,7 +152,6 @@
             <input type="number" min="1" max="10"> Effort expended on this topic.   <br>
             <input type="number" min="1" max="10"> Did the content provide something valuable?  <br>
             <input type="number" min="1" max="10"> Would you read another review from this user? <br>
-
             <button type="submit" name="action">Submit</button>
         </form>
         <div class="like-dislike-count">
