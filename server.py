@@ -65,7 +65,7 @@ def do_login():
 
 @app.route('/profile')
 def profile():
-    # Retrieve user information from the session
+    # Retrieve user information from the session if session exists
     session = get_session(request)
     if not session:
         return redirect('/login')
@@ -73,7 +73,6 @@ def profile():
     first_name = request.session.get('first_name', None)
     last_name = request.session.get('last_name', None)
     email = request.session.get('email', None)
-    # Add more user-specific information as needed
 
     # Pass the user data to the profile template
     return template('profile', username=username, first_name=first_name, last_name=last_name, email=email)
@@ -146,45 +145,6 @@ def view_review(review_id):
         return "Review not found"
 
     return template('view_review.tpl', review=review, comments=comments)
-
-
-"""
-Author: Md Jawad Ul Tazwar
-
-Routes:
--------
-/dashboard:
-    Displays the user's dashboard containing all their reviews. If the user is not logged in, they are redirected 
-    to the login page.
-
-/edit_review/<review_id>:
-    Displays the edit page for a particular review specified by its unique ID. If the review with the provided ID 
-    is not found, a message is displayed to the user.
-
-/update_review:
-    Updates a review in the database with the edited content from the user. After updating, the user is redirected 
-    back to the dashboard.
-
-/delete_review/<review_id>:
-    Deletes a review specified by its unique ID from the database. After deletion, the user is redirected back 
-    to the dashboard.
-
-/create_review:
-    Displays the page for creating a new review.
-
-/store_review:
-    Stores the newly created review in the database. The review is associated with the logged-in user. After storage,
-    the user is redirected back to the dashboard.
-
-Dependencies:
--------------
-* reviews_collection: This represents the MongoDB collection that contains all the reviews. Operations such as 
-  finding, updating, and deleting reviews are performed on this collection.
-
-* ObjectId: It's a utility from the MongoDB library to handle the unique object IDs associated with each document.
-
-
-"""
 
 
 @app.route('/dashboard')
