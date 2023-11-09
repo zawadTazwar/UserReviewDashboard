@@ -59,17 +59,78 @@ The server handles the following routes:
 ### Unit tests 
 Unit tests for the functions
 
+## (Mahad)
+
+In this section, I'll outline the specific code contributions and relevant docstrings for my part of the project. I've 
+primarily worked on the user authentication and session management aspects of the codebase.
+
+#### `server.py`
+
+In the `server.py` script, I've added the following routes and functions related to user authentication and registration:
+
+- `/login` (POST): This route handles user login. It retrieves the username and password from the request form, attempts
+ to authenticate the user, and creates a new session upon successful login.
+  - Relevant function: `do_login()`
+
+- `/profile`: This route displays the user's profile if a valid session exists, or redirects to the login page if no valid session exists.
+  - Relevant function: `profile()`
+
+- `/signup` (POST): This route is responsible for user registration (sign-up). It parses user registration data, checks 
+ for duplicate usernames, generates a unique user ID, and inserts the new user into the 'users_collection'.
+  - Relevant function: `do_signup()`
+
+### Database Configuration
+
+I've played a key role in configuring the MongoDB database for our project, including defining the database structure, collections, and connections.
+
+#### `server.py`
+
+In the `server.py` script, I've established the following MongoDB collections and integrated them into our project:
+
+- `users_collection`: This collection stores user information, such as user IDs, names, usernames, email addresses, and hashed passwords (for security).
+- `sessions_collection`: It is responsible for managing user sessions, storing session data, and ensuring secure authentication.
+- `reviews_collection`: This collection holds user reviews, including information such as review content, user IDs, timestamps, and likes/dislikes.
+- `comments_collection`: For comments on reviews, this collection stores data about review IDs, usernames, and comment content.
+
+I've ensured that the collections are appropriately set up and ready to store and retrieve data for their respective purposes.
+
+### MongoDB Integration
+
+I've integrated the MongoDB database into our project, allowing data storage, retrieval, and manipulation:
+
+- For user registration and authentication, I've implemented functions to insert and retrieve user data from the `users_collection`.
+- For session management, I've utilized the `sessions_collection` to securely manage user sessions.
+- When users create reviews, the `reviews_collection` stores review data, while comments on reviews are stored in the `comments_collection`.
+
+This database setup and integration ensure that our project can effectively manage user accounts, sessions, reviews, and comments, providing a seamless experience for users.
+### Commenting on Reviews
+
+I've implemented the functionality to add comments to reviews specified by their unique IDs. This allows users to engage in discussions and provide feedback on reviews.
+I've added the following route and functions for commenting on reviews in the `server.py` script:
+
+- `/add_comment/<review_id>` (GET and POST): This route handles the addition of comments to a review identified by its unique ID.
+  - Relevant function: `comment(review_id)`
+
+If the request method is POST, the function retrieves the comment content from the request form, associates it with the user's username, and inserts it into the `comments_collection`. Subsequently, the user is redirected to the review view.
+If the request method is GET, the function is responsible for displaying comments associated with the review. It retrieves the review and its associated comments from the database and renders them using a template.
+This feature enhances user engagement and interaction within the review system, allowing users to provide valuable feedback and insights on reviews.
+
+### Code Documentation
+
+In addition to the code contributions, I've also added docstrings and explanations within the code to make it more understandable 
+and maintainable. Clear and concise documentation is crucial for the success of our project.
+
+I'll continue to actively work on these features, collaborate with the team, and ensure that the codebase remains well-documented and functional.
+
 ## (Dayeem)
 
 ## (Jason)
 
-## (Mahad)
-
-
 
 # Session Management
 
-The `server.py` script includes a session management system that provides secure user authentication and session handling using cookies and MongoDB for storage.The session ID is stored securely as a cookie in the user's browser.
+The `server.py` script includes a session management system that provides secure user authentication and session handling 
+using cookies and MongoDB for storage.The session ID is stored securely as a cookie in the user's browser.
 
 ## Overview
 
@@ -139,6 +200,5 @@ if is_authenticated:
 else:
     print("Login failed.")
 
-# Future Development
 
     
