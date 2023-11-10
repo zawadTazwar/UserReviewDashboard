@@ -1,38 +1,21 @@
 # Component Architecture Document
 
 ## Overview
+This document provides an architecture overview of a web application built using the Bottle framework in Python. The application's primary focus is on user authentication, session management, and various user interactions, including login, signup, review creation, editing, deletion, and comment addition.
 
-The provided code snippets consist of a web application built using the Bottle framework in Python. The application is designed for user authentication, managing user sessions, and allowing users to perform various actions such as logging in, signing up, creating, editing, and deleting reviews, as well as leaving comments on reviews. Below is an architecture document that outlines the components, their responsibilities, and how they interact within the application.
+### UML Diagram:
+![UML diagram](images/UML_diagram.png)
 
 ## Components
 
-### 1. Web Application (Bottle)
+### 1. Web Application (Server)
 
-- **Responsibility**: The main component that handles HTTP requests and responses. It routes requests to the appropriate views and performs session management.
-
+- **Responsibility**: This component serves as the core of the application, handling HTTP requests and responses, routing to the appropriate views, and managing user sessions.
 - **Key Functions**:
-  - Route HTTP requests to appropriate views based on URL paths.
-  - Implement session management and authentication using hooks.
-  - Manage user sessions and store session data in MongoDB.
-
-### 2. MongoDB Database
-
-- **Responsibility**: Stores user data, review data, and session information.
-
-- **Key Collections**:
-  - `users_collection`: Stores user information such as username, password, first name, last name, and email.
-  - `reviews_collection`: Stores review data, including titles, content, likes, and dislikes.
-  - `sessions_collection`: Stores session data to manage user authentication and sessions.
-  - `comments_collection`: Stores comments associated with reviews.
-
-### 3. Views and Templates
-
-- **Responsibility**: Render HTML templates to present information to the user and handle user interactions.
-
-- **Key Views and Templates**:
   - `home()`: Renders the homepage template.
   - `login()`: Renders the login template.
-  - `do_login()`: Handles user login and redirects to the dashboard on success.
+  - `do_login()`: Handles user login and redirects to the dashboard upon success.
+  - `profile_info()`: Manages the user's profile information.
   - `profile()`: Renders the user profile page.
   - `signup()`: Renders the signup template.
   - `do_signup()`: Handles user registration.
@@ -40,17 +23,42 @@ The provided code snippets consist of a web application built using the Bottle f
   - `view_review(review_id)`: Displays a specific review and associated comments.
   - `dashboard()`: Displays the user's dashboard with their reviews.
   - `edit_review(review_id)`: Allows editing a review.
-  - `update_review()`: Handles review update.
-  - `delete_review(review_id)`: Handles review deletion.
-  - `create_review()`: Renders the create review template.
+  - `update_review()`: Handles review updates.
+  - `delete_review(review_id)`: Handles review deletions.
+  - `create_review()`: Renders the create_review template.
   - `store_review()`: Handles the creation of new reviews.
-  - `logout()`: Logs the user out and clears the session.
   - `add_comment(review_id)`: Allows users to add comments to reviews.
+  - `logout()`: Logs the user out and clears the session.
+  
+### 2. MongoDB Database
+
+- **Responsibility**: This component stores user data, review data, and session information in a MongoDB database.
+- **Key Collections**:
+  - `users_collection`: Stores user information, including username, password, first name, last name, and email.
+  - `reviews_collection`: Stores review data, including titles, content, likes, and dislikes.
+  - `sessions_collection`: Stores session data for user authentication and session management.
+  - `comments_collection`: Stores comments associated with reviews.
+
+  
+### 3. Templates
+
+- **Responsibility**: This component is responsible for rendering HTML templates to present information to the user and handle user interactions.
+- **Key Views and Templates**:
+  - 'homepage.tpl': Main page when opening the website.
+  - 'login.tpl': Login page.
+  - 'profile.tpl': User profile page.
+  - 'signup.tpl': Signup page.
+  - 'reviews.tpl': Reviews page.
+  - 'view_review.tpl': View a single review.
+  - 'dashboard.tpl': User dashboard page.
+  - 'edit_review.tpl': Edit a review.
+  - 'create_review.tpl': Create a new review.
+  - 'search_results.tpl': Display search results.
 
 ### 4. Session Management
 
 - **Responsibility**: Manages user sessions and session-related functions.
-
+- 
 - **Key Functions**:
   - `create_session(user_id, username, password, first_name, last_name, email, sessions_collection)`: Creates a new user session and sets a session cookie in the response.
   - `delete_session(session_id, sessions_collection)`: Deletes a user session.
@@ -98,4 +106,7 @@ The provided code snippets consist of a web application built using the Bottle f
 
 ## Conclusion
 
-The provided code snippets form a web application with components that collectively manage user sessions, user authentication, and the creation, retrieval, and interaction with reviews and comments. MongoDB is used to persist data, while Bottle handles routing and view rendering. The architecture is designed to enable users to have a personalized experience with features like creating and managing reviews and comments.
+This component architecture document outlines the various components, their responsibilities, and interactions in the web application.
+The components work together to provide user authentication, session management, and features for creating and managing reviews and comments.
+MongoDB is used to store and retrieve data, while the Bottle framework handles routing and view rendering.
+
