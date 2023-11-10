@@ -3,6 +3,7 @@ from pymongo import MongoClient
 from bson import ObjectId
 from session_management import create_session, manage_sessions, delete_session, get_session
 
+# Initialize a connection to a MongoDB cluster and set up database and collections.
 cluster = MongoClient("mongodb+srv://mahadmirza545:Mahad1234@cluster0.yqjy6mb.mongodb.net/?retryWrites=true&w=majority")
 db = cluster["userreview"]
 users_collection = db["login"]
@@ -45,6 +46,16 @@ def session_manager():
 
 @app.route('/login', method='POST')
 def do_login():
+    """
+    Handle user login when a POST request is received.
+
+    Retrieves the username and password from the request form, attempts to authenticate the user.
+    If authentication is successful, a new session is created, and the user is redirected to the dashboard.
+    If the login is unsuccessful, an "Invalid username or password" message is returned.
+
+    Returns:
+        HTTP response: Redirects to the dashboard upon successful login or provides an error message.
+    """
     username = request.forms.get('username')
     password = request.forms.get('password')
 
@@ -65,6 +76,15 @@ def do_login():
 
 @app.route('/profile')
 def profile():
+    """
+    Display the user's profile if a valid session exists, or redirect to the login page.
+
+    Retrieves user information from the session and renders the user's profile page.
+    If no valid session exists, the user is redirected to the login page.
+
+    Returns:
+        HTTP response: The user's profile page or a redirect to the login page.
+    """
     # Retrieve user information from the session if session exists
     session = get_session(request)
     if not session:
@@ -93,6 +113,16 @@ def signup():
 
 @app.route('/signup', method='POST')
 def do_signup():
+    """
+    Author: Mahad
+    Handle user registration (sign-up) when a POST request is received.
+
+    Parses user registration data from the request form, checks for duplicate usernames,
+    generates a unique user ID, and inserts the new user into the 'users_collection'.
+
+    Returns:
+        str: A success message indicating the user's sign-up status.
+    """
     first_name = request.forms.get('first_name')
     last_name = request.forms.get('last_name')
     username = request.forms.get('username')
@@ -274,6 +304,16 @@ def search_reviews():
 
 @app.route('/add_comment/<review_id>', method=['GET', 'POST'])
 def comment(review_id):
+    """
+    Author: Mahad
+    Handle adding comments to a review specified by its unique ID.
+
+    Args:
+        review_id (str): The unique identifier of the review to which comments are being added.
+
+    Returns:
+        HTTP response: Redirects to the review view after comment addition.
+    """
     if request.method == 'POST':
         content = request.forms.get('comment')
 
