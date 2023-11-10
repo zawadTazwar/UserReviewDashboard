@@ -68,8 +68,18 @@ class TestServer(unittest.TestCase):
         response = self.test_app.get('/edit_review/65492e9a717a81861104b2b4')
         self.assertEqual(response.status_code, 200)  # Check that the edit review page is accessible
 
-
     def test_create_session(self):
+        """
+        Test the creation of a user session.
+
+        This function assumes the existence of user data and verifies the creation of a session.
+
+        Args:
+            None
+
+        Returns:
+            None
+        """
         # Assuming you have user data
         user_id = 1
         username = 'testuser'
@@ -102,6 +112,17 @@ class TestServer(unittest.TestCase):
             del sessions[session_id]
 
     def test_manage_sessions_valid_session(self):
+        """
+        Test the management of a valid user session.
+
+        This function simulates a valid user session and checks if the session management works correctly.
+
+        Args:
+            None
+
+        Returns:
+            None
+        """
         request = MagicMock()
         request.get_cookie.return_value = 'test_session_id'
 
@@ -112,12 +133,34 @@ class TestServer(unittest.TestCase):
         self.assertEqual(request.session, {'username': 'testuser'})
 
     def test_manage_sessions_invalid_session(self):
+        """
+        Test the management of an invalid user session.
+
+        This function simulates an invalid user session and checks if the session is not present after management.
+
+        Args:
+            None
+
+        Returns:
+            None
+        """
         request = MagicMock()
         request.get_cookie.return_value = 'invalid_session_id'
         manage_sessions(self.sessions_collection)
         self.assertNotIn('session', request)
 
     def test_get_session_valid_session(self):
+        """
+        Test the retrieval of a valid user session.
+
+        This function simulates the retrieval of a valid user session and checks if it matches the expected session.
+
+        Args:
+            None
+
+        Returns:
+            None
+        """
         request = MagicMock()
         request.get_cookie.return_value = 'test_session_id'
         # Set up a sample session in the global sessions dictionary
@@ -126,6 +169,17 @@ class TestServer(unittest.TestCase):
         self.assertEqual(session, {'username': 'testuser'})
 
     def test_get_session_invalid_session(self):
+        """
+        Test the retrieval of an invalid user session.
+
+        This function simulates the retrieval of an invalid user session and checks if an empty session is returned.
+
+        Args:
+            None
+
+        Returns:
+            None
+        """
         request = MagicMock()
         request.get_cookie.return_value = 'invalid_session_id'
         session = get_session(request)
