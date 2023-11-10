@@ -16,3 +16,12 @@
 |---------------|-------------------------------------------------------------------------------------------------------------------------------------|-----------|
 | Chat GPT      | Helped with code implementation and errors that I did not understand. Very helpful for understanding HTML and CSS elements as well. |           |
 | pyMongo       | Help with using MongoDb and implementing into my code                                                                               | server.py |
+
+
+## Attributions for Dayeem
+
+| Source        | Contribution                                                                 | Location                  |
+|---------------|------------------------------------------------------------------------------|---------------------------|
+| Chat GPT      | Unit test implementations. Error debugging. Search algorithm implementation. | server.py, test_server.py |
+| https://www.smartdraw.com/uml-diagram/       | UML diagram implementation ideas                                             | UML_diagram.png           |
+| https://www.se.rit.edu/~co-operators/SoftwareArchitectureDocumentation.pdf     | Componenet architecture document ideas                                       | Comp_Arch.md              |

@@ -41,7 +41,20 @@ def login():
 
 @app.hook('before_request')
 def session_manager():
+    """
+    Hook function for managing user sessions before processing each request.
+
+    This function utilizes the `manage_sessions` function to handle tasks related to user sessions
+    before the application processes each incoming request.
+
+    Args:
+        None
+
+    Returns:
+        None
+    """
     manage_sessions(sessions_collection)
+
 
 
 @app.route('/login', method='POST')
@@ -259,12 +272,25 @@ def like_review(review_id):
 
 @app.route('/logout')
 def logout():
+    """
+    Endpoint for logging out a user.
+
+    This route clears the user session by deleting the associated session data from the database
+    and removing the session ID cookie from the user's browser.
+
+    Args:
+        None
+
+    Returns:
+        None
+    """
     # Clear the session
     session_id = request.get_cookie('session_id')
     if session_id:
         delete_session(session_id, sessions_collection)
         response.delete_cookie('session_id')
     redirect('/login')
+
 
 
 @app.route('/search_reviews', method='GET')
