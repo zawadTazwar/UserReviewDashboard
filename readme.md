@@ -122,30 +122,35 @@ and maintainable. Clear and concise documentation is crucial for the success of 
 
 I'll continue to actively work on these features, collaborate with the team, and ensure that the codebase remains well-documented and functional.
 
-## (Dayeem)
+
 
 ## (Jason)
 
+## (Md Golam Mahmud - Dayeem)
 
-# Session Management
+## Session Management
 
-The `server.py` script includes a session management system that provides secure user authentication and session handling 
-using cookies and MongoDB for storage.The session ID is stored securely as a cookie in the user's browser.
+The `server.py` script includes a session management system that provides secure user authentication and session handling implemented in a `session_management.py`
+using cookies and MongoDB for storage.The session ID is stored securely as a cookie in the user's browser. The `session_management.py` is imported in the `server.py` to create sessions while doing a login.
 
-## Overview
+### Overview
 
 The session management is facilitated through several key functions:
 
 - `create_session`: Generates a unique session ID and stores user session data in MongoDB and a local dictionary.
+This method is called in the `do_login` method in the `server.py` 
 - `delete_session`: Deletes a user session from MongoDB and the local storage based on the session ID.
+This is called in the `logout` method to delete sessions when the user logs out.
 - `manage_sessions`: Acts as a hook to manage user sessions before processing requests.
+This is called in the `session_manager` method in `server.py`
 - `get_session`: Retrieves the current user session data from a request.
+This is called `profile` method in the `server.py`
 
-## Setup
+### Setup
 
 Ensure MongoDB is running and a `sessions_collection` is created to store session data.
 
-## Usage
+### Usage
 
 ### Creating Sessions
 When a user logs in, call `create_session` with the user's details to initiate a session.
@@ -154,36 +159,54 @@ session_id = create_session(user_id, username, password, first_name, last_name, 
 response.set_cookie('session_id', session_id)
 
 ### Deleting Sessions
-To log out a user, invoke delete_session with the user's session ID.
+When a user logs out, `delete_session` function is invoked with the user's session ID.
 Example:
 delete_session(session_id, sessions_collection)
 response.delete_cookie('session_id')
 
 ### Managing Sessions
-Incorporate manage_sessions as a hook or middleware in your application to validate sessions on each request.
+Incorporated manage_sessions as a hook or middleware in your application to validate sessions on each request.
 Example:
 @app.hook('before_request')
 def before_request():
     manage_sessions(sessions_collection)
 
 ### Retrieving Sessions
-Use get_session to access the session data in the context of a request.
+Using `get_session` to access the session data in the context of a request.
 Example:
 session_data = get_session(request)
 
+### Unit tests for session management
 
-# User Registration and Authentication
+- **`test_create_session`**: Test the creation of a user session.
+- **`test_delete_session`**: Test the deletion of a user session.
+- **`test_manage_sessions_valid_session`**: Test the management of a valid user session.
+- **`test_manage_sessions_invalid_session`**: Test the management of an invalid user session.
+- **`test_get_session_valid_session`**: Test the retrieval of a valid user session.
+- **`test_get_session_invalid_session`**: Test the retrieval of an invalid user session.
+
+To run the tests:
+    Ensure the web application and MongoDB are set up and running.
+    Execute the test using the test runner('test_server.py')
+
+Expected:
+    The test should pass without errors.
+
+
+## User Registration and Authentication
 
 The `user_info.py` script contains functions to register new users and authenticate existing ones against credentials stored in a MongoDB database.
+However, this is a stab file. It is made to implement separate user authentication module that is now already implemented in the `do_login` and `profile` method,
+in the `server.py` file. The modularisation is a scope for our sprint 3. For now as it is implemented we explain what are the functions that will be implemented.
 
-## Overview
+### Overview
 
 This script provides two primary functions:
 
 - `register_user`: Registers a new user in the database.
 - `authenticate_user`: Authenticates a user's login attempt.
 
-## Usage
+### Usage
 
 ### Registering Users
 To register a new user, call register_user with the required personal information.
@@ -200,5 +223,47 @@ if is_authenticated:
 else:
     print("Login failed.")
 
+## `search_reviews` Function Documentation
 
-    
+### Overview
+The `search_reviews` function is responsible for searching reviews based on a user's query and rendering the search results using the `search_results.tpl` template.
+The `search_reviews` function is implemented in the `server.py` file.
+
+### Route Information
+- **Route**: `/search_reviews`
+- **Method**: GET
+
+### Parameters
+- None
+
+### Returns
+- **Type**: str
+- **Description**: Rendered template with search results (`search_results.tpl` file).
+
+### Functionality
+1. Retrieves the search query from the URL's 'query' parameter.
+2. Searches for reviews in the 'reviews_collection' with titles or usernames that match the query.
+3. Converts ObjectId to string for easier use in the template.
+4. Renders the search results using the 'search_results.tpl' template.
+
+### Example Usage
+```python
+# Example URL: /search_reviews?query=example
+search_results = search_reviews()
+```
+
+## Other files to take into consideration
+
+### docs folder:
+
+- `attribution_template.md`: A template for attributing work and contributions to the project by team members or third parties.
+- `code_review.md`: Outlines our code review process, standards, and checklists to ensure quality and consistency in our codebase.
+- `meetingNotes.md`: Notes from our team meetings, capturing the key points discussed, decisions made, and action items.
+- `team_review_sprint2.md`: Documentation of peer reviews within the team, reflecting on the work done and providing feedback for improvement.
+- `process_model.md`: Outlines the team's sprint process, including a visual model, process components, changes made, and a proposed improvement for continuous documentation updates post-code review and testing.
+- `Comp_Arch.md`: Provides an overview of the component architecture of the application, detailing its key components, interactions, and justifications for the chosen architecture.
+
+### doc/images folder: 
+
+- `Process-Model-Diagram.png`: Represents the workflow and stages of a project's development process; how tasks and activities progress from initiation to completion.
+- `UML_diagram.png`: Illustrates and communicates the structure, behavior, and interactions of the system or the process of the application.
