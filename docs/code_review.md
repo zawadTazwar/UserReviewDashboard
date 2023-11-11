@@ -137,6 +137,12 @@ __Pull Request #98 (Date: Nov. 8)__
 * __Code Guidelines:__ Code guidelines were checked and code is approved.
 * __Improvement:__ The server.py needs to be updated to handle the HTML form for rating reviews. We haven't figured out how we want to handle this data yet and task will be in backlog.
 
+**Final Code Review of Sprint 2 (Date: Nov. 10)**
+* All code is in place and are working.
+* Unit Tests all pass.
+* Coding style conventions: Everything passes now since we added docstrings.
+* Code Guidelines: Guidelines were reviewed and it is approved.
+
 
 
 
