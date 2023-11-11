@@ -125,6 +125,38 @@ I'll continue to actively work on these features, collaborate with the team, and
 
 
 ## (Jason)
+### Here are my tasks for sprint 2 and where to find them:
+
+1. **Updating HTML templates for session management:**
+   - **Files:** `dashboard.tpl`, `profile.tpl`
+   - **Description:** In this task, I updated the HTML templates for session management. This enhancement ensures that users have a personalized experience based on their profile information. The session management feature allows the server to identify and remember users, providing a customized dashboard and profile view.
+   - You can exercise this code by checking the `/dashboard` and `/profile` pages.
+
+2. **Designing and coding the HTML form for comments and displaying comments:**
+   - **File:** `view_review.tpl`
+   - **Description:** This task involved designing and coding the HTML form responsible for handling user comments. Additionally, I implemented the display functionality to show existing comments on the review page (`view_review.tpl`). Users can submit comments through the form, and the comments are dynamically displayed on the same page.
+   - You can exercise this by using the `/view_review` page and type a comment.
+
+3. **Designing and coding the HTML form for like/dislike and displaying the count of likes/dislikes:**
+   - **File:** `view_review.tpl`
+   - **Description:** I created the HTML form to handle user interactions for liking or disliking a review. The count of likes and dislikes is displayed on the review page (`view_review.tpl`). This feature allows users to express their opinion on a review and see the overall popularity of the review based on the accumulated likes and dislikes.
+   - You can exercise this by using the `/view_review` page and click the like or dislike button.
+
+4. **Designing and coding the HTML form for the search bar:**
+   - **File:** `reviews.tpl`
+   - **Description:** For this task, I designed and implemented the HTML form for the search bar. Users can input search queries to find specific reviews. The search functionality enhances user experience by allowing them to quickly locate reviews based on relevant keywords or phrases.
+   - You can exercise this by using the `/reviews` page and using the search bar.
+
+5. **Designing and coding the HTML form for the rating review:**
+   - **File:** `view_review.tpl`
+   - **Description:** I implemented the HTML form for users to provide a rating for a particular review. This feature allows users to express their opinion on the quality of a review by assigning a numerical rating. The rating form is displayed on the review page (`view_review.tpl`).
+   - You can exercise this by using the `/view_reviews` page and rate the review.
+
+6. **Completing the process model document:**
+   - **File:** `process_model.md`
+   - **Description:** This task involved completing the process model document (`process_model.md`). The document outlines the workflow and processes involved in the system. It serves as a comprehensive guide to understand how different components of the application interact and function together.
+
+**Unit Tests:** Run by `python -m unittest test_server` in terminal.
 
 ## (Md Golam Mahmud - Dayeem)
 

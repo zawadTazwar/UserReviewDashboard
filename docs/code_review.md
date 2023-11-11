@@ -127,6 +127,15 @@ Process Model Document is used to explain our process of how we are working on t
 * __Code Guidelines:__ Code guidelines were checked and code is approved.
 * __Improvement:__ No improvement came from code review.
 
+__Pull Request #98 (Date: Nov. 8)__
+* Added rating review form and updated profile in server.py
+* __Participants of review:__ Everyone
+* Jason was assigned this task. He added a HTML form to view_review for rating users reviews. He also updated profile in server.py to redirect to log in page when not logged in.
+* __Does it cause rest of code to not work?__ Code still works properly and new code does as well.
+* __Unit Tests:__ All tests pass now for the first time ever. Because of this profile fix.
+* __Coding style conventions:__ Docstrings need to be added which will be added tomorrow.
+* __Code Guidelines:__ Code guidelines were checked and code is approved.
+* __Improvement:__ The server.py needs to be updated to handle the HTML form for rating reviews. We haven't figured out how we want to handle this data yet and task will be in backlog.
 
 
 

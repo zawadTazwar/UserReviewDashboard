@@ -1,6 +1,7 @@
-### Team Review
+## Team Review
 
-**Mahad's review:**
+### Mahad's Team Review:
+
 As another sprint comes to an end, I can say again that this team has been a pleasure to work with. We are collaborating
 much better compared to sprint 1 and feel more confident about the project and relevant documentation. Below I discuss
 how I found working with each individual to be like.
@@ -18,7 +19,7 @@ first one to show up to meetings, always available outside of class too to work 
 submission which slows down our process, but he also works outside of school, so we all understand. Nevertheless, I am looking forward to work
 with him again as well.
 
-**Md Golam Mahmud's Team Review:**
+### Md Golam Mahmud's Team Review:
 
 In this sprint, our team experienced a dynamic blend of challenges and accomplishments. Each team member's unique contributions played a vital role in shaping our progress. Here's a snapshot of my team member's performances:
 
@@ -57,4 +58,28 @@ Sometimes not very clear on what the meeting agendas are.
 Response: 
 Zawad is given harder aspects of the coding.
 Made to do complex and extensive work required documentations.
+
+### Jason's Team Review:
+
+**Team:**
+The team has worked great together since the beginning. We always get our work done and our personalities have came together very nicely.
+I want to see this team work together on assigning tasks, team meetings, and discord discussions better. I tend to take a more leadership role which is fine, I do feel like a team needs someone to be in that position. Although this tends to cause team members to rely on me for running everything.
+This often means I am the only team member that familiarizes myself with the meeting agenda before we start our meeting. As well as, I am often the only member that reads up on the professors material for the tasks to be assigned.
+Our meetings have only 50 minutes, and we need to get as much done in that meeting as possible instead of myself explaining what could have been read on the course webpage beforehand.
+This can be improved by everyone taking more initiative on what the professor assigns us to do. If we all come prepared with ideas, questions, and thoughts our team meeting process and understanding of the project will be improved by everyone.
+
+**Md Golam Mahmud (Dayeem):**
+Dayeem has been great to work with, he always shows up to meetings on time and works hard on his tasks assigned to him.
+I want Dayeem to take the feedback we talked about in the meetings and continue to work on communicating issues with tasks assigned and completing these tasks on time.
+He has improved toward the end of the sprint and I hope this continues.
+
+**Mahad:**
+Mahad is great at working on tasks. I tend to assign him harder tasks then other team members because he continues to do a great job on them. 
+I would like to see some more effort with the team meetings from Mahad. He often shows up late and isn't prepared for the meeting agenda.
+The best way to improve would be to come on time and read the agenda tasks the professor has assigned on the course webpage and think about questions and ideas for those agenda items beforehand.
+
+**Zawad (Tazwar):**
+Zawad is always smiling with a good attitude. He is open to taking on whatever may be assigned to him.
+I would like to see Zawad show up for team meetings on time more often and talk more in the meetings. We don't get a lot of responses or ideas from Zawad which needs to be improved.
+This can happen by being more involved with the team on discord, showing to meetings on time, and being more vocal about his thoughts.
 

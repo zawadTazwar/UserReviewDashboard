@@ -2,13 +2,14 @@
 
  
 =======
-## Attributions
+## Attributions for Jason
 
-| Source                                  | Contribution                                                                             | Location   |
-|-----------------------------------------|------------------------------------------------------------------------------------------|------------|
-| https://www.youtube.com/watch?v=nUcj3d0bI-c | This YouTube tutorial helped me (Jason) understand how to use Bottle to create the server | `server.py`  |
-| https://www.w3schools.com/html/default.asp    | Helped me (Jason) create my HTML code in my TPL files.                                   | .tpl files |
-| ChatGPT                                 | Helped me (Jason) design my templates with CSS, since I haven't learned it before.       | .tpl files | 
+| Source                                                                   | Contribution                                                                              | Location             |
+|--------------------------------------------------------------------------|-------------------------------------------------------------------------------------------|----------------------|
+| https://www.youtube.com/watch?v=nUcj3d0bI-c                              | This YouTube tutorial helped me (Jason) understand how to use Bottle to create the server | `server.py`          |
+| https://www.w3schools.com/html/default.asp                               | Helped me (Jason) create my HTML code in my TPL files.                                    | .tpl files           |
+| ChatGPT                                                                  | Helped me (Jason) design my templates with CSS, since I haven't learned it before.        | .tpl files           | 
+| https://iansommerville.com/engineering-software-products/                | Helped me create the process model diagram.                                               | `process_model.md`   |
 
 ## Attributions for Mahad
 

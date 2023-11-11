@@ -310,3 +310,35 @@ This will put us in a great position to finalize and clean up everything for sub
 - Md Golam Mahmud Chowdhury and Mahad are wokring on Component Architecture Document.
 - Jason is working on Process Model Diagram.
 - Tazwar is putting together a template for our ReadMe file.
+
+## Nov 09, 2023
+**Recorded by:** Tazwar
+**Notes submitted on:** Nov 09, 2023
+**SCRUM master:** Md Golam Mahmud Chowdhury
+**Venue:** EN 2040 
+**Source:** None  
+**Time:** 1PM  
+**Attendance:** Everyone
+
+**What did we complete since our last meeting?**
+- Process model document has been completed by Jason yesterday. It has been merged with the master.
+- ReadMe file has been updated by Tazwar, individual portions need to be added since and the document is not currently merged with master.
+- Component Architecture Document is almost completed by Mahad and Dayeem. They will complete that today.
+- Rating Reviews form has been created by Jason.
+- Code Reviews took place for everything merged to master.
+
+**Our finalizing tasks:**
+- Performance reviews: Everyone needs to complete this task in team_reviews.md.
+- Attributions: Everyone needs to update their attributions for this sprint.
+- Docstrings: Docstrings need to be checked and updated for all code.
+- Final Code Review: Double check the code to make sure everything is ready to go.
+- Finalize KanBan Board: Update tasks that are done and move everything else to backlog for next sprint.
+- ReadMe: Finish the ReadMe final for marking.
+
+_All of these tasks are individual and everyone has to do them._
+
+All code is now finalized and now more new code will be added for this sprint so we can do our final code review and add in our documentation.
+
+**Team Problem:**
+We talked about Md Golam Mahmud Chowdhury a couple meetings ago we wanted to talk about how the problem is going. Md Golam Mahmud Chowdhury has been communicating better in our discord chat for problems he may be encountering.
+It seems like after our talk the problem has been resolved, and he understands the importance of deadlines and communicating any issues to the team.
