@@ -170,6 +170,13 @@ def do_signup():
 
 @app.route('/reviews')
 def reviews():
+    """
+    Fetches review titles and corresponding _id from the database.
+
+    Returns:
+        template: 'reviews.tpl' with reviews data.
+    """
+
     # Fetch review titles and their corresponding _id from the database
     reviews = list(reviews_collection.find({}, {"_id": 1, "title": 1}))
 
@@ -182,8 +189,20 @@ def reviews():
 
 @app.route('/view_review/<review_id>')
 def view_review(review_id):
+    """
+    Retrieves and displays a specific review and its comments.
+
+    Args:
+        review_id (str): The unique identifier for the review.
+
+    Returns:
+        template: 'view_review.tpl' with review and comments data.
+        str: "Review not found" if the review does not exist.
+    """
+
     review = reviews_collection.find_one({"_id": ObjectId(review_id)})
     comments = comments_collection.find({"review_id": review_id})
+
     if not review:
         return "Review not found"
 
@@ -192,6 +211,13 @@ def view_review(review_id):
 
 @app.route('/dashboard')
 def dashboard():
+    """
+    Displays the dashboard with reviews created by the logged-in user.
+
+    Returns:
+        template: 'dashboard.tpl' with user reviews data.
+    """
+
     username = request.session.get('username', None)
 
     # Fetch user reviews from the database
@@ -204,9 +230,19 @@ def dashboard():
     return template('dashboard.tpl', reviews=user_reviews)
 
 
-# Route for editing a review
 @app.route('/edit_review/<review_id>')
 def edit_review(review_id):
+    """
+    Displays the page for editing a specific review.
+
+    Args:
+        review_id (str): The unique identifier for the review.
+
+    Returns:
+        template: 'edit_review.tpl' with review data.
+        str: "Review not found" if the review does not exist.
+    """
+
     review = reviews_collection.find_one({"_id": ObjectId(review_id)})
 
     if not review:
@@ -215,9 +251,19 @@ def edit_review(review_id):
     return template('edit_review.tpl', review=review)
 
 
-# Route for updating a review after editing
 @app.route('/update_review', method='POST')
 def update_review():
+    """
+    Updates a review based on the provided content.
+
+    Form Data:
+        review_id (str): The unique identifier for the review.
+        content (str): The updated content for the review.
+
+    Redirects:
+        '/dashboard' after updating the review.
+    """
+
     review_id = request.forms.get('review_id')
     content = request.forms.get('content')
 
@@ -228,18 +274,45 @@ def update_review():
 
 @app.route('/delete_review/<review_id>', method='POST')
 def delete_review(review_id):
+    """
+    Deletes a specific review.
+
+    Args:
+        review_id (str): The unique identifier for the review.
+
+    Redirects:
+        '/dashboard' after deleting the review.
+    """
+
     reviews_collection.delete_one({"_id": ObjectId(review_id)})
     return redirect('/dashboard')
 
 
-# Route for creating a new review
 @app.route('/create_review')
 def create_review():
+    """
+    Displays the page for creating a new review.
+
+    Returns:
+        template: 'create_review.tpl'.
+    """
+
     return template('create_review.tpl')
 
 
 @app.route('/store_review', method='POST')
 def store_review():
+    """
+    Stores a new review in the database.
+
+    Form Data:
+        title (str): The title of the review.
+        content (str): The content of the review.
+
+    Redirects:
+        '/dashboard' after storing the review.
+    """
+
     title = request.forms.get('title')
     content = request.forms.get('content')
     username = request.session.get('username')
@@ -259,6 +332,16 @@ def store_review():
 
 @app.route('/like_review/<review_id>', method='POST')
 def like_review(review_id):
+    """
+    Handles the 'like' or 'dislike' action for a review.
+
+    Form Data:
+        action (str): The action to perform ('like' or 'dislike').
+
+    Redirects:
+        '/view_review/{review_id}' after processing the action.
+    """
+
     action = request.forms.get('action')
 
     if action == 'like':
