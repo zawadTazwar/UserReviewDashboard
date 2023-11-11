@@ -26,3 +26,11 @@
 | Chat GPT      | Unit test implementations. Error debugging. Search algorithm implementation. | server.py, test_server.py |
 | https://www.smartdraw.com/uml-diagram/       | UML diagram implementation ideas                                             | UML_diagram.png           |
 | https://www.se.rit.edu/~co-operators/SoftwareArchitectureDocumentation.pdf     | Componenet architecture document ideas                                       | Comp_Arch.md              |
+
+## Attributions for Zawad
+
+| Source        | Contribution                                      | Location     |
+|---------------|---------------------------------------------------|--------------|
+| Chat GPT      | Error debugging. Search algorithm implementation. | server.py    |
+| https://www.youtube.com/watch?v=E6NO0rgFub4      | Creating the readme file                          | Readme       |
+

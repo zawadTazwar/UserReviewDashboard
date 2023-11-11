@@ -56,8 +56,10 @@ The server handles the following routes:
 - `/create_review`: Displays a form to create a new review.
 - `/store_review`: Endpoint for storing the new review.
 - `/like_review/<review_id>`: Endpoint for liking or disliking a review.
-### Unit tests 
-Unit tests for the functions
+
+- Unit tests for the functions
+**Unit Tests:** Run by `python -m unittest test_server` in terminal.
+
 
 ## (Mahad)
 
