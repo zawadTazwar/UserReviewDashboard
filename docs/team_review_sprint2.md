@@ -83,3 +83,14 @@ Zawad is always smiling with a good attitude. He is open to taking on whatever m
 I would like to see Zawad show up for team meetings on time more often and talk more in the meetings. We don't get a lot of responses or ideas from Zawad which needs to be improved.
 This can happen by being more involved with the team on discord, showing to meetings on time, and being more vocal about his thoughts.
 
+### Zawad's Team Review:
+It has been a great experience to work on a project with a group as this was my first group project at MUN. Got the chance to learn a lot from my team members and still learning. 
+Some words for my team members:
+**Jason:**
+Jason is a strong and active leader who is good at handling different tasks and leading the team. However, his strong role sometimes makes other team members depend too much on him, which might not be good for their learning. He is really good at organizing tasks and keeping track of the team's progress, but it would be better if he encouraged others to take more responsibility and shared tasks more evenly.
+
+**Mahad:**
+Mahad is really skilled technically and pays great attention to details, which really helps the team work wel. It would also help if he came to meetings on time and was more prepared to discuss what the team needs to do.
+
+**Dayeem:**
+Dayeem is always on time and consistently shows up for team meetings, showing he's really committed. He works hard on what he's given, but he should try to finish his work faster and talk more about any problems he's facing. This would help the team work together better and keep the project moving smoothly.
