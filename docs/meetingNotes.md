@@ -404,7 +404,7 @@ December 1st
 **Venue:** EN 2040 
 **Source:** None  
 **Time:** 1PM  
-**Attendance:** Jason and Md Golam Mahmud Chowdhury
+**Attendance:** Everyone
 
 **What Features are we going to do?**
 - Contact Us Page
