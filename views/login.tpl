@@ -69,6 +69,18 @@
         .login-button:hover {
             background-color: #45a049;
         }
+
+        .forgot-password {
+            display: block;
+            margin-top: 10px;
+            color: #2368dc;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -78,7 +90,8 @@
     <h1>AchieveIT</h1>
     <a class="header-button" href="/">Home</a>
     <a class="header-button" href="reviews">Reviews</a>
-    <a class="header-button" href="signup">Sign Up</a> <!-- Added "Sign Up" button -->
+    <a class="header-button" href="signup">Sign Up</a>
+    <a class="header-button" href="/contactus">Contact Us</a>
 </header>
 
 <!-- Login Form -->
@@ -88,6 +101,7 @@
         <input class="login-input" type="text" name="username" placeholder="Username" required>
         <input class="login-input" type="password" name="password" placeholder="Password" required>
         <button class="login-button" type="submit">Log In</button>
+        <a href="/forgot_password" class="forgot-password">Forgot Password?</a>
     </form>
 </div>
 
