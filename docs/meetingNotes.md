@@ -342,3 +342,112 @@ All code is now finalized and now more new code will be added for this sprint so
 **Team Problem:**
 We talked about Md Golam Mahmud Chowdhury a couple meetings ago we wanted to talk about how the problem is going. Md Golam Mahmud Chowdhury has been communicating better in our discord chat for problems he may be encountering.
 It seems like after our talk the problem has been resolved, and he understands the importance of deadlines and communicating any issues to the team.
+
+## Nov 14, 2023
+**Recorded by:** Jason
+**Notes submitted on:** Nov 16, 2023
+**SCRUM master:** Md Golam Mahmud Chowdhury
+**Venue:** EN 2040 
+**Source:** None  
+**Time:** 1PM  
+**Attendance:** Jason and Md Golam Mahmud Chowdhury
+
+**Left Over Tasks:**
+- Rating Review could be implemented better on the backend. This is something that was added to backlog of last sprint and should be implemented.
+
+**Sprint 3:**
+- Update Process Model with the ideas we found to improve on. These ideas are listed in the `process_model.md`.
+- Update Component Architecture: We want to separate server.py. There is too much going on in there and we can make separate python files for some of this code. We will design a new component architecture and organize our code for it.
+- New Microservices architecture document: Learn more about what this is and we will come back to it.
+- 3 New Features.
+- What is this project requirements specification thing the prof is talking about? We will ask next class when he is here.
+
+**3 New Features: (Brainstorm Ideas)**
+
+Contact Us Inquiry Page
+- Add a page with a inquiry form
+- require user to put in username, name, email, subject, and message.
+- possibly email out to support/dev team
+
+Forgot Username/Password
+- Setup button on login page for forgot username/password
+- Figure out a way to help them reset it
+
+Reply to comments
+- Setup form for replies
+- display these replies
+
+Anonymous Reviewing
+- Allow the option when creating a review to display username as anonymous
+- Radio buttons of public and anonymous?
+- Display username if public selected
+- Public is default
+
+Rating Users/Top Rated Reviewer
+- Rate users based on how good someone thinks their reviews are
+- Kinda like a upvote
+- Have a page that shows top reviewers
+
+
+**Final Code Pull Request Deadline:**
+December 1st
+- This is so we can double check the document files that are needed to be done
+- And do final code review
+
+**Assigning Tasks**
+- We are waiting for next team meeting because most of team isn't here today.
+
+## Nov 16, 2023
+**Recorded by:** Md Golam Mahmud Chowdhury
+**Notes submitted on:** Nov 16, 2023
+**SCRUM master:** Jason
+**Venue:** EN 2040 
+**Source:** None  
+**Time:** 1PM  
+**Attendance:** Jason and Md Golam Mahmud Chowdhury
+
+**What Features are we going to do?**
+- Contact Us Page
+- Forgot Password
+- Rating Users/Top Reviewer Page
+
+**Tasks:**
+
+Contact Us Page:
+- Create HTML form for the inquiry (Jason)
+- Create backend function to save info in database (Mahad)
+- Create backend code to alert the dev team. _Possibly by email if we can figure this out_ (Dayeem)
+- May need to create a support email account. (Jason)
+
+Forgot Password:
+- Design the functionality of forgot password, how will we do this? Do we need to add another step to the sign up? (Mahad)
+- Add HTML link to login in page for forgot password (Jason)
+- Create HTML for forgot password page once clicked (Jason)
+- Create backend function for saving new security info (Mahad)
+- Create backend code to handle the form information (Mahad)
+
+Rating Users/Top Reviewer Page:
+- Design the functionality of rating users. What kind of scale do you want to use? Is it just liking or disliking profile? (Zawad)
+- Update profile function to profile/<username> function so everyone can view peoples profile (Dayeem)
+- Update profile to also show their reviews under the user info (Jason)
+- Add the rating onto the profile/<username> page (Zawad)
+- Add attribute of rating to user info (Mahad)
+- create backend code to handle the rating (Zawad)
+- Create a top reviewer page and display the users with the best ratings in descending order (Jason)
+
+Component Architecture Document (Mahad, Dayeem)
+- Update UML Diagram to Architecture we want
+- Organize code to fit this Architecture
+- Update document to explain the new architecture
+
+Process Model Document (Jason)
+- Update model with improved process
+- Update document to explain new process
+
+Microservices Document (Zawad)
+- We will figure out tasks once the document is further explained by professor
+
+Backlog Tasks:
+- Once these major tasks are completed we may look for backlog tasks to do. We will assign these later.
+
+
