@@ -83,6 +83,7 @@
     <a class="header-button" href="/reviews">Reviews</a>
     <a class="header-button" href="/login">Login</a>
     <a class="header-button" href="/logout">Logout</a>
+    <a class="header-button" href="/contactus">Contact Us</a>
 </header>
 
 <!-- Main Content Section -->

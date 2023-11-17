@@ -45,6 +45,26 @@
         .user-info {
             font-size: 18px;
         }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        /* Style the review list items (anchors) */
+        ul a {
+            text-decoration: none;
+            color: #2368dc;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        /* Hover effect for the review links */
+        ul a:hover {
+            text-decoration: underline;
+
     </style>
 </head>
 <body>
@@ -53,17 +73,25 @@
     <h1>AchieveIT</h1>
     <a class="header-button" href="/">Home</a>
     <a class="header-button" href="reviews">Reviews</a>
+    <a class="header-button" href="/contactus">Contact Us</a>
 </header>
 
 <!-- Profile Container -->
 <div class="profile-container">
-    <h2>My Profile</h2>
+    <h2>{{username}} Profile</h2>
     <div class="user-info">
         <p><strong>Name:</strong> {{first_name}} {{last_name}}</p>
         <p><strong>Username:</strong> {{username}}</p>
         <p><strong>Email:</strong> {{email}}</p>
     </div>
+        <h3>{{username}} Reviews:</h3>
+            <ul>
+                % for review in reviews:
+                    <a href="/view_review/{{review['_id']}}">{{review['title']}}</a><br>
+                % end
+            </ul>
 </div>
+
 
 </body>
     <footer style="background-color: #333; color: #fff; text-align: center; padding: 10px;">

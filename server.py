@@ -39,6 +39,11 @@ def login():
     return template('login.tpl')
 
 
+@app.route('/contactus')
+def contact():
+    return template('contact_us.tpl')
+
+
 @app.hook('before_request')
 def session_manager():
     """
@@ -54,7 +59,6 @@ def session_manager():
         None
     """
     manage_sessions(sessions_collection)
-
 
 
 @app.route('/login', method='POST')
@@ -87,6 +91,11 @@ def do_login():
         return "Invalid username or password"
 
 
+@app.route('/forgot_password')
+def forgot_password():
+    return template('forgot_password.tpl')
+
+
 @app.route('/profile')
 def profile():
     """
@@ -107,8 +116,15 @@ def profile():
     last_name = request.session.get('last_name', None)
     email = request.session.get('email', None)
 
+    user_reviews = list(reviews_collection.find({'username': username}, {"_id": 1, "title": 1}))
+
+    # Modify the _id field to a string
+    for review in user_reviews:
+        review['_id'] = str(review['_id'])
+
     # Pass the user data to the profile template
-    return template('profile', username=username, first_name=first_name, last_name=last_name, email=email)
+    return template('profile', username=username, first_name=first_name, last_name=last_name, email=email,
+                    reviews=user_reviews)
 
 
 # Define a route for the sign-up page
@@ -166,6 +182,11 @@ def do_signup():
 
     # For this example, you can return a success message
     return f"Sign-up successful for {first_name} {last_name} with username {username}"
+
+
+@app.route('/top_reviewers')
+def top_reviewers():
+    return template('top_reviewer.tpl')
 
 
 @app.route('/reviews')
@@ -373,7 +394,6 @@ def logout():
         delete_session(session_id, sessions_collection)
         response.delete_cookie('session_id')
     redirect('/login')
-
 
 
 @app.route('/search_reviews', method='GET')
