@@ -450,4 +450,20 @@ Microservices Document (Zawad)
 Backlog Tasks:
 - Once these major tasks are completed we may look for backlog tasks to do. We will assign these later.
 
+## Nov 21, 2023
+**Recorded by:** Muhammad Mahad Mirza
+**Notes submitted on:** Nov 22, 2023
+**SCRUM master:** Md Gulam Mahmud Chowdhury
+**Venue:** EN 2040 
+**Source:** None  
+**Time:** 1PM  
+**Attendance:** Everyone
 
+Tasks:
+- Figure out a way to send email from the server using the two new to be implemented features ‘Contact Us Page’ and 
+‘Forgot Password’
+- Update present Architecture to Microservices Architecture, decided to make more research on it
+- Make a new UML diagram according to this
+Decisions:
+- Use third party software named ‘SendGrid’ to send email from the server regarding forgot password and contact page
+- Code modularization - Routing functions, authentication functions, session management functions and feature functions are separated from the server.py file
