@@ -1,7 +1,16 @@
+# import smtplib
+# from email.mime.multipart import MIMEMultipart
+# from email.mime.text import MIMEText
+import subprocess
 from bottle import Bottle, request, redirect, template, run, response
 from pymongo import MongoClient
 from bson import ObjectId
 from session_management import create_session, manage_sessions, delete_session, get_session
+import os
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
+
+
 
 # Initialize a connection to a MongoDB cluster and set up database and collections.
 cluster = MongoClient("mongodb+srv://mahadmirza545:Mahad1234@cluster0.yqjy6mb.mongodb.net/?retryWrites=true&w=majority")
@@ -96,36 +105,79 @@ def forgot_password():
     return template('forgot_password.tpl')
 
 
-@app.route('/profile')
-def profile():
-    """
-    Display the user's profile if a valid session exists, or redirect to the login page.
+# @app.route('/profile')
+# def profile():
+#     """
+#     Display the user's profile if a valid session exists, or redirect to the login page.
+#
+#     Retrieves user information from the session and renders the user's profile page.
+#     If no valid session exists, the user is redirected to the login page.
+#
+#     Returns:
+#         HTTP response: The user's profile page or a redirect to the login page.
+#     """
+#     # Retrieve user information from the session if session exists
+#     session = get_session(request)
+#     if not session:
+#         return redirect('/login')
+#     username = request.session.get('username', None)
+#     first_name = request.session.get('first_name', None)
+#     last_name = request.session.get('last_name', None)
+#     email = request.session.get('email', None)
+#
+#     user_reviews = list(reviews_collection.find({'username': username}, {"_id": 1, "title": 1}))
+#
+#     # Modify the _id field to a string
+#     for review in user_reviews:
+#         review['_id'] = str(review['_id'])
+#
+#     # Pass the user data to the profile template
+#     return template('profile', username=username, first_name=first_name, last_name=last_name, email=email,
+#                     reviews=user_reviews)
 
-    Retrieves user information from the session and renders the user's profile page.
-    If no valid session exists, the user is redirected to the login page.
+# @app.route('/profile', defaults={'username': None})
+
+@app.route('/profile')
+@app.route('/profile/<username>')
+def profile(username=None):
+    """
+    Display the user's profile based on the provided username or session.
+
+    Args:
+        username (str): The username of the profile to be viewed.
 
     Returns:
         HTTP response: The user's profile page or a redirect to the login page.
     """
-    # Retrieve user information from the session if session exists
+
+    # Check if there's an active session
     session = get_session(request)
-    if not session:
-        return redirect('/login')
-    username = request.session.get('username', None)
-    first_name = request.session.get('first_name', None)
-    last_name = request.session.get('last_name', None)
-    email = request.session.get('email', None)
 
+    # If no username provided, try fetching from session
+    if not username:
+        if not session:
+            return redirect('/login')
+        username = session.get('username')
+
+    # If the username is "reviews", redirect to the reviews page
+    if username == "reviews":
+        return redirect('/reviews')
+
+    # Retrieve user information from the database using the provided or session username
+    user = users_collection.find_one({"username": username})
+
+    # If the user doesn't exist, display a message
+    if not user:
+        return "User not found"
+
+    # Fetch user reviews based on the retrieved username
     user_reviews = list(reviews_collection.find({'username': username}, {"_id": 1, "title": 1}))
-
-    # Modify the _id field to a string
     for review in user_reviews:
         review['_id'] = str(review['_id'])
 
     # Pass the user data to the profile template
-    return template('profile', username=username, first_name=first_name, last_name=last_name, email=email,
-                    reviews=user_reviews)
-
+    return template('profile.tpl', username=user.get('username'), first_name=user.get('first_name'),
+                    last_name=user.get('last_name'), email=user.get('email'), reviews=user_reviews)
 
 # Define a route for the sign-up page
 @app.route('/signup')
@@ -462,6 +514,68 @@ def comment(review_id):
         comments = comments_collection.find({"review_id": review_id})
         return template('view_review.tpl', review=review, comments=comments)
 
+    return template('error', error=str(e))
+
+
+@app.route('/submit_inquiry', method='POST')
+def submit_inquiry():
+    """
+    Handles the submission of inquiry form data and sends an email using SendGrid API.
+
+    Returns:
+        HTTP response: Indicates success or failure of the email sending process.
+    """
+    # Path to the batch file setting the environment variables
+    batch_file_path = r'C:\path\to\your\batch\setenv.bat'
+
+    # Execute the batch file to set environment variables
+    subprocess.run(batch_file_path, shell=True)
+
+    # Get the SendGrid API key from the environment variables
+    api_key = os.environ.get('SENDGRID_API_KEY')
+
+    # Replace with your sender and receiver emails
+    sender_email = 'mgmchowdhury@mun.ca'
+    receiver_email = 'g.mahmud.chowdhury@gmail.com'
+
+    # Extract form data
+    username = request.forms.get('username')
+    name = request.forms.get('name')
+    email = request.forms.get('email')
+    subject = request.forms.get('subject')
+    content = request.forms.get('content')
+
+    # Compose the email message
+    message = Mail(
+        from_email=sender_email,
+        to_emails=receiver_email,
+        subject=subject,
+        html_content=f"<strong>From:</strong> {username} ({name})<br><strong>Email:</strong> {email}<br><br>{content}"
+    )
+
+    try:
+        # Send the email using SendGrid API
+        sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
+        response = sg.send(message)
+
+        # Check if email sending was successful
+        if response.status_code == 202:
+            return "Email sent successfully!"
+        else:
+            return "Failed to send email. Please try again later."
+    except Exception as e:
+        return f"Failed to send email: {str(e)}"
+
+
+@app.route('/contact_us')
+def contact_us():
+    """
+    Displays the contact us page.
+
+    Returns:
+        HTML template: Renders the contact us page template.
+    """
+    return template('contact_us.tpl')
 
 if __name__ == '__main__':
     run(app, host='localhost', port=8080)
