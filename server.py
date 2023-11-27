@@ -100,38 +100,6 @@ def forgot_password():
     return template('forgot_password.tpl')
 
 
-# @app.route('/profile')
-# def profile():
-#     """
-#     Display the user's profile if a valid session exists, or redirect to the login page.
-#
-#     Retrieves user information from the session and renders the user's profile page.
-#     If no valid session exists, the user is redirected to the login page.
-#
-#     Returns:
-#         HTTP response: The user's profile page or a redirect to the login page.
-#     """
-#     # Retrieve user information from the session if session exists
-#     session = get_session(request)
-#     if not session:
-#         return redirect('/login')
-#     username = request.session.get('username', None)
-#     first_name = request.session.get('first_name', None)
-#     last_name = request.session.get('last_name', None)
-#     email = request.session.get('email', None)
-#
-#     user_reviews = list(reviews_collection.find({'username': username}, {"_id": 1, "title": 1}))
-#
-#     # Modify the _id field to a string
-#     for review in user_reviews:
-#         review['_id'] = str(review['_id'])
-#
-#     # Pass the user data to the profile template
-#     return template('profile', username=username, first_name=first_name, last_name=last_name, email=email,
-#                     reviews=user_reviews)
-
-# @app.route('/profile', defaults={'username': None})
-
 @app.route('/profile')
 @app.route('/profile/<username>')
 def profile(username=None):
