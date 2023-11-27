@@ -154,10 +154,6 @@ def profile(username=None):
             return redirect('/login')
         username = session.get('username')
 
-    # If the username is "reviews", redirect to the reviews page
-    if username == "reviews":
-        return redirect('/reviews')
-
     # Retrieve user information from the database using the provided or session username
     user = users_collection.find_one({"username": username})
 
