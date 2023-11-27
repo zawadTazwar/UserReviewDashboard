@@ -3,7 +3,9 @@ from pymongo import MongoClient
 from bson import ObjectId
 from session_management import create_session, manage_sessions, delete_session, get_session
 import sendgrid
-from sendgrid.helpers.mail import Mail
+from sendgrid.helpers.mail import Mail, Email, Content
+from itsdangerous import URLSafeTimedSerializer
+
 
 
 
@@ -15,9 +17,17 @@ sessions_collection = db["sessions"]
 print(sessions_collection)
 reviews_collection = db["reviews"]
 comments_collection = db["comments"]
+
 # Create a Bottle web application
 app = Bottle()
 
+# SendGrid configuration
+SENDGRID_API_KEY = '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'
+sg = sendgrid.SendGridAPIClient(api_key=SENDGRID_API_KEY)
+FROM_EMAIL = "mmirza@mun.ca"
+
+# Flask-Security token serializer
+token_serializer = URLSafeTimedSerializer('AchieveIT2023')
 
 @app.route('/')
 def home():
@@ -93,44 +103,6 @@ def do_login():
         redirect('/dashboard')
     else:
         return "Invalid username or password"
-
-
-@app.route('/forgot_password')
-def forgot_password():
-    return template('forgot_password.tpl')
-
-
-# @app.route('/profile')
-# def profile():
-#     """
-#     Display the user's profile if a valid session exists, or redirect to the login page.
-#
-#     Retrieves user information from the session and renders the user's profile page.
-#     If no valid session exists, the user is redirected to the login page.
-#
-#     Returns:
-#         HTTP response: The user's profile page or a redirect to the login page.
-#     """
-#     # Retrieve user information from the session if session exists
-#     session = get_session(request)
-#     if not session:
-#         return redirect('/login')
-#     username = request.session.get('username', None)
-#     first_name = request.session.get('first_name', None)
-#     last_name = request.session.get('last_name', None)
-#     email = request.session.get('email', None)
-#
-#     user_reviews = list(reviews_collection.find({'username': username}, {"_id": 1, "title": 1}))
-#
-#     # Modify the _id field to a string
-#     for review in user_reviews:
-#         review['_id'] = str(review['_id'])
-#
-#     # Pass the user data to the profile template
-#     return template('profile', username=username, first_name=first_name, last_name=last_name, email=email,
-#                     reviews=user_reviews)
-
-# @app.route('/profile', defaults={'username': None})
 
 @app.route('/profile')
 @app.route('/profile/<username>')
@@ -505,6 +477,138 @@ def comment(review_id):
         comments = comments_collection.find({"review_id": review_id})
         return template('view_review.tpl', review=review, comments=comments)
 
+@app.route('/forgot_password')
+def forgot_password():
+    """
+    Renders the 'forgot_password.tpl' template.
+
+    Args:
+        None
+
+    Returns:
+        template: 'forgot_password.tpl'
+    """
+    return template('forgot_password.tpl')
+
+
+@app.route('/forgot_password', method='POST')
+def send_reset_email():
+    """
+     Handles the submission of the forgot password form.
+     Sends a password reset email to the user and displays a success or error message.
+
+     Args:
+         None
+
+     Returns:
+         str: Success or error message.
+     """
+    email = request.forms.get('email')
+
+    # Find the user by email
+    user = users_collection.find_one({"email": email})
+
+    if user:
+        # Generate a password reset token
+        token = generate_reset_token(user['_id'])
+        print(f"Generated Token: {token}")
+        # Send the reset email using SendGrid
+        send_password_reset_email(user['email'], token)
+
+        return "Password reset email sent. Check your inbox."
+    else:
+        return "Email not found in the system."
+
+
+def generate_reset_token(user_id):
+    """
+     Generates a password reset token for a given user ID.
+
+     Args:
+         user_id (str): The user's unique identifier.
+
+     Returns:
+         str: The generated password reset token.
+     """
+    return token_serializer.dumps(str(user_id))
+
+
+def send_password_reset_email(email, token):
+    """
+    Sends a password reset email to the user with a reset link containing the provided token.
+
+    Args:
+        email (str): The recipient's email address.
+        token (str): The password reset token.
+
+    Returns:
+        None
+    """
+    reset_link = f"http://localhost:8080/reset_password/{token}"
+    subject = "Password Reset Request"
+    body = f"Click the following link to reset your password: {reset_link}"
+
+    # Create SendGrid email
+    message = Mail(
+        from_email=FROM_EMAIL,
+        to_emails=email,
+        subject=subject,
+        plain_text_content=Content("text/plain", body),
+    )
+
+    # Send the email using SendGrid API
+    try:
+        response = sg.send(message)
+        print(response.status_code)
+        print(response.body)
+        print(response.headers)
+    except Exception as e:
+        print(f"Error sending email: {e}")
+
+@app.route('/reset_password/<token>')
+def reset_password(token):
+    """
+    Renders the 'reset_password.tpl' template.
+    Displays the password reset page with a form to set a new password.
+
+    Args:
+        token (str): The password reset token.
+
+    Returns:
+        template: 'reset_password.tpl' with the token.
+        str: "Invalid or expired token" if the token is not valid.
+    """
+    user_id = token_serializer.loads(token, max_age=3600)
+
+    # Pass the user ID to the template
+    return template('reset_password.tpl', user_id=user_id, token=token)
+
+
+# Route to handle the password reset form submission
+@app.route('/reset_password/<token>', method='POST')
+def perform_password_reset(token):
+    """
+    Handles the submission of the reset password form.
+    Updates the user's password in the database and displays a success or error message.
+
+    Args:
+        token (str): The password reset token.
+
+    Returns:
+        str: "Password reset successful" or an error message.
+    """
+    try:
+        # Decrypt the token to verify its validity
+        user_id = token_serializer.loads(token, max_age=3600)
+
+        # Update the user's password in the database
+        new_password = request.forms.get('password')
+        users_collection.update_one({"_id": ObjectId(user_id)}, {"$set": {"password": new_password}})
+        return "Password reset successful. You can now log in with your new password."
+
+    except Exception:
+        # Token is invalid or expired
+        return "Invalid or expired token. Please try again."
     return template('error', error=str(e))
 
 
