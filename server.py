@@ -101,12 +101,6 @@ def do_login():
     else:
         return "Invalid username or password"
 
-
-@app.route('/forgot_password')
-def forgot_password():
-    return template('forgot_password.tpl')
-
-
 @app.route('/profile')
 def profile():
     """
