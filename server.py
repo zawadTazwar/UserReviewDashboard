@@ -6,6 +6,9 @@ import sendgrid
 from sendgrid.helpers.mail import Mail, Email, Content
 from itsdangerous import URLSafeTimedSerializer
 
+
+
+
 # Initialize a connection to a MongoDB cluster and set up database and collections.
 cluster = MongoClient("mongodb+srv://mahadmirza545:Mahad1234@cluster0.yqjy6mb.mongodb.net/?retryWrites=true&w=majority")
 db = cluster["userreview"]
@@ -102,35 +105,42 @@ def do_login():
         return "Invalid username or password"
 
 @app.route('/profile')
-def profile():
+@app.route('/profile/<username>')
+def profile(username=None):
     """
-    Display the user's profile if a valid session exists, or redirect to the login page.
+    Display the user's profile based on the provided username or session.
 
-    Retrieves user information from the session and renders the user's profile page.
-    If no valid session exists, the user is redirected to the login page.
+    Args:
+        username (str): The username of the profile to be viewed.
 
     Returns:
         HTTP response: The user's profile page or a redirect to the login page.
     """
-    # Retrieve user information from the session if session exists
+
+    # Check if there's an active session
     session = get_session(request)
-    if not session:
-        return redirect('/login')
-    username = request.session.get('username', None)
-    first_name = request.session.get('first_name', None)
-    last_name = request.session.get('last_name', None)
-    email = request.session.get('email', None)
 
+    # If no username provided, try fetching from session
+    if not username:
+        if not session:
+            return redirect('/login')
+        username = session.get('username')
+
+    # Retrieve user information from the database using the provided or session username
+    user = users_collection.find_one({"username": username})
+
+    # If the user doesn't exist, display a message
+    if not user:
+        return "User not found"
+
+    # Fetch user reviews based on the retrieved username
     user_reviews = list(reviews_collection.find({'username': username}, {"_id": 1, "title": 1}))
-
-    # Modify the _id field to a string
     for review in user_reviews:
         review['_id'] = str(review['_id'])
 
     # Pass the user data to the profile template
-    return template('profile', username=username, first_name=first_name, last_name=last_name, email=email,
-                    reviews=user_reviews)
-
+    return template('profile.tpl', username=user.get('username'), first_name=user.get('first_name'),
+                    last_name=user.get('last_name'), email=user.get('email'), reviews=user_reviews)
 
 # Define a route for the sign-up page
 @app.route('/signup')
@@ -599,6 +609,64 @@ def perform_password_reset(token):
     except Exception:
         # Token is invalid or expired
         return "Invalid or expired token. Please try again."
+    return template('error', error=str(e))
+
+
+@app.route('/submit_inquiry', method='POST')
+def submit_inquiry():
+    """
+    Handles the submission of inquiry form data and sends an email using SendGrid API.
+
+    Returns:
+        HTTP response: Indicates success or failure of the email sending process.
+    """
+
+    # Get the SendGrid API key from the environment variables
+    api_key = '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'
+    sg = sendgrid.SendGridAPIClient(api_key)
+
+    # Replace with your sender and receiver emails
+    sender_email = 'mgmchowdhury@mun.ca'
+    receiver_email = 'g.mahmud.chowdhury@gmail.com'
+
+    # Extract form data
+    username = request.forms.get('username')
+    name = request.forms.get('name')
+    email = request.forms.get('email')
+    subject = request.forms.get('subject')
+    content = request.forms.get('content')
+
+    # Compose the email message
+    message = Mail(
+        from_email=sender_email,
+        to_emails=receiver_email,
+        subject=subject,
+        html_content=f"<strong>From:</strong> {username} ({name})<br><strong>Email:</strong> {email}<br><br>{content}"
+    )
+
+    try:
+        # Send the email using SendGrid API
+
+        response = sg.send(message)
+
+        # Check if email sending was successful
+        if response.status_code == 202:
+            return "Email sent successfully!"
+        else:
+            return "Failed to send email. Please try again later."
+    except Exception as e:
+        return f"Failed to send email: {str(e)}"
+
+
+@app.route('/contact_us')
+def contact_us():
+    """
+    Displays the contact us page.
+
+    Returns:
+        HTML template: Renders the contact us page template.
+    """
+    return template('contact_us.tpl')
 
 if __name__ == '__main__':
     run(app, host='localhost', port=8080)
