@@ -1,13 +1,8 @@
-# import smtplib
-# from email.mime.multipart import MIMEMultipart
-# from email.mime.text import MIMEText
-import subprocess
 from bottle import Bottle, request, redirect, template, run, response
 from pymongo import MongoClient
 from bson import ObjectId
 from session_management import create_session, manage_sessions, delete_session, get_session
-import os
-from sendgrid import SendGridAPIClient
+import sendgrid
 from sendgrid.helpers.mail import Mail
 
 
@@ -525,14 +520,10 @@ def submit_inquiry():
     Returns:
         HTTP response: Indicates success or failure of the email sending process.
     """
-    # Path to the batch file setting the environment variables
-    batch_file_path = r'C:\path\to\your\batch\setenv.bat'
-
-    # Execute the batch file to set environment variables
-    subprocess.run(batch_file_path, shell=True)
 
     # Get the SendGrid API key from the environment variables
-    api_key = os.environ.get('SENDGRID_API_KEY')
+    api_key = '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'
+    sg = sendgrid.SendGridAPIClient(api_key)
 
     # Replace with your sender and receiver emails
     sender_email = 'mgmchowdhury@mun.ca'
@@ -555,7 +546,7 @@ def submit_inquiry():
 
     try:
         # Send the email using SendGrid API
-        sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
+
         response = sg.send(message)
 
         # Check if email sending was successful
