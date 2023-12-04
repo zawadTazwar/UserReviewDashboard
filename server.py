@@ -138,9 +138,45 @@ def profile(username=None):
     for review in user_reviews:
         review['_id'] = str(review['_id'])
 
+    # Calculate average rating
+    ratings = user.get('ratings', [])
+    if ratings:
+        average_rating = "{:.2f}".format(sum(rating['value'] for rating in ratings) / len(ratings))
+    else:
+        average_rating = "No ratings yet"
+
     # Pass the user data to the profile template
     return template('profile.tpl', username=user.get('username'), first_name=user.get('first_name'),
-                    last_name=user.get('last_name'), email=user.get('email'), reviews=user_reviews)
+                    last_name=user.get('last_name'), email=user.get('email'), reviews=user_reviews,
+                    average_rating=average_rating)
+
+@app.route('/rate_user/<username>', method='POST')
+def rate_user(username):
+    """
+     Handle the submission of a rating for a user's profile.
+
+     Args:
+         username (str): The username of the user whose profile is being rated.
+
+     Returns:
+         HTTP response: After successfully adding the rating to the user's profile, it redirects to the user's profile page.
+     """
+    rater_username = request.forms.get('rater_username')  # Username of the user giving the rating
+    rating_value = int(request.forms.get('rating_value'))  # Rating value
+
+    # Find the user to be rated
+    user = users_collection.find_one({"username": username})
+    if not user:
+        return "User not found"
+
+    # Append the new rating
+    users_collection.update_one(
+        {"username": username},
+        {"$push": {"ratings": {"value": rating_value, "rated_by": rater_username}}}
+    )
+
+    return redirect(f'/profile/{username}')
+
 
 # Define a route for the sign-up page
 @app.route('/signup')
@@ -201,8 +237,32 @@ def do_signup():
 
 @app.route('/top_reviewers')
 def top_reviewers():
-    return template('top_reviewer.tpl')
+    """
+       Display a list of users sorted by their average ratings in descending order.
 
+       Returns:
+           HTTP response: A page displaying users sorted by ratings.
+       """
+
+    # Fetch all users from the database
+    all_users = list(users_collection.find({}, {"_id": 0, "username": 1}))
+
+    # Calculate average ratings for each user and store them in a dictionary
+    user_ratings = {}
+    for user in all_users:
+        username = user.get('username')
+        ratings = user.get('ratings', [])
+        if ratings:
+            average_rating = sum(rating['value'] for rating in ratings) / len(ratings)
+        else:
+            average_rating = 0  # Default rating for users with no ratings
+        user_ratings[username] = average_rating
+
+    # Sort users by their average ratings in descending order
+    sorted_users = sorted(user_ratings.items(), key=lambda x: x[1], reverse=True)
+
+    # Pass the sorted user data to the template
+    return template('top_reviewer.tpl', sorted_users=sorted_users)
 
 @app.route('/reviews')
 def reviews():
@@ -221,6 +281,35 @@ def reviews():
         review['_id'] = str(review['_id'])
 
     return template('reviews.tpl', reviews=reviews)
+
+@app.route('/reviews')
+def top_review():
+    """
+    Fetches review titles and corresponding _id from the database.
+    Also fetches the top review based on the most likes.
+
+    Returns:
+    template: 'reviews.tpl' with reviews data and top reviewer data.
+    """
+
+    # Existing logic to fetch reviews
+    reviews = list(reviews_collection.find({}, {"_id": 1, "title": 1}))
+
+    # Modify the _id field to a string
+    for review in reviews:
+        review['_id'] = str(review['_id'])
+
+    # Logic to fetch the top reviewer
+    top_review_aggregate = reviews_collection.aggregate([
+        {"$sort": {"like": -1}},
+        {"$limit": 1}
+    ])
+    top_review = next(top_review_aggregate, None)
+
+    # Pass both reviews and top reviewer data to the template
+    return template('reviews.tpl', reviews=reviews, top_review=top_review)
+
+
 
 
 @app.route('/view_review/<review_id>')
