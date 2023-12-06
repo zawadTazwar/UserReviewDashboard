@@ -64,7 +64,47 @@
         /* Hover effect for the review links */
         ul a:hover {
             text-decoration: underline;
+        }
 
+
+        /* Style the rating form */
+        .rating-form {
+            margin-top: 20px;
+        }
+
+        .rating-form label {
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .rating-form input[type="number"] {
+            width: 50px;
+            padding: 5px;
+            font-size: 16px;
+        }
+
+        .rating-form input[type="submit"] {
+            background-color: #2368dc;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .rating-form input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .average-rating {
+            font-size: 20px;
+            margin-top: 10px;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -83,6 +123,15 @@
         <p><strong>Name:</strong> {{first_name}} {{last_name}}</p>
         <p><strong>Username:</strong> {{username}}</p>
         <p><strong>Email:</strong> {{email}}</p>
+        <p><strong>Average Rating:</strong> {{average_rating}}</p>
+    </div>
+
+    <div class="rating-form">
+        <form action="/rate_user/{{username}}" method="post">
+            <label for="rating">Rate this profile:</label>
+            <input type="number" id="rating" name="rating_value" min="1" max="5" required>
+            <input type="submit" value="Rate">
+        </form>
     </div>
         <h3>{{username}} Reviews:</h3>
             <ul>

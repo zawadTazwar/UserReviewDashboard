@@ -3,7 +3,9 @@ from pymongo import MongoClient
 from bson import ObjectId
 from session_management import create_session, manage_sessions, delete_session, get_session
 import sendgrid
-from sendgrid.helpers.mail import Mail
+from sendgrid.helpers.mail import Mail, Email, Content
+from itsdangerous import URLSafeTimedSerializer
+
 
 
 
@@ -15,9 +17,17 @@ sessions_collection = db["sessions"]
 print(sessions_collection)
 reviews_collection = db["reviews"]
 comments_collection = db["comments"]
+
 # Create a Bottle web application
 app = Bottle()
 
+# SendGrid configuration
+SENDGRID_API_KEY = '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'
+sg = sendgrid.SendGridAPIClient(api_key=SENDGRID_API_KEY)
+FROM_EMAIL = "mmirza@mun.ca"
+
+# Flask-Security token serializer
+token_serializer = URLSafeTimedSerializer('AchieveIT2023')
 
 @app.route('/')
 def home():
@@ -94,12 +104,6 @@ def do_login():
     else:
         return "Invalid username or password"
 
-
-@app.route('/forgot_password')
-def forgot_password():
-    return template('forgot_password.tpl')
-
-
 @app.route('/profile')
 @app.route('/profile/<username>')
 def profile(username=None):
@@ -134,9 +138,45 @@ def profile(username=None):
     for review in user_reviews:
         review['_id'] = str(review['_id'])
 
+    # Calculate average rating
+    ratings = user.get('ratings', [])
+    if ratings:
+        average_rating = "{:.2f}".format(sum(rating['value'] for rating in ratings) / len(ratings))
+    else:
+        average_rating = "No ratings yet"
+
     # Pass the user data to the profile template
     return template('profile.tpl', username=user.get('username'), first_name=user.get('first_name'),
-                    last_name=user.get('last_name'), email=user.get('email'), reviews=user_reviews)
+                    last_name=user.get('last_name'), email=user.get('email'), reviews=user_reviews,
+                    average_rating=average_rating)
+
+@app.route('/rate_user/<username>', method='POST')
+def rate_user(username):
+    """
+     Handle the submission of a rating for a user's profile.
+
+     Args:
+         username (str): The username of the user whose profile is being rated.
+
+     Returns:
+         HTTP response: After successfully adding the rating to the user's profile, it redirects to the user's profile page.
+     """
+    rater_username = request.forms.get('rater_username')  # Username of the user giving the rating
+    rating_value = int(request.forms.get('rating_value'))  # Rating value
+
+    # Find the user to be rated
+    user = users_collection.find_one({"username": username})
+    if not user:
+        return "User not found"
+
+    # Append the new rating
+    users_collection.update_one(
+        {"username": username},
+        {"$push": {"ratings": {"value": rating_value, "rated_by": rater_username}}}
+    )
+
+    return redirect(f'/profile/{username}')
+
 
 # Define a route for the sign-up page
 @app.route('/signup')
@@ -197,8 +237,32 @@ def do_signup():
 
 @app.route('/top_reviewers')
 def top_reviewers():
-    return template('top_reviewer.tpl')
+    """
+       Display a list of users sorted by their average ratings in descending order.
 
+       Returns:
+           HTTP response: A page displaying users sorted by ratings.
+       """
+
+    # Fetch all users from the database
+    all_users = list(users_collection.find({}, {"_id": 0, "username": 1}))
+
+    # Calculate average ratings for each user and store them in a dictionary
+    user_ratings = {}
+    for user in all_users:
+        username = user.get('username')
+        ratings = user.get('ratings', [])
+        if ratings:
+            average_rating = sum(rating['value'] for rating in ratings) / len(ratings)
+        else:
+            average_rating = 0  # Default rating for users with no ratings
+        user_ratings[username] = average_rating
+
+    # Sort users by their average ratings in descending order
+    sorted_users = sorted(user_ratings.items(), key=lambda x: x[1], reverse=True)
+
+    # Pass the sorted user data to the template
+    return template('top_reviewer.tpl', sorted_users=sorted_users)
 
 @app.route('/reviews')
 def reviews():
@@ -217,6 +281,35 @@ def reviews():
         review['_id'] = str(review['_id'])
 
     return template('reviews.tpl', reviews=reviews)
+
+@app.route('/reviews')
+def top_review():
+    """
+    Fetches review titles and corresponding _id from the database.
+    Also fetches the top review based on the most likes.
+
+    Returns:
+    template: 'reviews.tpl' with reviews data and top reviewer data.
+    """
+
+    # Existing logic to fetch reviews
+    reviews = list(reviews_collection.find({}, {"_id": 1, "title": 1}))
+
+    # Modify the _id field to a string
+    for review in reviews:
+        review['_id'] = str(review['_id'])
+
+    # Logic to fetch the top reviewer
+    top_review_aggregate = reviews_collection.aggregate([
+        {"$sort": {"like": -1}},
+        {"$limit": 1}
+    ])
+    top_review = next(top_review_aggregate, None)
+
+    # Pass both reviews and top reviewer data to the template
+    return template('reviews.tpl', reviews=reviews, top_review=top_review)
+
+
 
 
 @app.route('/view_review/<review_id>')
@@ -473,6 +566,138 @@ def comment(review_id):
         comments = comments_collection.find({"review_id": review_id})
         return template('view_review.tpl', review=review, comments=comments)
 
+@app.route('/forgot_password')
+def forgot_password():
+    """
+    Renders the 'forgot_password.tpl' template.
+
+    Args:
+        None
+
+    Returns:
+        template: 'forgot_password.tpl'
+    """
+    return template('forgot_password.tpl')
+
+
+@app.route('/forgot_password', method='POST')
+def send_reset_email():
+    """
+     Handles the submission of the forgot password form.
+     Sends a password reset email to the user and displays a success or error message.
+
+     Args:
+         None
+
+     Returns:
+         str: Success or error message.
+     """
+    email = request.forms.get('email')
+
+    # Find the user by email
+    user = users_collection.find_one({"email": email})
+
+    if user:
+        # Generate a password reset token
+        token = generate_reset_token(user['_id'])
+        print(f"Generated Token: {token}")
+        # Send the reset email using SendGrid
+        send_password_reset_email(user['email'], token)
+
+        return "Password reset email sent. Check your inbox."
+    else:
+        return "Email not found in the system."
+
+
+def generate_reset_token(user_id):
+    """
+     Generates a password reset token for a given user ID.
+
+     Args:
+         user_id (str): The user's unique identifier.
+
+     Returns:
+         str: The generated password reset token.
+     """
+    return token_serializer.dumps(str(user_id))
+
+
+def send_password_reset_email(email, token):
+    """
+    Sends a password reset email to the user with a reset link containing the provided token.
+
+    Args:
+        email (str): The recipient's email address.
+        token (str): The password reset token.
+
+    Returns:
+        None
+    """
+    reset_link = f"http://localhost:8080/reset_password/{token}"
+    subject = "Password Reset Request"
+    body = f"Click the following link to reset your password: {reset_link}"
+
+    # Create SendGrid email
+    message = Mail(
+        from_email=FROM_EMAIL,
+        to_emails=email,
+        subject=subject,
+        plain_text_content=Content("text/plain", body),
+    )
+
+    # Send the email using SendGrid API
+    try:
+        response = sg.send(message)
+        print(response.status_code)
+        print(response.body)
+        print(response.headers)
+    except Exception as e:
+        print(f"Error sending email: {e}")
+
+@app.route('/reset_password/<token>')
+def reset_password(token):
+    """
+    Renders the 'reset_password.tpl' template.
+    Displays the password reset page with a form to set a new password.
+
+    Args:
+        token (str): The password reset token.
+
+    Returns:
+        template: 'reset_password.tpl' with the token.
+        str: "Invalid or expired token" if the token is not valid.
+    """
+    user_id = token_serializer.loads(token, max_age=3600)
+
+    # Pass the user ID to the template
+    return template('reset_password.tpl', user_id=user_id, token=token)
+
+
+# Route to handle the password reset form submission
+@app.route('/reset_password/<token>', method='POST')
+def perform_password_reset(token):
+    """
+    Handles the submission of the reset password form.
+    Updates the user's password in the database and displays a success or error message.
+
+    Args:
+        token (str): The password reset token.
+
+    Returns:
+        str: "Password reset successful" or an error message.
+    """
+    try:
+        # Decrypt the token to verify its validity
+        user_id = token_serializer.loads(token, max_age=3600)
+
+        # Update the user's password in the database
+        new_password = request.forms.get('password')
+        users_collection.update_one({"_id": ObjectId(user_id)}, {"$set": {"password": new_password}})
+        return "Password reset successful. You can now log in with your new password."
+
+    except Exception:
+        # Token is invalid or expired
+        return "Invalid or expired token. Please try again."
     return template('error', error=str(e))
 
 

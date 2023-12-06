@@ -2,10 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>AchieveIT</title>
+    <title>AchieveIT - Reset Password</title>
     <style>
         /* Header Style */
         header {
@@ -32,12 +31,6 @@
         /* Style the buttons on hover */
         .header-button:hover {
             background-color: #45a049;
-        }
-
-        p {
-            text-align: center;
-            margin: auto;
-            padding: 50px 50px;
         }
 
         /* Form Style */
@@ -81,10 +74,13 @@
 
 <main>
     <section>
-        <h2>Forgot Password</h2>
-        <form action="/forgot_password" method="post">
-            <label for="email">Enter your email address:</label><br>
-            <input type="email" id="email" name="email" required><br><br>
+        <h2>Reset Password</h2>
+        <form action="/reset_password/{{ token }}" method="post">
+            <input type="hidden" name="token" value="{{ token }}">
+            <label for="password">Enter your new password:</label><br>
+            <input type="password" id="password" name="password" required><br><br>
+            <label for="confirm_password">Confirm your new password:</label><br>
+            <input type="password" id="confirm_password" name="confirm_password" required><br><br>
             <input type="submit" value="Reset Password">
         </form>
     </section>
