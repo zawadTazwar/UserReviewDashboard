@@ -12,7 +12,7 @@ This document presents the structure of a microservices-based system and compare
 
 ### 1. Architectural Approach Comparison
 
-### Components-based (Monolithic) Architecture:
+### Components-based Architecture:
 - **Structure:** The application is structured as a single monolithic server that encompasses various functionalities including user management, session management, and request handling.
 - **Server Responsibilities:** A central server directly manages operations such as login, signup, profile information retrieval, and more.
 - **Data Management:** All data is stored in a unified MongoDB database, which is accessed by the server for all data retrieval and manipulation tasks.
