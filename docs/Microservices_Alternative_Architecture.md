@@ -6,7 +6,7 @@ This document presents the structure of a microservices-based system and compare
 
 ## Microservices Architecture:
 
-![Microservices Architecture](C:\Users\zawad\OneDrive\Documents\Microservices Architecture.png)
+<img alt="Microservices Architecture" src="C:\Users\zawad\OneDrive\Documents\Microservices Architecture.png"/>
 
 ## Comparison of Microservices and Components-based Architectures
 
