@@ -6,9 +6,6 @@ import sendgrid
 from sendgrid.helpers.mail import Mail, Email, Content
 from itsdangerous import URLSafeTimedSerializer
 
-
-
-
 # Initialize a connection to a MongoDB cluster and set up database and collections.
 cluster = MongoClient("mongodb+srv://mahadmirza545:Mahad1234@cluster0.yqjy6mb.mongodb.net/?retryWrites=true&w=majority")
 db = cluster["userreview"]
@@ -28,6 +25,7 @@ FROM_EMAIL = "mmirza@mun.ca"
 
 # Flask-Security token serializer
 token_serializer = URLSafeTimedSerializer('AchieveIT2023')
+
 
 @app.route('/')
 def home():
@@ -104,6 +102,7 @@ def do_login():
     else:
         return "Invalid username or password"
 
+
 @app.route('/profile')
 @app.route('/profile/<username>')
 def profile(username=None):
@@ -147,35 +146,7 @@ def profile(username=None):
 
     # Pass the user data to the profile template
     return template('profile.tpl', username=user.get('username'), first_name=user.get('first_name'),
-                    last_name=user.get('last_name'), email=user.get('email'), reviews=user_reviews,
-                    average_rating=average_rating)
-
-@app.route('/rate_user/<username>', method='POST')
-def rate_user(username):
-    """
-     Handle the submission of a rating for a user's profile.
-
-     Args:
-         username (str): The username of the user whose profile is being rated.
-
-     Returns:
-         HTTP response: After successfully adding the rating to the user's profile, it redirects to the user's profile page.
-     """
-    rater_username = request.forms.get('rater_username')  # Username of the user giving the rating
-    rating_value = int(request.forms.get('rating_value'))  # Rating value
-
-    # Find the user to be rated
-    user = users_collection.find_one({"username": username})
-    if not user:
-        return "User not found"
-
-    # Append the new rating
-    users_collection.update_one(
-        {"username": username},
-        {"$push": {"ratings": {"value": rating_value, "rated_by": rater_username}}}
-    )
-
-    return redirect(f'/profile/{username}')
+                    last_name=user.get('last_name'), email=user.get('email'), reviews=user_reviews)
 
 
 # Define a route for the sign-up page
@@ -237,32 +208,13 @@ def do_signup():
 
 @app.route('/top_reviewers')
 def top_reviewers():
-    """
-       Display a list of users sorted by their average ratings in descending order.
-
-       Returns:
-           HTTP response: A page displaying users sorted by ratings.
-       """
-
-    # Fetch all users from the database
-    all_users = list(users_collection.find({}, {"_id": 0, "username": 1}))
-
-    # Calculate average ratings for each user and store them in a dictionary
-    user_ratings = {}
-    for user in all_users:
-        username = user.get('username')
-        ratings = user.get('ratings', [])
-        if ratings:
-            average_rating = sum(rating['value'] for rating in ratings) / len(ratings)
-        else:
-            average_rating = 0  # Default rating for users with no ratings
-        user_ratings[username] = average_rating
 
     # Sort users by their average ratings in descending order
     sorted_users = sorted(user_ratings.items(), key=lambda x: x[1], reverse=True)
 
     # Pass the sorted user data to the template
     return template('top_reviewer.tpl', sorted_users=sorted_users)
+
 
 @app.route('/reviews')
 def reviews():
@@ -281,6 +233,7 @@ def reviews():
         review['_id'] = str(review['_id'])
 
     return template('reviews.tpl', reviews=reviews)
+
 
 @app.route('/reviews')
 def top_review():
@@ -308,8 +261,6 @@ def top_review():
 
     # Pass both reviews and top reviewer data to the template
     return template('reviews.tpl', reviews=reviews, top_review=top_review)
-
-
 
 
 @app.route('/view_review/<review_id>')
@@ -566,6 +517,7 @@ def comment(review_id):
         comments = comments_collection.find({"review_id": review_id})
         return template('view_review.tpl', review=review, comments=comments)
 
+
 @app.route('/forgot_password')
 def forgot_password():
     """
@@ -653,6 +605,7 @@ def send_password_reset_email(email, token):
         print(response.headers)
     except Exception as e:
         print(f"Error sending email: {e}")
+
 
 @app.route('/reset_password/<token>')
 def reset_password(token):
@@ -756,6 +709,7 @@ def contact_us():
         HTML template: Renders the contact us page template.
     """
     return template('contact_us.tpl')
+
 
 if __name__ == '__main__':
     run(app, host='localhost', port=8080)

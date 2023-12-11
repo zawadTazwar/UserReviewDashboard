@@ -143,6 +143,58 @@ __Pull Request #98 (Date: Nov. 8)__
 * Coding style conventions: Everything passes now since we added docstrings.
 * Code Guidelines: Guidelines were reviewed and it is approved.
 
+## Sprint 3 Code Review
+
+__Pull Request #117-119 (Date: Nov. 17)__
+* Added meetingNotes and created the basic frontend for contact us, forgot password, and top_reviewer
+* __Participants of review:__ Everyone
+* Jason was assigned this task. He created the form and page for contact us. And created basic templates with nothing on them for forgot password and top_reviewer.
+* __Does it cause rest of code to not work?__ Code still works properly and new code does as well.
+* __Coding style conventions:__ Code does follow our conventions.
+* __Code Guidelines:__ Code guidelines were checked and code is approved.
+* __Improvement:__ No improvement found. The backend implementation for the features just need to be finished for it to work.
+
+__Pull Request #120 (Date: Nov. 22)__
+* Only meetingNotes. No need for code review.
+
+__Pull Request #122 (Date: Nov. 27)__
+* Implemented the backend for contact us page. And updated the profile page so everyone can view peoples profiles.
+* __Participants of review:__ Everyone
+* Dayeem was assigned this task. He created the backend by getting the info from the form and sending an email using sendgrid api to alert the dev team. Profile page was also updated so we can view other users profile. Just like profile/<username>.
+* __Does it cause rest of code to not work?__ Code still works properly and new code does as well.
+* __Coding style conventions:__ Code does follow our conventions.
+* __Code Guidelines:__ Code guidelines were checked and code is approved.
+* __Improvement:__ We could add hyperlinks on our other features so it sends you to their profile when clicking on a users name for things like their comments or reviews.
+
+__Pull Request #123 (Date: Nov. 27)__
+* Implemented the backend for forgot password and updated the frontend.
+* __Participants of review:__ Everyone
+* Mahad was assigned this task. He created the backend to email the user for forgot password and then the user can click on the link they receive via email and update their password in the database. He also updated the frontend to add a form for putting in your email that is connected to your account.
+* __Does it cause rest of code to not work?__ Code still works properly and new code does as well.
+* __Coding style conventions:__ Code does follow our conventions.
+* __Code Guidelines:__ Code guidelines were checked and code is approved.
+* __Improvement:__ No improvement found.
+
+__Pull Request #124 (Date: Dec. 6)__
+* added the top reviewer backend and frontend
+* __Participants of review:__ Everyone
+* Zawad was assigned this task. He added the code to calculate and display the top_reviewer as well as added the buttons to like the profile.
+* __Does it cause rest of code to not work?__ Code still works properly and new code does as well.
+* __Coding style conventions:__ Code does follow our conventions.
+* __Code Guidelines:__ Code guidelines were checked and code is approved.
+* __Improvement:__ No improvement found.
+
+__Pull Request #125 (Date: Dec. 7)__
+* added microservices document. No code review needed.
+
+__All other pull requests will be documentation only. No need for reviews.__
+
+**Final Code Review of Sprint 3 (Date: Dec. 10)**
+* All code is in place and are working.
+* Unit Tests all pass.
+* Coding style conventions: Everything passes now since we added docstrings.
+* Code Guidelines: Guidelines were reviewed and it is approved.
+
 
 
 
