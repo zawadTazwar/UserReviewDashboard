@@ -20,3 +20,19 @@ more involved in the decision making process compared to earlier sprints. He ble
  but everything worked out with the professor providing us an extenison.
 
 All in all, it has been an absolute pleasure working with these people and I wish them all the best for the future.
+
+### Jason's Team Review:
+
+**Team:**
+The team has worked great together since the beginning. I feel like we came together and built a great first project for some of us. It was fun to build and fun to learn how to work as a team.
+
+**Md Golam Mahmud (Dayeem):**
+Dayeem has been great to work with, he always shows up to meetings on time and works hard on his tasks assigned to him.
+Only suggestion for dayeem in the future would to be more vocal and also be more of a leader. I feel like he has the skills, just needs to confidence. Other than that, Dayeem has been a pleasure to work with. 
+
+**Mahad:**
+Mahad is great. He came up with a really good feature idea for this sprint and executed it very well. Still having a similar issue with not showing up to meetings on time though. It causes a slow down with our meetings and meetingnotes because we need the whole teams impact which results from us talking on discord more.
+
+**Zawad (Tazwar):**
+Zawad came up with a great idea for a feature this sprint. He did a great job on it as well, and I am happy with his work throughout the course. I gave him a bigger task of the microservices document and he did it very well.
+Still having an issue with showing up on time for meetings though. And I would have liked his coding portion done sooner when the rest of us were working on ours. It would have allowed him to help with more documentation.
