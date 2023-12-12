@@ -13,10 +13,12 @@
 
 ## Attributions for Mahad
 
-| Source        | Contribution                                                                                                                        | Location  |
-|---------------|-------------------------------------------------------------------------------------------------------------------------------------|-----------|
-| Chat GPT      | Helped with code implementation and errors that I did not understand. Very helpful for understanding HTML and CSS elements as well. |           |
-| pyMongo       | Help with using MongoDb and implementing into my code                                                                               | server.py |
+| Source        | Contribution                                                                                                                        | Location           |
+|---------------|-------------------------------------------------------------------------------------------------------------------------------------|--------------------|
+| Chat GPT      | Helped with code implementation and errors that I did not understand. Very helpful for understanding HTML and CSS elements as well. |                    |
+| pyMongo       | Help with using MongoDb and implementing into my code                                                                               | server.py          |
+|       https://pypi.org/project/pipreqs/        | Setting up requirements.txt                                                                                                         | 'requirements.txt' |
+|   https://www.youtube.com/watch?v=Xqb8W17i1PI  | Helped with using SendGrid to be able to send emails for the forgot password route.                                                 | 'server.py'        |
 
 
 ## Attributions for Dayeem

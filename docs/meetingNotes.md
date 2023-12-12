@@ -436,19 +436,39 @@ Rating Users/Top Reviewer Page:
 - Create a top reviewer page and display the users with the best ratings in descending order (Jason)
 
 Component Architecture Document (Mahad, Dayeem)
-- Update UML Diagram to Architecture we want
-- Organize code to fit this Architecture
-- Update document to explain the new architecture
+- Update document with the feedback from sprint 2 markings
 
 Process Model Document (Jason)
-- Update model with improved process
-- Update document to explain new process
+- Update document with feedback from sprint 2 markings
 
 Microservices Document (Zawad)
 - We will figure out tasks once the document is further explained by professor
 
 Backlog Tasks:
 - Once these major tasks are completed we may look for backlog tasks to do. We will assign these later.
+
+## Nov 17, 2023
+**Recorded by:** Jason Wheeler
+**Notes submitted on:** Nov 17, 2023
+_No meeting today since we had nothing to discuss since last meeting. Professor was out sick._
+
+Jason completed most of his coding tasks.
+
+## Nov 20, 2023
+**Recorded by:** Zawad
+**Notes submitted on:** Nov 20, 2023
+**SCRUM master:** Mahad
+**Venue:** EN 2040 
+**Source:** None  
+**Time:** 1PM  
+**Attendance:** Everyone
+
+Prof suggested we talk about changes to process and architecture documents. We decided that we are currently happy with our documents and are waiting for marking feedback to improve them further.
+
+We talked about the microservices document. Zawad has accepted the task to dive deeper in the topic and learn how to build the document for us since the rest of us built the last documents.
+We will check back in with the progress of this in a later meeting.
+
+Assigned tasks are still being worked on. So nothing else to talk about. We just need to keep working on tasks.
 
 ## Nov 21, 2023
 **Recorded by:** Muhammad Mahad Mirza
@@ -467,3 +487,90 @@ Tasks:
 Decisions:
 - Use third party software named ‘SendGrid’ to send email from the server regarding forgot password and contact page
 - Code modularization - Routing functions, authentication functions, session management functions and feature functions are separated from the server.py file
+
+## Nov 24, 2023
+**Recorded by:** Jason
+**Notes submitted on:** Nov 24, 2023
+**SCRUM master:** Mahad
+**Venue:** EN 2040 
+**Source:** None  
+**Time:** 1PM  
+**Attendance:** Everyone
+
+We looked into chapter 9 and found some interesting ideas for testing and code review.
+
+One was user testing. We don't just want our code to run properly we want to make sure what we are implementing is useful. Since we are nearing the end of our sprint we don't have much time to implement this now into our testing. But for future reference it would be a good idea.
+For the code review we liked the to-do list component. Once the feedback is received it could be turned into a to-do list rather than just a broad statement of what needs to be done.
+
+Nothing else to talk about. We are still working on tasks.
+
+## Nov 27, 2023
+**Recorded by:** Md Gulam Mahmud Chowdhury
+**Notes submitted on:** Nov 27, 2023
+**SCRUM master:** Zawad
+**Venue:** EN 2040 
+**Source:** None  
+**Time:** 1PM  
+**Attendance:** Everyone
+
+Today we checked in with Zawad's microservices document. He said he is still working on it and hasn't come across with any issues yet. Although he was having trouble understanding what to do at first. He now has a better idea.
+
+Mahad and Dayeem have now completed their coding tasks for this sprint as well.
+
+We still haven't received feedback for sprint 2 yet. This has delayed our documentation because we want to know where to improve. We are also finding it hard to write meetingNotes.
+We feel like there isn't as much to discuss this sprint because the main functionality is running we just all have to work on the assigned tasks.
+
+## Nov 28, 2023
+**Recorded by:** Zawad
+**Notes submitted on:** Nov 28, 2023
+**SCRUM master:** Jason
+**Venue:** EN 2040 
+**Source:** None  
+**Time:** 1PM  
+**Attendance:** Everyone
+
+Still waiting for feedback to progress with documentation. Otherwise we have nothing else to discuss.
+
+_reminder for marking:_ Code reviews are happening in discord outside of meeting time.
+
+## Nov 30, 2023
+**Recorded by:** Jason
+**Notes submitted on:** Nov 30, 2023
+**SCRUM master:** Md Gulam Mahmud Chowdhury
+**Venue:** EN 2040 
+**Source:** None  
+**Time:** 1PM  
+**Attendance:** Everyone
+
+We looked at the requirements.txt document that we need to create. Mahad has decided he would like to do this task and the rest of us agree with that idea.
+
+Still waiting for feedback. Nothing else to discuss. We just need to complete tasks.
+
+## Dec 1, 2023
+**Recorded by:** Md Gulam Mahmud Chowdhury
+**Notes submitted on:** Dec 1, 2023
+**SCRUM master:** Mahad
+**Venue:** EN 2040 
+**Source:** None  
+**Time:** 1PM  
+**Attendance:** Everyone
+
+Since we are still waiting on feedback. The pull request date has been moved to Dec 4th. This is because we know the final due date will be changed from the 4th so we will have extra time after this.
+
+Still waiting on Zawads coding task to be complete, and then we are basically done for coding tasks. He will have it done for the 4th.
+
+
+## Dec 4, 2023
+**Recorded by:** Zawad
+**Notes submitted on:** Dec 4, 2023
+**SCRUM master:** Jason
+**Venue:** EN 2040 
+**Source:** None  
+**Time:** 1PM  
+**Attendance:** Everyone
+
+Final Meeting. Everything else will be communicated through our discord. 
+
+Zawad completed his coding tasks. We are all good to work on documentation. But we still don't have feedback to improve documents. It seems like some changes from the professor will be made.
+
+Nothing else to talk about in these meeting we are waiting on further instruction from professor.

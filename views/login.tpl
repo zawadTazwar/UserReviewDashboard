@@ -89,8 +89,8 @@
 <header>
     <h1>AchieveIT</h1>
     <a class="header-button" href="/">Home</a>
-    <a class="header-button" href="reviews">Reviews</a>
-    <a class="header-button" href="signup">Sign Up</a>
+    <a class="header-button" href="/reviews">Reviews</a>
+    <a class="header-button" href="/signup">Sign Up</a>
     <a class="header-button" href="/contactus">Contact Us</a>
 </header>
 
