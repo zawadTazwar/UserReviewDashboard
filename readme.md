@@ -60,6 +60,14 @@ The server handles the following routes:
 - Unit tests for the functions
 **Unit Tests:** Run by `python -m unittest test_server` in terminal.
 
+## Feature: Top Reviewer and Top Review
+### functions
+### Overview
+The functionalities include routes and functions that enable the identification and display of top reviewers based on their average ratings and the top review based on the most likes given by users.
+
+- `rate_user`: This route handles the submission of a rating for a user's profile and it redirects to the user's profile page. The route receives the username, rater's username, and the rating value. Upon receiving a request, it updates the user's profile by adding the new rating to their profile and then redirects to the user's profile page.
+- `top_reviewers`: This route displays a list of users sorted by their average ratings in descending order. The route fetches all users from the database, calculates the average ratings for each user, and sorts users based on their average ratings in descending order. It then renders a page displaying users sorted by their average ratings.
+- `top_review`: This route fetches review titles and corresponding IDs from the database. Additionally, it fetches the top review based on the most likes given by users. The route retrieves review titles and their corresponding IDs from the database. It also identifies the top review based on the most likes given by users. The fetched data is passed to the 'reviews.tpl' template for rendering.
 
 ## (Mahad)
 
@@ -124,6 +132,37 @@ and maintainable. Clear and concise documentation is crucial for the success of 
 
 I'll continue to actively work on these features, collaborate with the team, and ensure that the codebase remains well-documented and functional.
 
+## Feature: Forgot Password
+
+"Forgot Password" feature allows users who have forgotten their passwords to reset them securely. It involves:
+
+Users providing their email for verification.
+Generating a unique token to confirm identity.
+Sending an email with a reset link.
+Allowing users to set a new password using the link received in their email.
+This feature enhances user experience by enabling password recovery while maintaining security protocols.
+
+### functions
+- `forgot_password` route serves the purpose of rendering the 'forgot_password.tpl' template. It is a part of the password recovery process, presenting users with a form or interface to initiate the password reset process. This route does not take any arguments and returns the specified template for user interaction.
+- `send_reset_email` route handles the submission of the forgot password form. Its primary function is to process user requests for password resets. Upon receiving an email address, it checks if the email exists in the system's database. If found, it generates a unique token for the user, sends a password reset email to the provided email address using the SendGrid service, and provides appropriate success or error messages.
+- `generate_reset_token` Function generates a unique password reset token for a given user ID. This token serves as a secure identifier for allowing users to reset their passwords. The function takes the user's unique identifier as an argument and returns the generated token.
+- `send_password_reset_email` Function is responsible for sending a password reset email to the user. It takes the user's `email` address and a password reset `token` as arguments. Using the SendGrid service, it constructs an email containing a reset link with the provided token and sends it to the user's email address.
+- `reset_password` route renders the 'reset_password.tpl' template. Displays the password reset page with a form to set a new password or a str: "Invalid or expired token" if the token is not valid.
+- `perform_password_reset` route handles the submission of the reset password form. Updates the user's password in the database and displays a success or error message.
+
+
+
+### The use of SendGrid
+
+SendGrid is a cloud-based service that provides reliable and scalable solutions for sending emails. It offers a robust platform for managing email delivery, ensuring high deliverability rates and providing various tools to optimize email performance.
+
+Key features and aspects of SendGrid:
+- Email Delivery: SendGrid simplifies the process of sending emails programmatically through an API. It handles the complexities of email infrastructure, such as managing servers, IP addresses, and sender reputation, to ensure that emails reach their intended recipients.
+- Scalability: The service is designed to accommodate varying email volumes, whether it's sending a few transactional emails or managing large-scale email marketing campaigns.
+- Analytics and Insights: SendGrid provides detailed analytics and real-time insights into email delivery metrics. This includes data on open rates, click-through rates, bounce rates, and more, enabling users to track the performance of their emails.
+- Personalization and Templating: It allows for personalized email content by leveraging templates. Users can create customizable templates for different types of emails, streamlining the process of sending consistent and branded emails.
+- Security: SendGrid implements various security measures to protect against spam, phishing, and other email-related security threats. It includes features like email authentication, link tracking, and TLS encryption for secure communication.
+- API Integration: The SendGrid API seamlessly integrates with various programming languages and frameworks, making it easy to incorporate email sending capabilities into web applications, software, or any system that requires email functionality.
 
 
 ## (Jason)
@@ -286,16 +325,50 @@ The `search_reviews` function is implemented in the `server.py` file.
 search_results = search_reviews()
 ```
 
+## Feature: Contact us
+
+### Overview
+
+The `submit_inquiry` function and `contact_us` route handle the process of sending inquiries and messages through an inquiry form on the website.
+
+The `submit_inquiry` function in `server.py` manages the submission of inquiry form data and utilizes the SendGrid API to send emails.
+This function accomplishes the following tasks:
+- Sends emails using the SendGrid API upon receiving an inquiry.
+- Extracts form data including username, name, email, subject, and content.
+- Composes an email message with the extracted data and sends it to the specified receiver email.
+
+The `contact_us` route handles the rendering of the contact us page.
+This function also:
+- Displays the contact us page where users can access the inquiry form.
+- Has inquiry forms which take in the information of the user to be sent to the email administered in the `submit_inquiry` function.
+
+### Usage
+
+**Submitting an Inquiry:** The function is triggered when an inquiry form is submitted in the `contact_us` page.
+Example:
+```
+python
+# Code that triggers the form submission
+submit_inquiry()
+```
+
 ## Other files to take into consideration
 
 ### docs folder:
-
+Sprint 2:
 - `attribution_template.md`: A template for attributing work and contributions to the project by team members or third parties.
 - `code_review.md`: Outlines our code review process, standards, and checklists to ensure quality and consistency in our codebase.
 - `meetingNotes.md`: Notes from our team meetings, capturing the key points discussed, decisions made, and action items.
 - `team_review_sprint2.md`: Documentation of peer reviews within the team, reflecting on the work done and providing feedback for improvement.
 - `process_model.md`: Outlines the team's sprint process, including a visual model, process components, changes made, and a proposed improvement for continuous documentation updates post-code review and testing.
 - `Comp_Arch.md`: Provides an overview of the component architecture of the application, detailing its key components, interactions, and justifications for the chosen architecture.
+
+Sprint 3:
+- `attribution_template.md`: A template for attributing work and contributions to the project by team members or third parties.
+- `code_review.md`: Outlines our code review process, standards, and checklists to ensure quality and consistency in our codebase.
+- `meetingNotes.md`: Notes from our team meetings, capturing the key points discussed, decisions made, and action items.
+- `team_reviews_sprint3.md`: Documentation of peer reviews within the team, reflecting on the work done and providing feedback for improvement in the future projects outside of this course.
+- 
 
 ### doc/images folder: 
 
