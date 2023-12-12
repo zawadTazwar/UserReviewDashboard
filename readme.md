@@ -16,6 +16,16 @@ Our `docs` directory in the repository contains various documents that provide m
 - **source-control_str.md**: Describes our strategy for source control, including branch naming conventions, merge strategies, and commit policies.
 - **team_reviews.md**: Documentation of peer reviews within the team, reflecting on the work done and providing feedback for improvement.
 - **user_stories.md**: A collection of user stories that guide the development of the project, ensuring we're building features that users actually need.
+- **team_review_sprint2.md**: Documentation of peer reviews within the team, reflecting on the work done and providing feedback for improvement.
+- **process_model.md**: Outlines the team's sprint process, including a visual model, process components, changes made, and a proposed improvement for continuous documentation updates post-code review and testing.
+- **Comp_Arch.md**: Provides an overview of the component architecture of the application, detailing its key components, interactions, and justifications for the chosen architecture.
+- **team_reviews_sprint3.md**: Documentation of peer reviews within the team, reflecting on the work done for sprint 3.
+- **Microservices_Alternative_Architecture.md**: Outlines the shift from a component-based architecture to microservices, comparing their structures, code differences, and implications on the development lifecycle.
+
+`doc/images` folder contains the files that are used as images to explain our process models and architecture:
+- `Process-Model-Diagram.png`: Represents the workflow and stages of a project's development process; how tasks and activities progress from initiation to completion.
+- `UML_diagram.png`: Illustrates and communicates the structure, behavior, and interactions of the system or the process of the application.
+- `Microservices-Architecture.png`: Illustrates the Microservice Architecture and how different microservices are related to each other.
 
 Please refer to each document for detailed information on its respective topic.
 
@@ -60,6 +70,8 @@ The server handles the following routes:
 - Unit tests for the functions
 **Unit Tests:** Run by `python -m unittest test_server` in terminal.
 
+
+## Sprint 3 (Zawad)
 ## Feature: Top Reviewer and Top Review
 ### functions
 ### Overview
@@ -132,6 +144,7 @@ and maintainable. Clear and concise documentation is crucial for the success of 
 
 I'll continue to actively work on these features, collaborate with the team, and ensure that the codebase remains well-documented and functional.
 
+## Sprint 3 (Mahad)
 ## Feature: Forgot Password
 
 "Forgot Password" feature allows users who have forgotten their passwords to reset them securely. It involves:
@@ -151,10 +164,15 @@ This feature enhances user experience by enabling password recovery while mainta
 - `perform_password_reset` route handles the submission of the reset password form. Updates the user's password in the database and displays a success or error message.
 
 
-
 ### The use of SendGrid
 
 SendGrid is a cloud-based service that provides reliable and scalable solutions for sending emails. It offers a robust platform for managing email delivery, ensuring high deliverability rates and providing various tools to optimize email performance.
+
+Procedure it follows:
+- API Request Reception: When an application sends an email request via SendGrid's API, the request is received and parsed by SendGrid's infrastructure.
+- Validation and Authentication: SendGrid performs validation checks on multiple aspects of the email, such as sender information, recipient addresses, content formatting, and adherence to email standards.  It verifies that the sender has proper authorization to send emails from the specified domain by using authentication protocols like SPF, DKIM, and DMARC.
+- Message Queuing: After passing validation checks, the email is placed in a queue for delivery. The queuing system manages the order of outgoing emails and ensures efficient handling of a high volume of messages.
+- Bounce Handling and Feedback Loop: During the delivery process, if an email cannot be delivered (bounces back), SendGrid categorizes the bounce type (soft or hard bounce). It handles bounce management, ensuring proper handling of soft bounces (temporary issues) and managing the removal of invalid or permanently undeliverable email addresses.
 
 Key features and aspects of SendGrid:
 - Email Delivery: SendGrid simplifies the process of sending emails programmatically through an API. It handles the complexities of email infrastructure, such as managing servers, IP addresses, and sender reputation, to ensure that emails reach their intended recipients.
@@ -198,6 +216,23 @@ Key features and aspects of SendGrid:
    - **Description:** This task involved completing the process model document (`process_model.md`). The document outlines the workflow and processes involved in the system. It serves as a comprehensive guide to understand how different components of the application interact and function together.
 
 **Unit Tests:** Run by `python -m unittest test_server` in terminal.
+
+### Here are my tasks for sprint 3 and where to find them:
+
+1. **Designing and coding the HTML form for Password Reset:**
+   - **File:** `forgot_password.tpl`
+   - **Description:** Created an HTML form for users to initiate a password reset. This form consists of an input field requesting the user's email address. Upon submission, it triggers a password reset process, sending a reset email to the provided address. The form facilitates user interaction by enabling them to reset their password conveniently.
+   - You can exercise this by using the `/forgot_password` page, enter your email address in the designated field, and submit the form to initiate the password reset process.
+   
+2. **Designing and coding the HTML Form for Submitting Inquiries and Users to Get In Touch:**
+   - **File:** Not specified (HTML code snippet)
+   - **Description:** This HTML structure represents a form for users to submit inquiries or messages and get in touch with the platform. The form includes input fields for username, full name, email, subject, and message content. Users can fill in these details and submit the form to initiate an inquiry or message submission process. 
+   - Access the `/submit_inquiry` or `/contact_us` page on the website, fill out the form fields with your username, name, email, subject, and message content, and submit the form to send an inquiry or message to the platform administrators or support team
+
+3. **Designing and coding the HTML Form for Resetting Password of the User:**
+   - **File:** Not specified (HTML code snippet)
+   - **Description:** This HTML structure showcases a form designed for users to reset their passwords. It consists of input fields for entering a new password and confirming the password. Users are required to input and confirm their new password to initiate the password reset process.
+   - **Rendered after the link on the email sent to the user is clicked to give a HTML form structure within the website's `/reset_password` page. Users can input their new password and confirmation, then submit the form to reset their password securely.
 
 ## (Md Golam Mahmud - Dayeem)
 
@@ -324,7 +359,7 @@ The `search_reviews` function is implemented in the `server.py` file.
 # Example URL: /search_reviews?query=example
 search_results = search_reviews()
 ```
-
+## Sprint 3(Md Golam Mahmud Dayeem)
 ## Feature: Contact us
 
 ### Overview
@@ -352,25 +387,16 @@ python
 submit_inquiry()
 ```
 
-## Other files to take into consideration
+## Files to take into consideration for sprint 3
 
 ### docs folder:
-Sprint 2:
-- `attribution_template.md`: A template for attributing work and contributions to the project by team members or third parties.
-- `code_review.md`: Outlines our code review process, standards, and checklists to ensure quality and consistency in our codebase.
-- `meetingNotes.md`: Notes from our team meetings, capturing the key points discussed, decisions made, and action items.
-- `team_review_sprint2.md`: Documentation of peer reviews within the team, reflecting on the work done and providing feedback for improvement.
-- `process_model.md`: Outlines the team's sprint process, including a visual model, process components, changes made, and a proposed improvement for continuous documentation updates post-code review and testing.
-- `Comp_Arch.md`: Provides an overview of the component architecture of the application, detailing its key components, interactions, and justifications for the chosen architecture.
 
-Sprint 3:
-- `attribution_template.md`: A template for attributing work and contributions to the project by team members or third parties.
-- `code_review.md`: Outlines our code review process, standards, and checklists to ensure quality and consistency in our codebase.
+- `attribution_template.md`: An updated template for sprint 3 of attributed work and contributions to the project by team members or third parties.
+- `code_review.md`: Also updated document that outlines our code review process, standards, and checklists to ensure quality and consistency in our codebase.
 - `meetingNotes.md`: Notes from our team meetings, capturing the key points discussed, decisions made, and action items.
 - `team_reviews_sprint3.md`: Documentation of peer reviews within the team, reflecting on the work done and providing feedback for improvement in the future projects outside of this course.
-- 
+- `Microservices_Alternative_Architecture.md`: Outlines the shift from a component-based architecture to microservices, comparing their structures, code differences, and implications on the development lifecycle.
 
-### doc/images folder: 
+### doc/images folder:
 
-- `Process-Model-Diagram.png`: Represents the workflow and stages of a project's development process; how tasks and activities progress from initiation to completion.
-- `UML_diagram.png`: Illustrates and communicates the structure, behavior, and interactions of the system or the process of the application.
+- `Microservices-Architecture.png`: Illustrates the Microservice Architecture and how different microservices are related to each other.
