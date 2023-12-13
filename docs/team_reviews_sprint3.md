@@ -37,11 +37,9 @@ Mahad is great. He came up with a really good feature idea for this sprint and e
 Zawad came up with a great idea for a feature this sprint. He did a great job on it as well, and I am happy with his work throughout the course. I gave him a bigger task of the microservices document and he did it very well.
 Still having an issue with showing up on time for meetings though. And I would have liked his coding portion done sooner when the rest of us were working on ours. It would have allowed him to help with more documentation.
 
-## Jawad's Team Review :
 ### Jawad's Team Review:
 It has been a great experience to work as a team in this course. Learned a lot of things which improved me socially and personally. Each team member has performed exceptionally well. The last sprint and this sprint was really packed with true team effort. I really feel fortunate to have been a part of such a great group.
 Now some words for my teammates:
-
 
 **Jason:**
 Jason is a great team leader, organizing tasks well and preparing thoroughly for meetings, which has really helped the team. His personal meetings with the course professor also cleared out a lot of doubts. But sometimes his other commitments affected his work with the team. It would be good if he shared tasks with others more.
