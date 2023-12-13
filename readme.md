@@ -182,6 +182,10 @@ Key features and aspects of SendGrid:
 - Security: SendGrid implements various security measures to protect against spam, phishing, and other email-related security threats. It includes features like email authentication, link tracking, and TLS encryption for secure communication.
 - API Integration: The SendGrid API seamlessly integrates with various programming languages and frameworks, making it easy to incorporate email sending capabilities into web applications, software, or any system that requires email functionality.
 
+## Document:
+
+`requirements.txt`
+The requirements.txt file lists specific Python packages and versions required for the project, facilitating consistent environment setup and dependency installation using pip
 
 ## (Jason)
 ### Here are my tasks for sprint 2 and where to find them:
@@ -389,6 +393,9 @@ submit_inquiry()
 
 ## Files to take into consideration for sprint 3
 
+### term-project folder:
+- `requirements.txt`: The file lists specific Python packages and versions required for the project, facilitating consistent environment setup and dependency installation using `pip`. 
+
 ### docs folder:
 
 - `attribution_template.md`: An updated template for sprint 3 of attributed work and contributions to the project by team members or third parties.
@@ -396,7 +403,10 @@ submit_inquiry()
 - `meetingNotes.md`: Notes from our team meetings, capturing the key points discussed, decisions made, and action items.
 - `team_reviews_sprint3.md`: Documentation of peer reviews within the team, reflecting on the work done and providing feedback for improvement in the future projects outside of this course.
 - `Microservices_Alternative_Architecture.md`: Outlines the shift from a component-based architecture to microservices, comparing their structures, code differences, and implications on the development lifecycle.
-
 ### doc/images folder:
 
 - `Microservices-Architecture.png`: Illustrates the Microservice Architecture and how different microservices are related to each other.
+
+### doc/Hypotheticals:
+
+- `hypthecticals.md`: This file outlines the team's reflections on unfinished tasks due to late feedback, addressing aspects like agenda clarity, code reviews, architectural representations, and process distinction, providing insights into missed improvements for Sprint 3.

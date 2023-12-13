@@ -49,3 +49,36 @@ Dayeem is always on time and does his tasks well. He's good at making decisions 
 
 **Mahad:**
 Mahad has good technical skills and his ideas for the project are really helpful. But he needs to be on time for meetings to help the team run smoothly.
+
+
+### Md Golam Mahmud's Team Review:
+
+The final sprint, had lots of challenges from the previous as we were making our application more specified according to the assignment specification. Our team experienced had to go in discussions for implementing features, time management and methods of implementing them. The team was very upbringing for new ideas and how to accomplish the goals. Each team member's became very specialized in performing tasks that they were supposed to do. Jason very innovative and efficient in HTML, Mahad in Database and information, Zawad in Documentation and project architecture and me at Backend and Applications. Here's a snapshot of my team member's performances for sprint 3:
+
+**Jason:**
+Jason has put up with his reputation. He has made the project objectives very clear from the start of the sprint. Team progress and due dates have been all tracked by him. Distributing tasks was far easier this time, as he knew what potentials each team members had. He also managed to distribute the tasks so that each team member is not put up with too much pressure. He has leaded the team in a very effective and efficient way.
+
+Challenges: 
+Jason found it hard to manage time schedules for others. Many team members including me were not able to finish the coding process on time. Although much decision-making and time enforcement. This had implications on Jason's work as he saw everyone else weren't putting enough efforts.
+
+Response: 
+Jason as a team member had to reinforce dates and persuade and navigate other team members on how to complete the tasks quicker and as specified.
+
+**Mahad:**
+Mahad's as usual was very keen on completing his tasks perfectly. He has the solutions to everything. His idea of using SendGrid made most of our tasks for the features work. His technical expertise had managed to finish tasks on time and even help other team members to do so. He was done with his job before anyone else.
+
+Challenges: 
+His communication was vague with the team. He was not very early in the team meetings
+
+Response:
+Proper messages and discussions were set at the discord team server to ensure that he is keeping up with the team progress.
+Meeting note takers' follow-up with each team member after each meeting to ensure, nothing's missed throughout the project phase.
+
+**Zawad:**
+Zawad showed very enthusiastic work approach this sprint. He was very professional and powerful in doing the microservices document. He finished it in due time and provided very strong work dynamics this sprint. He has improved from last sprint, coming to team meetings in time, and understanding team prospects and decisions. 
+
+Challenges:
+Zawad mistook one of his feature updates in one instance. He couldn't understand what was wanted from him when he to code the feature for the top reviewer. He later understood in the next meeting. 
+
+Response: 
+He discussed his approach in the exact team meeting and finished his code without any further delay and not putting the team on stop for his work.

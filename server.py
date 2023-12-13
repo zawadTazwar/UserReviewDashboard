@@ -53,6 +53,15 @@ def login():
 
 @app.route('/contactus')
 def contact():
+    """
+    Renders the 'contact_us.tpl' template.
+
+    Args:
+        None
+
+    Returns:
+        template: 'contact_us.tpl'
+    """
     return template('contact_us.tpl')
 
 
@@ -660,7 +669,7 @@ def submit_inquiry():
     Handles the submission of inquiry form data and sends an email using SendGrid API.
 
     Returns:
-        HTTP response: Indicates success or failure of the email sending process.
+        str: HTTP response indicating success or failure of the email sending process.
     """
 
     # Get the SendGrid API key from the environment variables
@@ -672,11 +681,11 @@ def submit_inquiry():
     receiver_email = 'g.mahmud.chowdhury@gmail.com'
 
     # Extract form data
-    username = request.forms.get('username')
-    name = request.forms.get('name')
-    email = request.forms.get('email')
-    subject = request.forms.get('subject')
-    content = request.forms.get('content')
+    username = request.form.get('username')
+    name = request.form.get('name')
+    email = request.form.get('email')
+    subject = request.form.get('subject')
+    content = request.form.get('content')
 
     # Compose the email message
     message = Mail(
@@ -688,7 +697,6 @@ def submit_inquiry():
 
     try:
         # Send the email using SendGrid API
-
         response = sg.send(message)
 
         # Check if email sending was successful
