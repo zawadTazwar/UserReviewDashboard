@@ -1,6 +1,6 @@
 ## Hypotheticals for Sprint 3
 **Team**
-You will find the `Comp_Arch.md` and `process_model.md` files in the hypotheticals where the tasks defined have not been finished due to late feedback:
+
 - agenda coverage for each meeting: We would have been more clear about the meeting agenda after getting this feedback. It was too late to incorporate
 - includes progress on agenda items suggested by prof on class diary/webpage: We thought some of the agenda items are suggestions for our meetings and we often talk outside class time. We would have done this better for sprint 3.
 - New tasks and issues arising in meetings, reviews and otherwise are noted on kanban board: We would have got further clarification on this and improved clarity of tasks being moved to backlog for improvements. We felt like we were doing a good job of this.
