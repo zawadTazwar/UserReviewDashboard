@@ -23,11 +23,11 @@
 
 ## Attributions for Dayeem
 
-| Source        | Contribution                                                                 | Location                  |
-|---------------|------------------------------------------------------------------------------|---------------------------|
-| Chat GPT      | Unit test implementations. Error debugging. Search algorithm implementation. | server.py, test_server.py |
-| https://www.smartdraw.com/uml-diagram/       | UML diagram implementation ideas                                             | UML_diagram.png           |
-| https://www.se.rit.edu/~co-operators/SoftwareArchitectureDocumentation.pdf     | Componenet architecture document ideas                                       | Comp_Arch.md              |
+| Source        | Contribution                                                                                                                                                                                                                                                                                                         | Location                                          |
+|---------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------|
+| Chat GPT      | Unit test implementations. Error debugging. Search algorithm implementation.<br/>For Sprint 3: SendGrid API key setup for the contact us feature. Dealt with the error that was showing while visiting the profiles by username. Trying to provide appropiate doctstrings as the professor wasn't satisfied with it. | server.py, test_server.py<br/>Sprint 3: server.py |
+| https://www.smartdraw.com/uml-diagram/       | UML diagram implementation ideas                                                                                                                                                                                                                                                                                     | UML_diagram.png                                   |
+| https://www.se.rit.edu/~co-operators/SoftwareArchitectureDocumentation.pdf     | Componenet architecture document ideas                                                                                                                                                                                                                                                                               | Comp_Arch.md                                      |
 
 ## Attributions for Zawad
 
