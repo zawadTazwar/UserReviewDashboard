@@ -35,4 +35,6 @@
 |---------------|---------------------------------------------------|--------------|
 | Chat GPT      | Error debugging. Search algorithm implementation. | server.py    |
 | https://www.youtube.com/watch?v=E6NO0rgFub4      | Creating the readme file                          | Readme       |
+| https://learn.microsoft.com/en-us/azure/architecture/microservices/| Creating the microservices document               | Microservices_Alternative_Architecture.md|
+ |https://www.youtube.com/watch?v=WlCKv49Pkvg | Making the microservices architecture             | Microservices_Alternative_Architecture.md|
 
