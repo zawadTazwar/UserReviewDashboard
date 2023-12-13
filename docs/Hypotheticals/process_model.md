@@ -8,7 +8,7 @@ This document explains the process the team goes through when working on a sprin
 * Ideas for improving our process and what we will do about it
 
 ### Process Model Diagram:
-![Process Model Diagram](images/Process-Model-Diagram.png)
+![Process Model Diagram](../images/Process-Model-Diagram.png)
 
 ### Elements of Process:
 * **To-Do/Feature List and Backlog**: The process starts with the existence of a to-do/feature list and a backlog of tasks. This is where potential features or tasks are documented.
